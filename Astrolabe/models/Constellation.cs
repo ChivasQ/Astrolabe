@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Astrolabe.models
 {
-    internal class Constellation
+    public class Constellation
     {
+        public string Name { get; set; }
+        public List<Star> Stars { get; set; } = new();
     }
 }

@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Astrolabe.models
 {
-    public class ObserverLocation
+    internal class Astronomy
     {
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
+
     }
 }

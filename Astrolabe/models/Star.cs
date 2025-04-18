@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Astrolabe.models
 {
-    internal class Star
+    public class Star
     {
+        public string Name { get; set; }
+        public Constellation Constellation { get; set; }
+        public double ApparentMagnitude { get; set; } // видима зоряна величина
+        public double DistanceLightYears { get; set; }
+        public SkyCoordinate Coordinates { get; set; }
     }
 }
