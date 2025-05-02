@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Astrolabe.models
+namespace Astrolabe.Models
 {
     public class Constellation
     {
