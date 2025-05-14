@@ -13,5 +13,12 @@ namespace Astrolabe
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
         }
+
+        internal class models
+        {
+            internal class Star
+            {
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Astrolabe.Models
+﻿namespace Astrolabe.models
 {
     public class Tests
     {

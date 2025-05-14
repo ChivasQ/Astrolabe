@@ -32,19 +32,36 @@
             resultList = new ListBox();
             starBindingSource1 = new BindingSource(components);
             starBindingSource = new BindingSource(components);
-            textBox1 = new TextBox();
+            tabControl1 = new TabControl();
+            tabMain = new TabPage();
             groupBox1 = new GroupBox();
+            tabSearchByStar = new TabPage();
+            tabSearchByConstellation = new TabPage();
+            tabPage1 = new TabPage();
+            helpProvider1 = new HelpProvider();
+            tabControl2 = new TabControl();
+            tabDefaultSearch = new TabPage();
+            tabAdvancedSearch = new TabPage();
             button1 = new Button();
+            button2 = new Button();
+            button3 = new Button();
             label1 = new Label();
-            groupBox2 = new GroupBox();
-            label3 = new Label();
-            label2 = new Label();
-            textBox3 = new TextBox();
+            textBox1 = new TextBox();
             textBox2 = new TextBox();
+            label2 = new Label();
+            label3 = new Label();
+            textBox3 = new TextBox();
+            textBox4 = new TextBox();
+            button4 = new Button();
+            textBox5 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).BeginInit();
+            tabControl1.SuspendLayout();
+            tabMain.SuspendLayout();
             groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
+            tabControl2.SuspendLayout();
+            tabDefaultSearch.SuspendLayout();
+            tabAdvancedSearch.SuspendLayout();
             SuspendLayout();
             // 
             // resultList
@@ -53,144 +70,278 @@
             resultList.DataSource = starBindingSource1;
             resultList.DisplayMember = "Name";
             resultList.FormattingEnabled = true;
-            resultList.ItemHeight = 15;
-            resultList.Location = new Point(12, 12);
+            resultList.ItemHeight = 19;
+            resultList.Location = new Point(6, 22);
             resultList.Name = "resultList";
-            resultList.Size = new Size(388, 424);
+            resultList.Size = new Size(744, 175);
             resultList.TabIndex = 1;
             resultList.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // starBindingSource1
             // 
-            starBindingSource1.DataSource = typeof(Models.Star);
+            starBindingSource1.DataSource = typeof(Astrolabe.models.Star);
             // 
             // starBindingSource
             // 
-            starBindingSource.DataSource = typeof(Models.Star);
+            starBindingSource.DataSource = typeof(Astrolabe.models.Star);
             // 
-            // textBox1
+            // tabControl1
             // 
-            textBox1.Location = new Point(119, 22);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(226, 23);
-            textBox1.TabIndex = 0;
-            textBox1.TextChanged += textBox1_TextChanged;
+            tabControl1.Controls.Add(tabMain);
+            tabControl1.Controls.Add(tabSearchByStar);
+            tabControl1.Controls.Add(tabSearchByConstellation);
+            tabControl1.Controls.Add(tabPage1);
+            tabControl1.Location = new Point(12, 12);
+            tabControl1.Name = "tabControl1";
+            tabControl1.SelectedIndex = 0;
+            tabControl1.Size = new Size(776, 426);
+            tabControl1.TabIndex = 4;
+            // 
+            // tabMain
+            // 
+            tabMain.Controls.Add(tabControl2);
+            tabMain.Controls.Add(groupBox1);
+            tabMain.Location = new Point(4, 24);
+            tabMain.Name = "tabMain";
+            tabMain.Padding = new Padding(3);
+            tabMain.Size = new Size(768, 398);
+            tabMain.TabIndex = 0;
+            tabMain.Text = "Головна";
+            tabMain.UseVisualStyleBackColor = true;
+            tabMain.Click += tabPage1_Click;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(button1);
-            groupBox1.Controls.Add(label1);
-            groupBox1.Controls.Add(textBox1);
-            groupBox1.Location = new Point(415, 12);
+            groupBox1.Controls.Add(resultList);
+            groupBox1.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            groupBox1.Location = new Point(6, 6);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(6);
-            groupBox1.Size = new Size(373, 106);
+            groupBox1.Size = new Size(756, 201);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
-            groupBox1.Text = "Пошук";
+            groupBox1.Text = "База зірок";
+            // 
+            // tabSearchByStar
+            // 
+            tabSearchByStar.Location = new Point(4, 24);
+            tabSearchByStar.Name = "tabSearchByStar";
+            tabSearchByStar.Padding = new Padding(3);
+            tabSearchByStar.Size = new Size(768, 398);
+            tabSearchByStar.TabIndex = 1;
+            tabSearchByStar.Text = "Пошук зірок";
+            tabSearchByStar.UseVisualStyleBackColor = true;
+            // 
+            // tabSearchByConstellation
+            // 
+            tabSearchByConstellation.Location = new Point(4, 24);
+            tabSearchByConstellation.Name = "tabSearchByConstellation";
+            tabSearchByConstellation.Size = new Size(768, 398);
+            tabSearchByConstellation.TabIndex = 2;
+            tabSearchByConstellation.Text = "Пошук сузір'їв";
+            tabSearchByConstellation.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Size = new Size(768, 398);
+            tabPage1.TabIndex = 3;
+            tabPage1.Text = "Спостереження";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabControl2
+            // 
+            tabControl2.Controls.Add(tabDefaultSearch);
+            tabControl2.Controls.Add(tabAdvancedSearch);
+            tabControl2.Location = new Point(6, 213);
+            tabControl2.Multiline = true;
+            tabControl2.Name = "tabControl2";
+            tabControl2.SelectedIndex = 0;
+            tabControl2.Size = new Size(756, 179);
+            tabControl2.TabIndex = 3;
+            // 
+            // tabDefaultSearch
+            // 
+            tabDefaultSearch.Controls.Add(textBox4);
+            tabDefaultSearch.Controls.Add(textBox3);
+            tabDefaultSearch.Controls.Add(label3);
+            tabDefaultSearch.Controls.Add(label2);
+            tabDefaultSearch.Controls.Add(textBox2);
+            tabDefaultSearch.Controls.Add(textBox1);
+            tabDefaultSearch.Controls.Add(label1);
+            tabDefaultSearch.Controls.Add(button3);
+            tabDefaultSearch.Controls.Add(button2);
+            tabDefaultSearch.Controls.Add(button1);
+            tabDefaultSearch.Location = new Point(4, 24);
+            tabDefaultSearch.Name = "tabDefaultSearch";
+            tabDefaultSearch.Padding = new Padding(3);
+            tabDefaultSearch.Size = new Size(748, 151);
+            tabDefaultSearch.TabIndex = 0;
+            tabDefaultSearch.Text = "Звичайний пошук";
+            tabDefaultSearch.UseVisualStyleBackColor = true;
+            // 
+            // tabAdvancedSearch
+            // 
+            tabAdvancedSearch.Controls.Add(textBox5);
+            tabAdvancedSearch.Controls.Add(button4);
+            tabAdvancedSearch.Location = new Point(4, 24);
+            tabAdvancedSearch.Name = "tabAdvancedSearch";
+            tabAdvancedSearch.Padding = new Padding(3);
+            tabAdvancedSearch.Size = new Size(748, 151);
+            tabAdvancedSearch.TabIndex = 1;
+            tabAdvancedSearch.Text = "Просунутий пошук";
+            tabAdvancedSearch.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
-            button1.Location = new Point(148, 62);
+            button1.Location = new Point(587, 116);
             button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 2;
-            button1.Text = "Знайти";
+            button1.Size = new Size(155, 29);
+            button1.TabIndex = 0;
+            button1.Text = "Пошук";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(394, 6);
+            button2.Name = "button2";
+            button2.Size = new Size(155, 24);
+            button2.TabIndex = 1;
+            button2.Text = "Фільтр наяскравіші";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(394, 36);
+            button3.Name = "button3";
+            button3.Size = new Size(155, 24);
+            button3.TabIndex = 2;
+            button3.Text = "Фільтр видимі";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(20, 25);
+            label1.Location = new Point(585, 12);
             label1.Name = "label1";
-            label1.Size = new Size(93, 15);
-            label1.TabIndex = 1;
-            label1.Text = "Пошук по назві";
-            label1.Click += label1_Click;
+            label1.Size = new Size(109, 15);
+            label1.TabIndex = 3;
+            label1.Text = "Вибір часу і місця:";
+            label1.Click += label1_Click_1;
             // 
-            // groupBox2
+            // textBox1
             // 
-            groupBox2.Controls.Add(label3);
-            groupBox2.Controls.Add(label2);
-            groupBox2.Controls.Add(textBox3);
-            groupBox2.Controls.Add(textBox2);
-            groupBox2.Location = new Point(415, 134);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(373, 302);
-            groupBox2.TabIndex = 3;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Зірка";
+            textBox1.Location = new Point(589, 34);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(85, 23);
+            textBox1.TabIndex = 4;
             // 
-            // label3
+            // textBox2
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(7, 73);
-            label3.Name = "label3";
-            label3.Size = new Size(36, 15);
-            label3.TabIndex = 4;
-            label3.Text = "Опис";
+            textBox2.Location = new Point(680, 34);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(45, 23);
+            textBox2.TabIndex = 5;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(6, 25);
+            label2.Location = new Point(585, 60);
             label2.Name = "label2";
-            label2.Size = new Size(39, 15);
-            label2.TabIndex = 3;
-            label2.Text = "Назва";
+            label2.Size = new Size(50, 15);
+            label2.TabIndex = 6;
+            label2.Text = "широта";
+            label2.Click += label2_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(657, 60);
+            label3.Name = "label3";
+            label3.Size = new Size(49, 15);
+            label3.TabIndex = 7;
+            label3.Text = "довгота";
             // 
             // textBox3
             // 
-            textBox3.DataBindings.Add(new Binding("DataContext", starBindingSource1, "Description", true));
-            textBox3.DataBindings.Add(new Binding("Text", starBindingSource1, "Description", true));
-            textBox3.Location = new Point(52, 70);
-            textBox3.Multiline = true;
+            textBox3.Location = new Point(589, 78);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(162, 84);
-            textBox3.TabIndex = 1;
+            textBox3.Size = new Size(62, 23);
+            textBox3.TabIndex = 8;
             // 
-            // textBox2
+            // textBox4
             // 
-            textBox2.DataBindings.Add(new Binding("DataContext", starBindingSource1, "Name", true));
-            textBox2.DataBindings.Add(new Binding("Text", starBindingSource1, "Name", true));
-            textBox2.Location = new Point(51, 22);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 0;
+            textBox4.Location = new Point(657, 78);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(62, 23);
+            textBox4.TabIndex = 9;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(587, 116);
+            button4.Name = "button4";
+            button4.Size = new Size(155, 29);
+            button4.TabIndex = 1;
+            button4.Text = "Пошук";
+            button4.UseVisualStyleBackColor = true;
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(6, 6);
+            textBox5.Multiline = true;
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(736, 104);
+            textBox5.TabIndex = 2;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(groupBox2);
-            Controls.Add(groupBox1);
-            Controls.Add(resultList);
+            Controls.Add(tabControl1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "MainForm";
-            Text = "Form1";
+            Text = "Астролябія";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).EndInit();
+            tabControl1.ResumeLayout(false);
+            tabMain.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
+            tabControl2.ResumeLayout(false);
+            tabDefaultSearch.ResumeLayout(false);
+            tabDefaultSearch.PerformLayout();
+            tabAdvancedSearch.ResumeLayout(false);
+            tabAdvancedSearch.PerformLayout();
             ResumeLayout(false);
         }
 
         #endregion
         private ListBox resultList;
-        private TextBox textBox1;
-        private GroupBox groupBox1;
-        private Label label1;
-        private Button button1;
         private BindingSource starBindingSource;
-        private GroupBox groupBox2;
-        private Label label3;
-        private Label label2;
-        private TextBox textBox3;
-        private TextBox textBox2;
         private BindingSource starBindingSource1;
+        private TabControl tabControl1;
+        private TabPage tabMain;
+        private TabPage tabSearchByStar;
+        private GroupBox groupBox1;
+        private TabPage tabSearchByConstellation;
+        private TabPage tabPage1;
+        private HelpProvider helpProvider1;
+        private TabControl tabControl2;
+        private TabPage tabDefaultSearch;
+        private TabPage tabAdvancedSearch;
+        private Button button3;
+        private Button button2;
+        private Button button1;
+        private Label label1;
+        private Label label2;
+        private TextBox textBox2;
+        private TextBox textBox1;
+        private TextBox textBox4;
+        private TextBox textBox3;
+        private Label label3;
+        private TextBox textBox5;
+        private Button button4;
     }
 }
