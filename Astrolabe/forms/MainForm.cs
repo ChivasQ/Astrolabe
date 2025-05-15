@@ -27,7 +27,7 @@ namespace Astrolabe
 
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox10_TextChanged(object sender, EventArgs e)
         {
             updateSearch();
         }
@@ -45,9 +45,9 @@ namespace Astrolabe
 
         private void updateSearch()
         {
-            string search_target = null;//textBox1.Text;
+            string search_target = textBox10.Text;
             List<Star> result = astronomy.FindAll(search_target);
-            Console.WriteLine(result.Count);
+            Console.WriteLine("�ӪӪ");
             starBindingSource1.DataSource = result;
         }
 
@@ -71,19 +71,14 @@ namespace Astrolabe
             return path;
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
-
+            updateSearch();
         }
 
-        private void label1_Click_1(object sender, EventArgs e)
+        private void textBox10_TextChanged_1(object sender, EventArgs e)
         {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
+            updateSearch();
         }
     }
 }
