@@ -32,7 +32,6 @@ namespace Astrolabe
             components = new System.ComponentModel.Container();
             resultList = new ListBox();
             starBindingSource1 = new BindingSource(components);
-            starBindingSource = new BindingSource(components);
             tabControl1 = new TabControl();
             tabMain = new TabPage();
             tabControl2 = new TabControl();
@@ -64,9 +63,9 @@ namespace Astrolabe
             listBox1 = new ListBox();
             tabSearchByConstellation = new TabPage();
             tabPage1 = new TabPage();
-            helpProvider1 = new HelpProvider();
+            tabPage4 = new TabPage();
+            button9 = new Button();
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)starBindingSource).BeginInit();
             tabControl1.SuspendLayout();
             tabMain.SuspendLayout();
             tabControl2.SuspendLayout();
@@ -78,6 +77,7 @@ namespace Astrolabe
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
             groupBox2.SuspendLayout();
+            tabPage4.SuspendLayout();
             SuspendLayout();
             // 
             // resultList
@@ -95,11 +95,7 @@ namespace Astrolabe
             // 
             // starBindingSource1
             // 
-            starBindingSource1.DataSource = typeof(Astrolabe.Astrolabe.models.Star);
-            // 
-            // starBindingSource
-            // 
-            starBindingSource.DataSource = typeof(Astrolabe.Astrolabe.models.Star);
+            starBindingSource1.DataSource = typeof(Astrolabe.models.Star);
             // 
             // tabControl1
             // 
@@ -107,6 +103,7 @@ namespace Astrolabe
             tabControl1.Controls.Add(tabSearchByStar);
             tabControl1.Controls.Add(tabSearchByConstellation);
             tabControl1.Controls.Add(tabPage1);
+            tabControl1.Controls.Add(tabPage4);
             tabControl1.Location = new Point(12, 12);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -415,6 +412,26 @@ namespace Astrolabe
             tabPage1.Text = "Спостереження";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(button9);
+            tabPage4.Location = new Point(4, 24);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Size = new Size(768, 398);
+            tabPage4.TabIndex = 4;
+            tabPage4.Text = "інше";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            button9.Location = new Point(36, 24);
+            button9.Name = "button9";
+            button9.Size = new Size(119, 34);
+            button9.TabIndex = 0;
+            button9.Text = "редактор бази";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -426,7 +443,6 @@ namespace Astrolabe
             Text = "Астролябія";
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)starBindingSource).EndInit();
             tabControl1.ResumeLayout(false);
             tabMain.ResumeLayout(false);
             tabControl2.ResumeLayout(false);
@@ -441,6 +457,7 @@ namespace Astrolabe
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
             groupBox2.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -461,7 +478,6 @@ namespace Astrolabe
 
         #endregion
         private ListBox resultList;
-        private BindingSource starBindingSource;
         private BindingSource starBindingSource1;
         private TabControl tabControl1;
         private TabPage tabMain;
@@ -469,7 +485,6 @@ namespace Astrolabe
         private GroupBox groupBox1;
         private TabPage tabSearchByConstellation;
         private TabPage tabPage1;
-        private HelpProvider helpProvider1;
         private TabControl tabControl2;
         private TabPage tabDefaultSearch;
         private TabPage tabAdvancedSearch;
@@ -495,5 +510,7 @@ namespace Astrolabe
         private TextBox textBox10;
         private Button button8;
         private ListBox listBox1;
+        private TabPage tabPage4;
+        private Button button9;
     }
 }

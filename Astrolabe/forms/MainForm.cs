@@ -80,5 +80,12 @@ namespace Astrolabe
         {
             updateSearch();
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            var form = new forms.DataEditorForm(astronomy);
+            form.ShowDialog(); 
+
+        }
     }
 }

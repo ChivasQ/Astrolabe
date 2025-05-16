@@ -8,7 +8,7 @@ namespace Astrolabe.models
 {
     public class Astronomy
     {
-        List<Star> stars = new List<Star>();
+        public List<Star> stars = new List<Star>();
 
 
         public List<Star> FindAll(String name) {

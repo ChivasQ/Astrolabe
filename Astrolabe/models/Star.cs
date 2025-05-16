@@ -8,7 +8,11 @@ namespace Astrolabe.models
 {
     public class Star
     {
-        public Star(string name) { this.Name = name; }
+        public Star(string name, double apparentMagnitude) 
+        { 
+            this.Name = name;
+            this.ApparentMagnitude = apparentMagnitude;
+        }
         public string Name { get; set; }
         public Constellation Constellation { get; set; }
         public double ApparentMagnitude { get; set; } // видима зоряна величина
