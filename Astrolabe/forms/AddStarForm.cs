@@ -25,9 +25,16 @@ namespace Astrolabe.forms
             string name = textBoxName.Text;
             string description = textBoxDescription.Text;
             double mag = double.Parse(textBoxMagnitude.Text);
-
-            NewStar = new Star(name, mag);
-            NewStar.Description = description;
+            // TODO: finish
+            NewStar = new Star
+            {
+                Name = name,
+                Constellation = "Canis Major",
+                ApparentMagnitude = mag,
+                DistanceLightYears = 8.6,
+                RightAscension = 6.75,
+                Declination = -16.7
+            };
 
             DialogResult = DialogResult.OK;
             this.Close();

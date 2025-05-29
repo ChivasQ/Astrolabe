@@ -7,6 +7,8 @@ namespace Astrolabe
     public partial class MainForm : Form
     {
         Astronomy astronomy;
+        bool FileOpened = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -15,12 +17,9 @@ namespace Astrolabe
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //int radius = 10;
-            //Rectangle bounds = new Rectangle(0, 0, this.Width, this.Height);
-            //GraphicsPath path = GetRoundedRectPath(bounds, radius);
-            //this.Region = new Region(path);
-            astronomy.Fill(100);
+            //astronomy.Fill(100);
+            dataGridView1.Visible = false;
+            label4.Visible = true;
         }
 
         private void textBox10_TextChanged(object sender, EventArgs e)
@@ -37,8 +36,18 @@ namespace Astrolabe
         {
             string search_target = textBox10.Text;
             List<Star> result = astronomy.FindAll(search_target);
-            Console.WriteLine("ЄУЄУЄ");
             starBindingSource1.DataSource = result;
+            if (FileOpened)
+            {
+                dataGridView1.Visible = true;
+                label4.Visible = false;
+            }
+            else
+            {
+                dataGridView1.Visible = false;
+                label4.Visible = true;
+            }
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -66,6 +75,7 @@ namespace Astrolabe
             {
                 string json = File.ReadAllText(openFileDialog.FileName);
                 astronomy.stars = JsonSerializer.Deserialize<List<Star>>(json);
+                FileOpened = true;
                 updateSearch();
             }
         }
@@ -90,9 +100,56 @@ namespace Astrolabe
 
         }
 
+        private void EditBaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new forms.DataEditorForm(astronomy);
+            form.ShowDialog();
+        }
+
+        public List<Star> GetVisibleStars(List<Star> allStars, double observerLatitude)
+        {
+            return allStars
+                .Where(star =>
+                    star.Declination >= (observerLatitude - 90) &&
+                    star.Declination <= (observerLatitude + 90) &&
+                    (star.ApparentMagnitude <= 6.5))
+                .ToList();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (!FileOpened)
+            {
+                MessageBox.Show("Спочатку відкрий або створи базу зірок.");
+                return;
+            }
+
+            if (!double.TryParse(textBoxLatitude.Text, out double latitude) || latitude < -90 || latitude > 90)
+            {
+                MessageBox.Show("Введіть коректну широту (-90 до 90).");
+                return;
+            }
+
+            var visibleStars = GetVisibleStars(astronomy.stars, latitude);
+
+            if (visibleStars.Count == 0)
+            {
+                MessageBox.Show("Жодної видимої зірки не знайдено для заданих параметрів.");
+            }
+
+            starBindingSource1.DataSource = visibleStars;
+            dataGridView1.Visible = true;
+            label4.Visible = false;
+        }
+
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            starBindingSource1.DataSource = astronomy.stars;
         }
     }
 }

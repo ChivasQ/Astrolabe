@@ -8,13 +8,13 @@
         static public List<Star> createStars(int len)
         {
             List<Star> result = new List<Star>();
-            for (int i = 0; i < len; i++)
-            {
-                int n = rnd.Next(testnames.Length);
-                Star star = new Star($"Star{i}: {testnames[n]}", (rnd.NextDouble()*2) - 1);
-                star.Description = $"Description to star{i}: {testnames[n]}";
-                result.Add(star);
-            }
+            //for (int i = 0; i < len; i++)
+            //{
+            //    int n = rnd.Next(testnames.Length);
+            //    Star star = new Star($"Star{i}: {testnames[n]}", (rnd.NextDouble()*2) - 1);
+            //    star.Description = $"Description to star{i}: {testnames[n]}";
+            //    result.Add(star);
+            //}
             return result;
         }
     }
