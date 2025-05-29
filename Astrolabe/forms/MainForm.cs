@@ -1,5 +1,6 @@
 using Astrolabe.models;
 using System.Drawing.Drawing2D;
+using System.Text.Json;
 
 namespace Astrolabe
 {
@@ -22,21 +23,10 @@ namespace Astrolabe
             astronomy.Fill(100);
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void textBox10_TextChanged(object sender, EventArgs e)
         {
             updateSearch();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -49,26 +39,6 @@ namespace Astrolabe
             List<Star> result = astronomy.FindAll(search_target);
             Console.WriteLine("ЄУЄУЄ");
             starBindingSource1.DataSource = result;
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private GraphicsPath GetRoundedRectPath(Rectangle bounds, int radius)
-        {
-            int diameter = radius * 2;
-            GraphicsPath path = new GraphicsPath();
-
-            path.StartFigure();
-            path.AddArc(bounds.X, bounds.Y, diameter, diameter, 180, 90);
-            path.AddArc(bounds.Right - diameter, bounds.Y, diameter, diameter, 270, 90);
-            path.AddArc(bounds.Right - diameter, bounds.Bottom - diameter, diameter, diameter, 0, 90);
-            path.AddArc(bounds.X, bounds.Bottom - diameter, diameter, diameter, 90, 90);
-            path.CloseFigure();
-
-            return path;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -84,7 +54,44 @@ namespace Astrolabe
         private void button9_Click(object sender, EventArgs e)
         {
             var form = new forms.DataEditorForm(astronomy);
-            form.ShowDialog(); 
+            form.ShowDialog();
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string json = File.ReadAllText(openFileDialog.FileName);
+                astronomy.stars = JsonSerializer.Deserialize<List<Star>>(json);
+                updateSearch();
+            }
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            saveFileDialog.Title = "Зберегти базу зірок";
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
+            };
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string json = JsonSerializer.Serialize(astronomy.stars, options);
+                File.WriteAllText(saveFileDialog.FileName, json);
+                MessageBox.Show("saved");
+            }
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
     }
