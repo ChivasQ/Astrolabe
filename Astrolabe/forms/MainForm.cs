@@ -77,6 +77,8 @@ namespace Astrolabe
                 astronomy.stars = JsonSerializer.Deserialize<List<Star>>(json);
                 FileOpened = true;
                 updateSearch();
+                astronomy.InitConstellations();
+                starBindingSource2.DataSource = astronomy.constellations;
             }
         }
 
@@ -151,5 +153,26 @@ namespace Astrolabe
         {
             starBindingSource1.DataSource = astronomy.stars;
         }
+
+        private void tabSearchByStar_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!FileOpened || listBox1.SelectedItem == null)
+                return;
+
+            string selectedConstellation = listBox1.SelectedItem.ToString();
+
+            var starsInConstellation = astronomy?.stars
+                ?.Where(s => s.Constellation == selectedConstellation)
+                ?.ToList();
+
+            // На випадок, якщо starsInConstellation також null:
+            starBindingSource.DataSource = starsInConstellation ?? new List<Star>();
+        }
+
     }
 }
