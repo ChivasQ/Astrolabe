@@ -77,6 +77,13 @@ namespace Astrolabe
             textBox10 = new TextBox();
             button8 = new Button();
             groupBox2 = new GroupBox();
+            dataGridView2 = new DataGridView();
+            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             starBindingSource = new BindingSource(components);
             listBox1 = new ListBox();
             starBindingSource2 = new BindingSource(components);
@@ -90,13 +97,6 @@ namespace Astrolabe
             saveAsToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             EditBaseToolStripMenuItem = new ToolStripMenuItem();
-            dataGridView2 = new DataGridView();
-            dataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn2 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn3 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
-            dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).BeginInit();
             tabControl1.SuspendLayout();
             tabMain.SuspendLayout();
@@ -110,11 +110,11 @@ namespace Astrolabe
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
             groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)starBindingSource2).BeginInit();
             tabPage4.SuspendLayout();
             menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // starBindingSource1
@@ -328,6 +328,8 @@ namespace Astrolabe
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.AutoGenerateColumns = false;
@@ -352,6 +354,7 @@ namespace Astrolabe
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridView1.Location = new Point(6, 18);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = SystemColors.Control;
             dataGridViewCellStyle5.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -360,6 +363,7 @@ namespace Astrolabe
             dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridView1.Size = new Size(948, 177);
             dataGridView1.TabIndex = 2;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
@@ -371,6 +375,7 @@ namespace Astrolabe
             ColumnName.DefaultCellStyle = dataGridViewCellStyle3;
             ColumnName.HeaderText = "Name";
             ColumnName.Name = "ColumnName";
+            ColumnName.ReadOnly = true;
             ColumnName.Width = 150;
             // 
             // ApparentMagnitudeColumn
@@ -378,6 +383,7 @@ namespace Astrolabe
             ApparentMagnitudeColumn.DataPropertyName = "ApparentMagnitude";
             ApparentMagnitudeColumn.HeaderText = "ApparentMagnitude";
             ApparentMagnitudeColumn.Name = "ApparentMagnitudeColumn";
+            ApparentMagnitudeColumn.ReadOnly = true;
             ApparentMagnitudeColumn.Width = 200;
             // 
             // DistanceLightYearsColumn
@@ -385,6 +391,7 @@ namespace Astrolabe
             DistanceLightYearsColumn.DataPropertyName = "DistanceLightYears";
             DistanceLightYearsColumn.HeaderText = "DistanceLightYears";
             DistanceLightYearsColumn.Name = "DistanceLightYearsColumn";
+            DistanceLightYearsColumn.ReadOnly = true;
             DistanceLightYearsColumn.Width = 200;
             // 
             // RightAscensionColumn
@@ -392,18 +399,21 @@ namespace Astrolabe
             RightAscensionColumn.DataPropertyName = "RightAscension";
             RightAscensionColumn.HeaderText = "RightAscension";
             RightAscensionColumn.Name = "RightAscensionColumn";
+            RightAscensionColumn.ReadOnly = true;
             // 
             // DeclinationColumn
             // 
             DeclinationColumn.DataPropertyName = "Declination";
             DeclinationColumn.HeaderText = "Declination";
             DeclinationColumn.Name = "DeclinationColumn";
+            DeclinationColumn.ReadOnly = true;
             // 
             // DescriptionColumn
             // 
             DescriptionColumn.DataPropertyName = "Description";
             DescriptionColumn.HeaderText = "Description";
             DescriptionColumn.Name = "DescriptionColumn";
+            DescriptionColumn.ReadOnly = true;
             DescriptionColumn.Width = 150;
             // 
             // tabSearchByStar
@@ -511,7 +521,80 @@ namespace Astrolabe
             groupBox2.Size = new Size(963, 201);
             groupBox2.TabIndex = 0;
             groupBox2.TabStop = false;
-            groupBox2.Text = "Пошук за зірками";
+            groupBox2.Text = "Пошук за сузір'ями";
+            // 
+            // dataGridView2
+            // 
+            dataGridViewCellStyle6.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridView2.AutoGenerateColumns = false;
+            dataGridView2.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
+            dataGridView2.DataSource = starBindingSource;
+            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = SystemColors.Window;
+            dataGridViewCellStyle8.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
+            dataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridView2.Location = new Point(323, 20);
+            dataGridView2.Name = "dataGridView2";
+            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = SystemColors.Control;
+            dataGridViewCellStyle9.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
+            dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridView2.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridView2.Size = new Size(634, 175);
+            dataGridView2.TabIndex = 3;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            dataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewTextBoxColumn1.HeaderText = "Name";
+            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.Width = 150;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            dataGridViewTextBoxColumn2.DataPropertyName = "ApparentMagnitude";
+            dataGridViewTextBoxColumn2.HeaderText = "ApparentMagnitude";
+            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            dataGridViewTextBoxColumn3.DataPropertyName = "DistanceLightYears";
+            dataGridViewTextBoxColumn3.HeaderText = "DistanceLightYears";
+            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.Width = 200;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            dataGridViewTextBoxColumn4.DataPropertyName = "RightAscension";
+            dataGridViewTextBoxColumn4.HeaderText = "RightAscension";
+            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            dataGridViewTextBoxColumn5.DataPropertyName = "Declination";
+            dataGridViewTextBoxColumn5.HeaderText = "Declination";
+            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            dataGridViewTextBoxColumn6.DataPropertyName = "Description";
+            dataGridViewTextBoxColumn6.HeaderText = "Description";
+            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.Width = 150;
             // 
             // starBindingSource
             // 
@@ -520,11 +603,12 @@ namespace Astrolabe
             // listBox1
             // 
             listBox1.DataSource = starBindingSource2;
+            listBox1.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             listBox1.FormattingEnabled = true;
-            listBox1.ItemHeight = 19;
+            listBox1.ItemHeight = 14;
             listBox1.Location = new Point(6, 20);
             listBox1.Name = "listBox1";
-            listBox1.Size = new Size(311, 175);
+            listBox1.Size = new Size(311, 172);
             listBox1.TabIndex = 0;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
@@ -614,78 +698,6 @@ namespace Astrolabe
             EditBaseToolStripMenuItem.Text = "Редагувати базу";
             EditBaseToolStripMenuItem.Click += EditBaseToolStripMenuItem_Click;
             // 
-            // dataGridView2
-            // 
-            dataGridViewCellStyle6.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
-            dataGridView2.AutoGenerateColumns = false;
-            dataGridView2.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
-            dataGridView2.DataSource = starBindingSource;
-            dataGridViewCellStyle8.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = SystemColors.Window;
-            dataGridViewCellStyle8.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle8.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle8.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
-            dataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
-            dataGridView2.Location = new Point(323, 20);
-            dataGridView2.Name = "dataGridView2";
-            dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = SystemColors.Control;
-            dataGridViewCellStyle9.Font = new Font("Calibri", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridViewCellStyle9.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = DataGridViewTriState.True;
-            dataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
-            dataGridView2.Size = new Size(634, 175);
-            dataGridView2.TabIndex = 3;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            dataGridViewTextBoxColumn1.DataPropertyName = "Name";
-            dataGridViewCellStyle7.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle7;
-            dataGridViewTextBoxColumn1.HeaderText = "Name";
-            dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            dataGridViewTextBoxColumn1.Width = 150;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            dataGridViewTextBoxColumn2.DataPropertyName = "ApparentMagnitude";
-            dataGridViewTextBoxColumn2.HeaderText = "ApparentMagnitude";
-            dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            dataGridViewTextBoxColumn2.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "DistanceLightYears";
-            dataGridViewTextBoxColumn3.HeaderText = "DistanceLightYears";
-            dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            dataGridViewTextBoxColumn3.Width = 200;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            dataGridViewTextBoxColumn4.DataPropertyName = "RightAscension";
-            dataGridViewTextBoxColumn4.HeaderText = "RightAscension";
-            dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            dataGridViewTextBoxColumn5.DataPropertyName = "Declination";
-            dataGridViewTextBoxColumn5.HeaderText = "Declination";
-            dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            dataGridViewTextBoxColumn6.DataPropertyName = "Description";
-            dataGridViewTextBoxColumn6.HeaderText = "Description";
-            dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            dataGridViewTextBoxColumn6.Width = 150;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -715,12 +727,12 @@ namespace Astrolabe
             tabPage3.ResumeLayout(false);
             tabPage3.PerformLayout();
             groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)starBindingSource2).EndInit();
             tabPage4.ResumeLayout(false);
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }

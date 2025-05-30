@@ -8,11 +8,13 @@ namespace Astrolabe
     {
         Astronomy astronomy;
         bool FileOpened = false;
+        private bool isModified = false;
 
         public MainForm()
         {
             InitializeComponent();
             astronomy = new Astronomy();
+            this.FormClosing += MainForm_FormClosing;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,6 +78,7 @@ namespace Astrolabe
                 string json = File.ReadAllText(openFileDialog.FileName);
                 astronomy.stars = JsonSerializer.Deserialize<List<Star>>(json);
                 FileOpened = true;
+                isModified = false;
                 updateSearch();
                 astronomy.InitConstellations();
                 starBindingSource2.DataSource = astronomy.constellations;
@@ -98,15 +101,21 @@ namespace Astrolabe
                 string json = JsonSerializer.Serialize(astronomy.stars, options);
                 File.WriteAllText(saveFileDialog.FileName, json);
                 MessageBox.Show("saved");
+                isModified = false;
             }
-
         }
 
         private void EditBaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var form = new forms.DataEditorForm(astronomy);
             form.ShowDialog();
+            if (form.isDataChanged)
+            {
+                isModified = true;
+                updateSearch();
+            }
         }
+
 
         public List<Star> GetVisibleStars(List<Star> allStars, double observerLatitude)
         {
@@ -173,6 +182,29 @@ namespace Astrolabe
             // На випадок, якщо starsInConstellation також null:
             starBindingSource.DataSource = starsInConstellation ?? new List<Star>();
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isModified)
+            {
+                var result = MessageBox.Show(
+                    "Ви маєте незбережені зміни. Бажаєте зберегти їх перед закриттям?",
+                    "Зберегти зміни?",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Warning
+                );
+
+                if (result == DialogResult.Yes)
+                {
+                    saveAsToolStripMenuItem_Click(null, null);
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
+
 
     }
 }
