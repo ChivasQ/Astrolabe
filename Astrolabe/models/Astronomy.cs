@@ -17,6 +17,10 @@ namespace Astrolabe.models
             for (int i = 0; i < stars.Count; i++)
             {
                 Star st = stars[i];
+                if (st.Name == null)
+                {
+                    continue;
+                }
                 if (System.Text.RegularExpressions.Regex.IsMatch(st.Name, name))
                 {
                     result.Add(st);

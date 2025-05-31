@@ -7,26 +7,32 @@ namespace Astrolabe.forms
     {
         public Astronomy astronomy { get; set; }
         public bool isDataChanged { get; set; }
+
         public DataEditorForm(Astronomy astronomy)
         {
             InitializeComponent();
             this.astronomy = astronomy;
             starBindingSource.DataSource = astronomy.stars;
             isDataChanged = false;
-            this.dataGridView1.UserDeletingRow += dataGridView1_UserDeletingRow;
 
+            this.dataGridView1.UserDeletingRow += dataGridView1_UserDeletingRow;
+            this.dataGridView1.DataError += dataGridView1_DataError;
+            this.dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
         }
 
         private void updateSearch()
         {
-            string search_target = richTextBox1.Text;
+            string search_target = richTextBox1.Text ?? string.Empty;
             List<Star> result = ApplyAdvancedFilter(search_target);
             starBindingSource.DataSource = result;
         }
 
         private List<Star> ApplyAdvancedFilter(string input)
         {
-            var result = astronomy.stars;
+            if (string.IsNullOrWhiteSpace(input))
+                return astronomy.stars;
+
+            var result = new List<Star>(astronomy.stars);
 
             var regex = new Regex(@"(?<field>\w+):(?<op>>=|<=|>|<|=)?(?<value>""[^""]+""|\S+)", RegexOptions.IgnoreCase);
             foreach (Match match in regex.Matches(input))
@@ -53,7 +59,8 @@ namespace Astrolabe.forms
                         break;
 
                     case "name":
-                        result = result.Where(s => s.Name.Contains(value, StringComparison.OrdinalIgnoreCase)).ToList();
+                        result = result.Where(s => !string.IsNullOrEmpty(s.Name) &&
+                                                   s.Name.Contains(value, StringComparison.OrdinalIgnoreCase)).ToList();
                         break;
 
                     case "magnitude":
@@ -72,7 +79,8 @@ namespace Astrolabe.forms
                         break;
 
                     case "constellation":
-                        result = result.Where(s => s.Constellation.Equals(value, StringComparison.OrdinalIgnoreCase)).ToList();
+                        result = result.Where(s => !string.IsNullOrEmpty(s.Constellation) &&
+                                                   s.Constellation.Equals(value, StringComparison.OrdinalIgnoreCase)).ToList();
                         break;
                 }
             }
@@ -83,11 +91,6 @@ namespace Astrolabe.forms
         private void DataEditorForm_Load(object sender, EventArgs e)
         {
             starBindingSource.DataSource = astronomy.stars;
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            isDataChanged = true;
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -110,58 +113,30 @@ namespace Astrolabe.forms
                 {
                     richTextBox1.Select(index, keyword.Length);
                     richTextBox1.SelectionFont = new Font("Segoe UI", 10, FontStyle.Bold);
-                    richTextBox1.SelectionColor = Color.DarkBlue;
+                    richTextBox1.SelectionColor = Color.Blue;
                     index += keyword.Length;
                 }
             }
 
-            // Відновлення курсору
             richTextBox1.Select(selectionStart, selectionLength);
             richTextBox1.TextChanged += richTextBox1_TextChanged;
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            updateSearch();
+            updateSearch(); // Обновим фильтр при изменении
         }
 
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
         {
-            // TODO: FIX OUT OF BOUND ERROR
-            Star? star = e.Row.DataBoundItem as Star;
-            if (star == null)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            var confirm = MessageBox.Show(
-                $"Ви дійсно хочете видалити зірку '{star.Name}'?",
-                "Підтвердження видалення",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning);
-
-            if (confirm != DialogResult.Yes)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            // Удаляем из главного списка
-            astronomy.stars.Remove(star);
-            
-            // Обновляем источник данных
-            starBindingSource.DataSource = null;
-            starBindingSource.DataSource = astronomy.stars;
-
             isDataChanged = true;
         }
 
-
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            e.Cancel = true;
+            MessageBox.Show("Ошибка при редактировании данных: " + e.Exception.Message);
         }
 
+        private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            isDataChanged = true;
+        }
     }
 }

@@ -111,9 +111,15 @@ namespace Astrolabe
             form.ShowDialog();
             if (form.isDataChanged)
             {
+                MessageBox.Show("awda");
+                if (!FileOpened) {
+                    FileOpened = true;
+                }
                 isModified = true;
                 updateSearch();
+
             }
+            astronomy = form.astronomy;
         }
 
 
