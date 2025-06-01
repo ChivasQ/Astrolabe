@@ -44,6 +44,7 @@
             DescriptionColumn = new DataGridViewTextBoxColumn();
             richTextBox1 = new RichTextBox();
             button1 = new Button();
+            buttonReset = new Button();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -57,6 +58,7 @@
             dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Control;
             dataGridViewCellStyle2.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -144,16 +146,28 @@
             // 
             button1.Location = new Point(390, 516);
             button1.Name = "button1";
-            button1.Size = new Size(54, 34);
+            button1.Size = new Size(87, 34);
             button1.TabIndex = 5;
-            button1.Text = "button1";
+            button1.Text = "Apply";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // buttonReset
+            // 
+            buttonReset.Location = new Point(483, 537);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new Size(51, 34);
+            buttonReset.TabIndex = 6;
+            buttonReset.Text = "Reset";
+            buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += buttonReset_Click;
             // 
             // DataEditorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(967, 583);
+            Controls.Add(buttonReset);
             Controls.Add(button1);
             Controls.Add(richTextBox1);
             Controls.Add(dataGridView1);
@@ -176,5 +190,6 @@
         private DataGridViewTextBoxColumn DescriptionColumn;
         private RichTextBox richTextBox1;
         private Button button1;
+        private Button buttonReset;
     }
 }

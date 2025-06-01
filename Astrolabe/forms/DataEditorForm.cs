@@ -18,74 +18,15 @@ namespace Astrolabe.forms
             this.dataGridView1.UserDeletingRow += dataGridView1_UserDeletingRow;
             this.dataGridView1.DataError += dataGridView1_DataError;
             this.dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+
+            this.AcceptButton = button1;
         }
 
         private void updateSearch()
         {
             string search_target = richTextBox1.Text ?? string.Empty;
-            List<Star> result = ApplyAdvancedFilter(search_target);
+            List<Star> result = Filters.ApplyAdvancedFilter(search_target, astronomy);
             starBindingSource.DataSource = result;
-        }
-
-        private List<Star> ApplyAdvancedFilter(string input)
-        {
-            if (string.IsNullOrWhiteSpace(input))
-                return astronomy.stars;
-
-            var result = new List<Star>(astronomy.stars);
-
-            var regex = new Regex(@"(?<field>\w+):(?<op>>=|<=|>|<|=)?(?<value>""[^""]+""|\S+)", RegexOptions.IgnoreCase);
-            foreach (Match match in regex.Matches(input))
-            {
-                string field = match.Groups["field"].Value.ToLower();
-                string op = match.Groups["op"].Value;
-                string value = match.Groups["value"].Value.Trim('"');
-
-                switch (field)
-                {
-                    case "distance":
-                        if (double.TryParse(value, out double dist))
-                        {
-                            result = op switch
-                            {
-                                ">" => result.Where(s => s.DistanceLightYears > dist).ToList(),
-                                "<" => result.Where(s => s.DistanceLightYears < dist).ToList(),
-                                ">=" => result.Where(s => s.DistanceLightYears >= dist).ToList(),
-                                "<=" => result.Where(s => s.DistanceLightYears <= dist).ToList(),
-                                "=" or "" => result.Where(s => s.DistanceLightYears == dist).ToList(),
-                                _ => result
-                            };
-                        }
-                        break;
-
-                    case "name":
-                        result = result.Where(s => !string.IsNullOrEmpty(s.Name) &&
-                                                   s.Name.Contains(value, StringComparison.OrdinalIgnoreCase)).ToList();
-                        break;
-
-                    case "magnitude":
-                        if (double.TryParse(value, out double mag))
-                        {
-                            result = op switch
-                            {
-                                ">" => result.Where(s => s.ApparentMagnitude > mag).ToList(),
-                                "<" => result.Where(s => s.ApparentMagnitude < mag).ToList(),
-                                ">=" => result.Where(s => s.ApparentMagnitude >= mag).ToList(),
-                                "<=" => result.Where(s => s.ApparentMagnitude <= mag).ToList(),
-                                "=" or "" => result.Where(s => s.ApparentMagnitude == mag).ToList(),
-                                _ => result
-                            };
-                        }
-                        break;
-
-                    case "constellation":
-                        result = result.Where(s => !string.IsNullOrEmpty(s.Constellation) &&
-                                                   s.Constellation.Equals(value, StringComparison.OrdinalIgnoreCase)).ToList();
-                        break;
-                }
-            }
-
-            return result;
         }
 
         private void DataEditorForm_Load(object sender, EventArgs e)
@@ -105,7 +46,14 @@ namespace Astrolabe.forms
             richTextBox1.SelectionFont = new Font("Segoe UI", 10, FontStyle.Regular);
             richTextBox1.SelectionColor = Color.Black;
 
-            string[] keywords = { "distance:", "name:", "type:", "magnitude:", "constellation:" };
+            string[] keywords =
+                {
+                    "distance:", "dist:",
+                    "name:",
+                    "magnitude:", "mag:",
+                    "constellation:", "cons:"
+                };
+
             foreach (string keyword in keywords)
             {
                 int index = 0;
@@ -120,8 +68,6 @@ namespace Astrolabe.forms
 
             richTextBox1.Select(selectionStart, selectionLength);
             richTextBox1.TextChanged += richTextBox1_TextChanged;
-
-            updateSearch(); // Обновим фильтр при изменении
         }
 
         private void dataGridView1_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
@@ -131,12 +77,23 @@ namespace Astrolabe.forms
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            MessageBox.Show("Ошибка при редактировании данных: " + e.Exception.Message);
+            MessageBox.Show("Помилка при редагуванні данних: " + e.Exception.Message);
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             isDataChanged = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            updateSearch();
+        }
+
+        private void buttonReset_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = string.Empty;
+            updateSearch();
         }
     }
 }

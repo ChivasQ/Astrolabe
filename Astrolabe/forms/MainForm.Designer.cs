@@ -56,8 +56,8 @@ namespace Astrolabe
             button2 = new Button();
             button1 = new Button();
             tabAdvancedSearch = new TabPage();
-            textBox5 = new TextBox();
-            button4 = new Button();
+            richTextBox1 = new RichTextBox();
+            ApplyAdvancedFilterButton = new Button();
             groupBox1 = new GroupBox();
             label4 = new Label();
             dataGridView1 = new DataGridView();
@@ -97,6 +97,7 @@ namespace Astrolabe
             saveAsToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             EditBaseToolStripMenuItem = new ToolStripMenuItem();
+            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).BeginInit();
             tabControl1.SuspendLayout();
             tabMain.SuspendLayout();
@@ -276,8 +277,9 @@ namespace Astrolabe
             // 
             // tabAdvancedSearch
             // 
-            tabAdvancedSearch.Controls.Add(textBox5);
             tabAdvancedSearch.Controls.Add(button4);
+            tabAdvancedSearch.Controls.Add(richTextBox1);
+            tabAdvancedSearch.Controls.Add(ApplyAdvancedFilterButton);
             tabAdvancedSearch.Location = new Point(4, 24);
             tabAdvancedSearch.Name = "tabAdvancedSearch";
             tabAdvancedSearch.Padding = new Padding(3);
@@ -286,22 +288,24 @@ namespace Astrolabe
             tabAdvancedSearch.Text = "Просунутий пошук";
             tabAdvancedSearch.UseVisualStyleBackColor = true;
             // 
-            // textBox5
+            // richTextBox1
             // 
-            textBox5.Location = new Point(6, 6);
-            textBox5.Multiline = true;
-            textBox5.Name = "textBox5";
-            textBox5.Size = new Size(736, 104);
-            textBox5.TabIndex = 2;
+            richTextBox1.Location = new Point(6, 107);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(746, 29);
+            richTextBox1.TabIndex = 2;
+            richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
             // 
-            // button4
+            // ApplyAdvancedFilterButton
             // 
-            button4.Location = new Point(587, 116);
-            button4.Name = "button4";
-            button4.Size = new Size(155, 29);
-            button4.TabIndex = 1;
-            button4.Text = "Пошук";
-            button4.UseVisualStyleBackColor = true;
+            ApplyAdvancedFilterButton.Location = new Point(758, 107);
+            ApplyAdvancedFilterButton.Name = "ApplyAdvancedFilterButton";
+            ApplyAdvancedFilterButton.Size = new Size(136, 29);
+            ApplyAdvancedFilterButton.TabIndex = 1;
+            ApplyAdvancedFilterButton.Text = "Пошук";
+            ApplyAdvancedFilterButton.UseVisualStyleBackColor = true;
+            ApplyAdvancedFilterButton.Click += buttonApplyAdvancedFilter_Click;
             // 
             // groupBox1
             // 
@@ -333,6 +337,7 @@ namespace Astrolabe
             dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Control;
             dataGridViewCellStyle2.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -366,7 +371,6 @@ namespace Astrolabe
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridView1.Size = new Size(948, 177);
             dataGridView1.TabIndex = 2;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // ColumnName
             // 
@@ -427,7 +431,6 @@ namespace Astrolabe
             tabSearchByStar.TabIndex = 1;
             tabSearchByStar.Text = "Сузір’я";
             tabSearchByStar.UseVisualStyleBackColor = true;
-            tabSearchByStar.Click += tabSearchByStar_Click;
             // 
             // tabControl3
             // 
@@ -698,6 +701,16 @@ namespace Astrolabe
             EditBaseToolStripMenuItem.Text = "Редагувати базу";
             EditBaseToolStripMenuItem.Click += EditBaseToolStripMenuItem_Click;
             // 
+            // button4
+            // 
+            button4.Location = new Point(900, 107);
+            button4.Name = "button4";
+            button4.Size = new Size(49, 29);
+            button4.TabIndex = 3;
+            button4.Text = "Reset";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -717,7 +730,6 @@ namespace Astrolabe
             tabDefaultSearch.ResumeLayout(false);
             tabDefaultSearch.PerformLayout();
             tabAdvancedSearch.ResumeLayout(false);
-            tabAdvancedSearch.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -773,8 +785,7 @@ namespace Astrolabe
         private TextBox textBox4;
         private TextBox textBoxLatitude;
         private Label label3;
-        private TextBox textBox5;
-        private Button button4;
+        private Button ApplyAdvancedFilterButton;
         private GroupBox groupBox2;
         private TabControl tabControl3;
         private TabPage tabPage2;
@@ -818,5 +829,7 @@ namespace Astrolabe
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private RichTextBox richTextBox1;
+        private Button button4;
     }
 }

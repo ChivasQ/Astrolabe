@@ -15,6 +15,7 @@ namespace Astrolabe
             InitializeComponent();
             astronomy = new Astronomy();
             this.FormClosing += MainForm_FormClosing;
+            this.AcceptButton = ApplyAdvancedFilterButton;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,7 +38,7 @@ namespace Astrolabe
         private void updateSearch()
         {
             string search_target = textBox10.Text;
-            List<Star> result = astronomy.FindAll(search_target);
+            List<Star> result = Filters.FindAllByName(search_target, astronomy.stars);
             starBindingSource1.DataSource = result;
             if (FileOpened)
             {
@@ -112,7 +113,8 @@ namespace Astrolabe
             if (form.isDataChanged)
             {
                 MessageBox.Show("awda");
-                if (!FileOpened) {
+                if (!FileOpened)
+                {
                     FileOpened = true;
                 }
                 isModified = true;
@@ -121,8 +123,6 @@ namespace Astrolabe
             }
             astronomy = form.astronomy;
         }
-
-
         public List<Star> GetVisibleStars(List<Star> allStars, double observerLatitude)
         {
             return allStars
@@ -159,19 +159,9 @@ namespace Astrolabe
             label4.Visible = false;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
             starBindingSource1.DataSource = astronomy.stars;
-        }
-
-        private void tabSearchByStar_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -211,6 +201,53 @@ namespace Astrolabe
             }
         }
 
+        private void buttonApplyAdvancedFilter_Click(object sender, EventArgs e)
+        {
+            string search_target = richTextBox1.Text ?? string.Empty;
+            List<Star> result = Filters.ApplyAdvancedFilter(search_target, astronomy);
+            starBindingSource1.DataSource = result;
+        }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            int selectionStart = richTextBox1.SelectionStart;
+            int selectionLength = richTextBox1.SelectionLength;
+
+            richTextBox1.TextChanged -= richTextBox1_TextChanged;
+
+            string text = richTextBox1.Text;
+            richTextBox1.SelectAll();
+            richTextBox1.SelectionFont = new Font("Segoe UI", 10, FontStyle.Regular);
+            richTextBox1.SelectionColor = Color.Black;
+
+            string[] keywords =
+                {
+                    "distance:", "dist:",
+                    "name:",
+                    "magnitude:", "mag:",
+                    "constellation:", "cons:"
+                };
+
+            foreach (string keyword in keywords)
+            {
+                int index = 0;
+                while ((index = text.IndexOf(keyword, index, StringComparison.OrdinalIgnoreCase)) != -1)
+                {
+                    richTextBox1.Select(index, keyword.Length);
+                    richTextBox1.SelectionFont = new Font("Segoe UI", 10, FontStyle.Bold);
+                    richTextBox1.SelectionColor = Color.Blue;
+                    index += keyword.Length;
+                }
+            }
+
+            richTextBox1.Select(selectionStart, selectionLength);
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text = string.Empty;
+            updateSearch();
+        }
     }
 }
