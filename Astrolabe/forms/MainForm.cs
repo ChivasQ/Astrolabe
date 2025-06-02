@@ -1,6 +1,7 @@
 using Astrolabe.models;
 using System.Drawing.Drawing2D;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace Astrolabe
 {
@@ -25,15 +26,15 @@ namespace Astrolabe
             label4.Visible = true;
         }
 
-        private void textBox10_TextChanged(object sender, EventArgs e)
-        {
-            updateSearch();
-        }
+        //private void textBox10_TextChanged(object sender, EventArgs e)
+        //{
+        //    updateSearch();
+        //}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            updateSearch();
-        }
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    updateSearch();
+        //}
 
         private void updateSearch()
         {
@@ -133,36 +134,36 @@ namespace Astrolabe
                 .ToList();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            if (!FileOpened)
-            {
-                MessageBox.Show("Спочатку відкрий або створи базу зірок.");
-                return;
-            }
+        //private void button1_Click_1(object sender, EventArgs e)
+        //{
+        //    if (!FileOpened)
+        //    {
+        //        MessageBox.Show("Спочатку відкрий або створи базу зірок.");
+        //        return;
+        //    }
 
-            if (!double.TryParse(textBoxLatitude.Text, out double latitude) || latitude < -90 || latitude > 90)
-            {
-                MessageBox.Show("Введіть коректну широту (-90 до 90).");
-                return;
-            }
+        //    if (!double.TryParse(textBoxLatitude.Text, out double latitude) || latitude < -90 || latitude > 90)
+        //    {
+        //        MessageBox.Show("Введіть коректну широту (-90 до 90).");
+        //        return;
+        //    }
 
-            var visibleStars = GetVisibleStars(astronomy.stars, latitude);
+        //    var visibleStars = GetVisibleStars(astronomy.stars, latitude);
 
-            if (visibleStars.Count == 0)
-            {
-                MessageBox.Show("Жодної видимої зірки не знайдено для заданих параметрів.");
-            }
+        //    if (visibleStars.Count == 0)
+        //    {
+        //        MessageBox.Show("Жодної видимої зірки не знайдено для заданих параметрів.");
+        //    }
 
-            starBindingSource1.DataSource = visibleStars;
-            dataGridView1.Visible = true;
-            label4.Visible = false;
-        }
+        //    starBindingSource1.DataSource = visibleStars;
+        //    dataGridView1.Visible = true;
+        //    label4.Visible = false;
+        //}
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            starBindingSource1.DataSource = astronomy.stars;
-        }
+        //private void button10_Click(object sender, EventArgs e)
+        //{
+        //    starBindingSource1.DataSource = astronomy.stars;
+        //}
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -204,8 +205,15 @@ namespace Astrolabe
         private void buttonApplyAdvancedFilter_Click(object sender, EventArgs e)
         {
             string search_target = richTextBox1.Text ?? string.Empty;
-            List<Star> result = Filters.ApplyAdvancedFilter(search_target, astronomy);
-            starBindingSource1.DataSource = result;
+            List<Star> firstFiltration = Filters.ApplyAdvancedFilter(search_target, astronomy);
+
+            double lat = double.Parse(textBoxLatitude.Text.Replace(".", ","));
+            double lon = double.Parse(textBoxLongitude.Text.Replace(".", ","));
+            DateTime time = DateTime.Parse(dateTimePicker1.Text);
+            List<Star> secondFiltration = Filters.FindVisibleStars(firstFiltration, lat, lon, time);
+
+            starBindingSource1.DataSource = null;
+            starBindingSource1.DataSource = secondFiltration;
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)

@@ -42,22 +42,7 @@ namespace Astrolabe
             starBindingSource1 = new BindingSource(components);
             tabControl1 = new TabControl();
             tabMain = new TabPage();
-            tabControl2 = new TabControl();
-            tabDefaultSearch = new TabPage();
-            button10 = new Button();
-            textBox4 = new TextBox();
-            textBoxLatitude = new TextBox();
-            label3 = new Label();
-            label2 = new Label();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
-            label1 = new Label();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
-            tabAdvancedSearch = new TabPage();
-            richTextBox1 = new RichTextBox();
-            ApplyAdvancedFilterButton = new Button();
+            splitContainer1 = new SplitContainer();
             groupBox1 = new GroupBox();
             label4 = new Label();
             dataGridView1 = new DataGridView();
@@ -67,6 +52,19 @@ namespace Astrolabe
             RightAscensionColumn = new DataGridViewTextBoxColumn();
             DeclinationColumn = new DataGridViewTextBoxColumn();
             DescriptionColumn = new DataGridViewTextBoxColumn();
+            groupBox3 = new GroupBox();
+            label5 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            label3 = new Label();
+            label2 = new Label();
+            textBoxLongitude = new TextBox();
+            label1 = new Label();
+            textBoxLatitude = new TextBox();
+            button2 = new Button();
+            button1 = new Button();
+            richTextBox1 = new RichTextBox();
+            ApplyAdvancedFilterButton = new Button();
+            button4 = new Button();
             tabSearchByStar = new TabPage();
             tabControl3 = new TabControl();
             tabPage2 = new TabPage();
@@ -97,15 +95,16 @@ namespace Astrolabe
             saveAsToolStripMenuItem = new ToolStripMenuItem();
             editToolStripMenuItem = new ToolStripMenuItem();
             EditBaseToolStripMenuItem = new ToolStripMenuItem();
-            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).BeginInit();
             tabControl1.SuspendLayout();
             tabMain.SuspendLayout();
-            tabControl2.SuspendLayout();
-            tabDefaultSearch.SuspendLayout();
-            tabAdvancedSearch.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            groupBox3.SuspendLayout();
             tabSearchByStar.SuspendLayout();
             tabControl3.SuspendLayout();
             tabPage2.SuspendLayout();
@@ -129,192 +128,47 @@ namespace Astrolabe
             tabControl1.Controls.Add(tabSearchByConstellation);
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage4);
-            tabControl1.Location = new Point(12, 27);
+            tabControl1.Location = new Point(0, 27);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(980, 416);
+            tabControl1.Size = new Size(1471, 526);
             tabControl1.TabIndex = 4;
             // 
             // tabMain
             // 
-            tabMain.Controls.Add(tabControl2);
-            tabMain.Controls.Add(groupBox1);
+            tabMain.Controls.Add(splitContainer1);
             tabMain.Location = new Point(4, 24);
             tabMain.Name = "tabMain";
             tabMain.Padding = new Padding(3);
-            tabMain.Size = new Size(972, 388);
+            tabMain.Size = new Size(1463, 498);
             tabMain.TabIndex = 0;
             tabMain.Text = "Головна";
             tabMain.UseVisualStyleBackColor = true;
             // 
-            // tabControl2
+            // splitContainer1
             // 
-            tabControl2.Controls.Add(tabDefaultSearch);
-            tabControl2.Controls.Add(tabAdvancedSearch);
-            tabControl2.Location = new Point(6, 213);
-            tabControl2.Multiline = true;
-            tabControl2.Name = "tabControl2";
-            tabControl2.SelectedIndex = 0;
-            tabControl2.Size = new Size(963, 170);
-            tabControl2.TabIndex = 3;
+            splitContainer1.Location = new Point(0, 0);
+            splitContainer1.Name = "splitContainer1";
             // 
-            // tabDefaultSearch
+            // splitContainer1.Panel1
             // 
-            tabDefaultSearch.Controls.Add(button10);
-            tabDefaultSearch.Controls.Add(textBox4);
-            tabDefaultSearch.Controls.Add(textBoxLatitude);
-            tabDefaultSearch.Controls.Add(label3);
-            tabDefaultSearch.Controls.Add(label2);
-            tabDefaultSearch.Controls.Add(textBox2);
-            tabDefaultSearch.Controls.Add(textBox1);
-            tabDefaultSearch.Controls.Add(label1);
-            tabDefaultSearch.Controls.Add(button3);
-            tabDefaultSearch.Controls.Add(button2);
-            tabDefaultSearch.Controls.Add(button1);
-            tabDefaultSearch.Location = new Point(4, 24);
-            tabDefaultSearch.Name = "tabDefaultSearch";
-            tabDefaultSearch.Padding = new Padding(3);
-            tabDefaultSearch.Size = new Size(955, 142);
-            tabDefaultSearch.TabIndex = 0;
-            tabDefaultSearch.Text = "Звичайний пошук";
-            tabDefaultSearch.UseVisualStyleBackColor = true;
+            splitContainer1.Panel1.Controls.Add(groupBox1);
             // 
-            // button10
+            // splitContainer1.Panel2
             // 
-            button10.Location = new Point(922, 115);
-            button10.Name = "button10";
-            button10.Size = new Size(27, 21);
-            button10.TabIndex = 10;
-            button10.Text = "button10";
-            button10.UseVisualStyleBackColor = true;
-            button10.Click += button10_Click;
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(657, 78);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(62, 23);
-            textBox4.TabIndex = 9;
-            // 
-            // textBoxLatitude
-            // 
-            textBoxLatitude.Location = new Point(589, 78);
-            textBoxLatitude.Name = "textBoxLatitude";
-            textBoxLatitude.Size = new Size(62, 23);
-            textBoxLatitude.TabIndex = 8;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(657, 60);
-            label3.Name = "label3";
-            label3.Size = new Size(49, 15);
-            label3.TabIndex = 7;
-            label3.Text = "довгота";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(585, 60);
-            label2.Name = "label2";
-            label2.Size = new Size(50, 15);
-            label2.TabIndex = 6;
-            label2.Text = "широта";
-            label2.Click += label2_Click;
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(680, 34);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(45, 23);
-            textBox2.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(589, 34);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(85, 23);
-            textBox1.TabIndex = 4;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(585, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(109, 15);
-            label1.TabIndex = 3;
-            label1.Text = "Вибір часу і місця:";
-            label1.Click += label1_Click_1;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(394, 36);
-            button3.Name = "button3";
-            button3.Size = new Size(155, 24);
-            button3.TabIndex = 2;
-            button3.Text = "Фільтр видимі";
-            button3.UseVisualStyleBackColor = true;
-            button3.Click += button3_Click;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(394, 6);
-            button2.Name = "button2";
-            button2.Size = new Size(155, 24);
-            button2.TabIndex = 1;
-            button2.Text = "Фільтр наяскравіші";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(587, 107);
-            button1.Name = "button1";
-            button1.Size = new Size(155, 29);
-            button1.TabIndex = 0;
-            button1.Text = "Пошук";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click_1;
-            // 
-            // tabAdvancedSearch
-            // 
-            tabAdvancedSearch.Controls.Add(button4);
-            tabAdvancedSearch.Controls.Add(richTextBox1);
-            tabAdvancedSearch.Controls.Add(ApplyAdvancedFilterButton);
-            tabAdvancedSearch.Location = new Point(4, 24);
-            tabAdvancedSearch.Name = "tabAdvancedSearch";
-            tabAdvancedSearch.Padding = new Padding(3);
-            tabAdvancedSearch.Size = new Size(955, 142);
-            tabAdvancedSearch.TabIndex = 1;
-            tabAdvancedSearch.Text = "Просунутий пошук";
-            tabAdvancedSearch.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(6, 107);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(746, 29);
-            richTextBox1.TabIndex = 2;
-            richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
-            // 
-            // ApplyAdvancedFilterButton
-            // 
-            ApplyAdvancedFilterButton.Location = new Point(758, 107);
-            ApplyAdvancedFilterButton.Name = "ApplyAdvancedFilterButton";
-            ApplyAdvancedFilterButton.Size = new Size(136, 29);
-            ApplyAdvancedFilterButton.TabIndex = 1;
-            ApplyAdvancedFilterButton.Text = "Пошук";
-            ApplyAdvancedFilterButton.UseVisualStyleBackColor = true;
-            ApplyAdvancedFilterButton.Click += buttonApplyAdvancedFilter_Click;
+            splitContainer1.Panel2.Controls.Add(groupBox3);
+            splitContainer1.Size = new Size(1463, 498);
+            splitContainer1.SplitterDistance = 1063;
+            splitContainer1.TabIndex = 4;
             // 
             // groupBox1
             // 
             groupBox1.Controls.Add(label4);
             groupBox1.Controls.Add(dataGridView1);
             groupBox1.Font = new Font("Calibri", 12F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            groupBox1.Location = new Point(6, 6);
+            groupBox1.Location = new Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(960, 201);
+            groupBox1.Size = new Size(1057, 489);
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "База зірок";
@@ -324,11 +178,11 @@ namespace Astrolabe
             label4.AutoSize = true;
             label4.Font = new Font("Calibri", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             label4.ForeColor = SystemColors.AppWorkspace;
-            label4.Location = new Point(239, 98);
+            label4.Location = new Point(265, 210);
             label4.Name = "label4";
-            label4.Size = new Size(517, 45);
+            label4.Size = new Size(517, 90);
             label4.TabIndex = 6;
-            label4.Text = "Відкрийте файл для перегляду";
+            label4.Text = "Відкрийте файл для перегляду\r\nабо заповніть нову у редакторі\r\n";
             // 
             // dataGridView1
             // 
@@ -369,7 +223,8 @@ namespace Astrolabe
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridView1.Size = new Size(948, 177);
+            dataGridView1.ShowEditingIcon = false;
+            dataGridView1.Size = new Size(1037, 455);
             dataGridView1.TabIndex = 2;
             // 
             // ColumnName
@@ -388,7 +243,7 @@ namespace Astrolabe
             ApparentMagnitudeColumn.HeaderText = "ApparentMagnitude";
             ApparentMagnitudeColumn.Name = "ApparentMagnitudeColumn";
             ApparentMagnitudeColumn.ReadOnly = true;
-            ApparentMagnitudeColumn.Width = 200;
+            ApparentMagnitudeColumn.Width = 150;
             // 
             // DistanceLightYearsColumn
             // 
@@ -396,7 +251,7 @@ namespace Astrolabe
             DistanceLightYearsColumn.HeaderText = "DistanceLightYears";
             DistanceLightYearsColumn.Name = "DistanceLightYearsColumn";
             DistanceLightYearsColumn.ReadOnly = true;
-            DistanceLightYearsColumn.Width = 200;
+            DistanceLightYearsColumn.Width = 150;
             // 
             // RightAscensionColumn
             // 
@@ -418,7 +273,133 @@ namespace Astrolabe
             DescriptionColumn.HeaderText = "Description";
             DescriptionColumn.Name = "DescriptionColumn";
             DescriptionColumn.ReadOnly = true;
-            DescriptionColumn.Width = 150;
+            DescriptionColumn.Width = 364;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Controls.Add(label5);
+            groupBox3.Controls.Add(dateTimePicker1);
+            groupBox3.Controls.Add(label3);
+            groupBox3.Controls.Add(label2);
+            groupBox3.Controls.Add(textBoxLongitude);
+            groupBox3.Controls.Add(label1);
+            groupBox3.Controls.Add(textBoxLatitude);
+            groupBox3.Controls.Add(button2);
+            groupBox3.Controls.Add(button1);
+            groupBox3.Controls.Add(richTextBox1);
+            groupBox3.Controls.Add(ApplyAdvancedFilterButton);
+            groupBox3.Controls.Add(button4);
+            groupBox3.Location = new Point(3, 7);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(386, 485);
+            groupBox3.TabIndex = 4;
+            groupBox3.TabStop = false;
+            groupBox3.Text = "groupBox3";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(211, 229);
+            label5.Name = "label5";
+            label5.Size = new Size(33, 15);
+            label5.TabIndex = 12;
+            label5.Text = "date:";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(244, 223);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(136, 23);
+            dateTimePicker1.TabIndex = 11;
+            dateTimePicker1.Value = new DateTime(2025, 6, 3, 0, 33, 29, 0);
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(211, 192);
+            label3.Name = "label3";
+            label3.Size = new Size(27, 15);
+            label3.TabIndex = 10;
+            label3.Text = "lon:";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(211, 163);
+            label2.Name = "label2";
+            label2.Size = new Size(23, 15);
+            label2.TabIndex = 9;
+            label2.Text = "lat:";
+            // 
+            // textBoxLongitude
+            // 
+            textBoxLongitude.Location = new Point(244, 189);
+            textBoxLongitude.Name = "textBoxLongitude";
+            textBoxLongitude.Size = new Size(136, 23);
+            textBoxLongitude.TabIndex = 8;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(232, 142);
+            label1.Name = "label1";
+            label1.Size = new Size(148, 15);
+            label1.TabIndex = 7;
+            label1.Text = "Координати на небосхилі";
+            // 
+            // textBoxLatitude
+            // 
+            textBoxLatitude.Location = new Point(244, 160);
+            textBoxLatitude.Name = "textBoxLatitude";
+            textBoxLatitude.Size = new Size(136, 23);
+            textBoxLatitude.TabIndex = 6;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(6, 257);
+            button2.Name = "button2";
+            button2.Size = new Size(136, 29);
+            button2.TabIndex = 5;
+            button2.Text = "Видимі зірки";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(6, 222);
+            button1.Name = "button1";
+            button1.Size = new Size(136, 29);
+            button1.TabIndex = 4;
+            button1.Text = "Найяскравіші зірки";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(6, 22);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(319, 29);
+            richTextBox1.TabIndex = 2;
+            richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            // 
+            // ApplyAdvancedFilterButton
+            // 
+            ApplyAdvancedFilterButton.Location = new Point(244, 440);
+            ApplyAdvancedFilterButton.Name = "ApplyAdvancedFilterButton";
+            ApplyAdvancedFilterButton.Size = new Size(136, 29);
+            ApplyAdvancedFilterButton.TabIndex = 1;
+            ApplyAdvancedFilterButton.Text = "Пошук";
+            ApplyAdvancedFilterButton.UseVisualStyleBackColor = true;
+            ApplyAdvancedFilterButton.Click += buttonApplyAdvancedFilter_Click;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(331, 22);
+            button4.Name = "button4";
+            button4.Size = new Size(49, 29);
+            button4.TabIndex = 3;
+            button4.Text = "Reset";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // tabSearchByStar
             // 
@@ -427,7 +408,7 @@ namespace Astrolabe
             tabSearchByStar.Location = new Point(4, 24);
             tabSearchByStar.Name = "tabSearchByStar";
             tabSearchByStar.Padding = new Padding(3);
-            tabSearchByStar.Size = new Size(972, 388);
+            tabSearchByStar.Size = new Size(1463, 498);
             tabSearchByStar.TabIndex = 1;
             tabSearchByStar.Text = "Сузір’я";
             tabSearchByStar.UseVisualStyleBackColor = true;
@@ -543,7 +524,7 @@ namespace Astrolabe
             dataGridViewCellStyle8.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle8.WrapMode = DataGridViewTriState.False;
             dataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
-            dataGridView2.Location = new Point(323, 20);
+            dataGridView2.Location = new Point(323, 17);
             dataGridView2.Name = "dataGridView2";
             dataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle9.BackColor = SystemColors.Control;
@@ -623,7 +604,7 @@ namespace Astrolabe
             // 
             tabSearchByConstellation.Location = new Point(4, 24);
             tabSearchByConstellation.Name = "tabSearchByConstellation";
-            tabSearchByConstellation.Size = new Size(972, 388);
+            tabSearchByConstellation.Size = new Size(1463, 498);
             tabSearchByConstellation.TabIndex = 2;
             tabSearchByConstellation.Text = "Пошук сузір'їв";
             tabSearchByConstellation.UseVisualStyleBackColor = true;
@@ -632,7 +613,7 @@ namespace Astrolabe
             // 
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
-            tabPage1.Size = new Size(972, 388);
+            tabPage1.Size = new Size(1463, 498);
             tabPage1.TabIndex = 3;
             tabPage1.Text = "Спостереження";
             tabPage1.UseVisualStyleBackColor = true;
@@ -642,7 +623,7 @@ namespace Astrolabe
             tabPage4.Controls.Add(button9);
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(972, 388);
+            tabPage4.Size = new Size(1463, 498);
             tabPage4.TabIndex = 4;
             tabPage4.Text = "інше";
             tabPage4.UseVisualStyleBackColor = true;
@@ -662,7 +643,7 @@ namespace Astrolabe
             menuStrip1.Items.AddRange(new ToolStripItem[] { fIleToolStripMenuItem, editToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(992, 24);
+            menuStrip1.Size = new Size(1471, 24);
             menuStrip1.TabIndex = 5;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -701,21 +682,11 @@ namespace Astrolabe
             EditBaseToolStripMenuItem.Text = "Редагувати базу";
             EditBaseToolStripMenuItem.Click += EditBaseToolStripMenuItem_Click;
             // 
-            // button4
-            // 
-            button4.Location = new Point(900, 107);
-            button4.Name = "button4";
-            button4.Size = new Size(49, 29);
-            button4.TabIndex = 3;
-            button4.Text = "Reset";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += button4_Click;
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(992, 446);
+            ClientSize = new Size(1471, 554);
             Controls.Add(tabControl1);
             Controls.Add(menuStrip1);
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -726,13 +697,15 @@ namespace Astrolabe
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).EndInit();
             tabControl1.ResumeLayout(false);
             tabMain.ResumeLayout(false);
-            tabControl2.ResumeLayout(false);
-            tabDefaultSearch.ResumeLayout(false);
-            tabDefaultSearch.PerformLayout();
-            tabAdvancedSearch.ResumeLayout(false);
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
             tabSearchByStar.ResumeLayout(false);
             tabControl3.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
@@ -772,19 +745,6 @@ namespace Astrolabe
         private GroupBox groupBox1;
         private TabPage tabSearchByConstellation;
         private TabPage tabPage1;
-        private TabControl tabControl2;
-        private TabPage tabDefaultSearch;
-        private TabPage tabAdvancedSearch;
-        private Button button3;
-        private Button button2;
-        private Button button1;
-        private Label label1;
-        private Label label2;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private TextBox textBox4;
-        private TextBox textBoxLatitude;
-        private Label label3;
         private Button ApplyAdvancedFilterButton;
         private GroupBox groupBox2;
         private TabControl tabControl3;
@@ -806,13 +766,6 @@ namespace Astrolabe
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem EditBaseToolStripMenuItem;
         private Label label4;
-        private DataGridViewTextBoxColumn ColumnName;
-        private DataGridViewTextBoxColumn ApparentMagnitudeColumn;
-        private DataGridViewTextBoxColumn DistanceLightYearsColumn;
-        private DataGridViewTextBoxColumn RightAscensionColumn;
-        private DataGridViewTextBoxColumn DeclinationColumn;
-        private DataGridViewTextBoxColumn DescriptionColumn;
-        private Button button10;
         private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn constellationDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn apparentMagnitudeDataGridViewTextBoxColumn;
@@ -831,5 +784,22 @@ namespace Astrolabe
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private RichTextBox richTextBox1;
         private Button button4;
+        private SplitContainer splitContainer1;
+        private DataGridViewTextBoxColumn ColumnName;
+        private DataGridViewTextBoxColumn ApparentMagnitudeColumn;
+        private DataGridViewTextBoxColumn DistanceLightYearsColumn;
+        private DataGridViewTextBoxColumn RightAscensionColumn;
+        private DataGridViewTextBoxColumn DeclinationColumn;
+        private DataGridViewTextBoxColumn DescriptionColumn;
+        private GroupBox groupBox3;
+        private Button button2;
+        private Button button1;
+        private TextBox textBoxLatitude;
+        private Label label3;
+        private Label label2;
+        private TextBox textBoxLongitude;
+        private Label label1;
+        private Label label5;
+        private DateTimePicker dateTimePicker1;
     }
 }

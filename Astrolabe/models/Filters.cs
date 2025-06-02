@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Astrolabe.models
 {
@@ -107,6 +108,19 @@ namespace Astrolabe.models
                 if (Regex.IsMatch(st.Name, name))
                 {
                     result.Add(st);
+                }
+            }
+            return result;
+        }
+
+        public static List<Star> FindVisibleStars(List<Star> stars, double lat, double lon, DateTime time)
+        {
+            List<Star> result = new List<Star>();
+            foreach (Star star in stars)
+            {
+                if (StarVisibility.IsStarVisible(star.RightAscension, star.Declination, lat, lon, time))
+                {
+                    result.Add(star);
                 }
             }
             return result;

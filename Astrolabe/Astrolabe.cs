@@ -1,3 +1,5 @@
+using Astrolabe.models;
+
 namespace Astrolabe
 {
     internal static class Astrolabe
@@ -8,8 +10,17 @@ namespace Astrolabe
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
+
+            //double ra = 37.9545;    // Полярна зоря
+            //double dec = 89.2641;
+            //double lat = 50.45;     // Київ
+            //double lon = 30.52;
+            //DateTime utc = DateTime.UtcNow;
+
+            //bool visible = StarVisibility.IsStarVisible(ra, dec, lat, lon, utc);
+
+            //MessageBox.Show("Зірка " + (visible ? "видима" : "невидима") + " у Києві.");
+
             ApplicationConfiguration.Initialize();
             Application.Run(new MainForm());
         }
