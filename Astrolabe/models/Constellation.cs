@@ -9,6 +9,7 @@ namespace Astrolabe.models
     public class Constellation
     {
         public string Name { get; set; }
-        public List<Star> Stars { get; set; } = new();
+        public string Description { get; set; }
     }
+
 }

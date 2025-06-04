@@ -44,7 +44,7 @@ namespace Astrolabe.models
             // Скалярний добуток
             double dot = vec3d.dot(starVector, zenithVector);
 
-            return dot > 0; // якщо більше нуля — зірка над горизонтом
+            return dot > 0; // якщо більше нуля - зірка над горизонтом
         }
 
         public static double GetLocalSiderealTime(DateTime utc, double longitude) // описаний у книзі Жана Мея "Astronomical Algorithms"

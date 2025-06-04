@@ -41,6 +41,7 @@
             DistanceLightYearsColumn = new DataGridViewTextBoxColumn();
             RightAscensionColumn = new DataGridViewTextBoxColumn();
             DeclinationColumn = new DataGridViewTextBoxColumn();
+            ConstellationColumn = new DataGridViewTextBoxColumn();
             DescriptionColumn = new DataGridViewTextBoxColumn();
             richTextBox1 = new RichTextBox();
             button1 = new Button();
@@ -55,24 +56,25 @@
             // 
             // dataGridView1
             // 
-            dataGridViewCellStyle1.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridView1.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
             dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
             dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
             dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnName, ApparentMagnitudeColumn, DistanceLightYearsColumn, RightAscensionColumn, DeclinationColumn, DescriptionColumn });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnName, ApparentMagnitudeColumn, DistanceLightYearsColumn, RightAscensionColumn, DeclinationColumn, ConstellationColumn, DescriptionColumn });
             dataGridView1.DataSource = starBindingSource;
             dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle4.BackColor = SystemColors.Window;
-            dataGridViewCellStyle4.Font = new Font("Calibri", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            dataGridViewCellStyle4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 204);
             dataGridViewCellStyle4.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
@@ -88,7 +90,8 @@
             dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
-            dataGridView1.Size = new Size(944, 498);
+            dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            dataGridView1.Size = new Size(1418, 498);
             dataGridView1.TabIndex = 3;
             // 
             // ColumnName
@@ -98,40 +101,49 @@
             ColumnName.DefaultCellStyle = dataGridViewCellStyle3;
             ColumnName.HeaderText = "Name";
             ColumnName.Name = "ColumnName";
-            ColumnName.Width = 150;
+            ColumnName.Width = 64;
             // 
             // ApparentMagnitudeColumn
             // 
             ApparentMagnitudeColumn.DataPropertyName = "ApparentMagnitude";
             ApparentMagnitudeColumn.HeaderText = "ApparentMagnitude";
             ApparentMagnitudeColumn.Name = "ApparentMagnitudeColumn";
-            ApparentMagnitudeColumn.Width = 200;
+            ApparentMagnitudeColumn.Width = 139;
             // 
             // DistanceLightYearsColumn
             // 
             DistanceLightYearsColumn.DataPropertyName = "DistanceLightYears";
             DistanceLightYearsColumn.HeaderText = "DistanceLightYears";
             DistanceLightYearsColumn.Name = "DistanceLightYearsColumn";
-            DistanceLightYearsColumn.Width = 200;
+            DistanceLightYearsColumn.Width = 131;
             // 
             // RightAscensionColumn
             // 
             RightAscensionColumn.DataPropertyName = "RightAscension";
             RightAscensionColumn.HeaderText = "RightAscension";
             RightAscensionColumn.Name = "RightAscensionColumn";
+            RightAscensionColumn.Width = 114;
             // 
             // DeclinationColumn
             // 
             DeclinationColumn.DataPropertyName = "Declination";
             DeclinationColumn.HeaderText = "Declination";
             DeclinationColumn.Name = "DeclinationColumn";
+            DeclinationColumn.Width = 92;
+            // 
+            // ConstellationColumn
+            // 
+            ConstellationColumn.DataPropertyName = "Constellation";
+            ConstellationColumn.HeaderText = "Constellation";
+            ConstellationColumn.Name = "ConstellationColumn";
+            ConstellationColumn.Width = 102;
             // 
             // DescriptionColumn
             // 
             DescriptionColumn.DataPropertyName = "Description";
             DescriptionColumn.HeaderText = "Description";
             DescriptionColumn.Name = "DescriptionColumn";
-            DescriptionColumn.Width = 150;
+            DescriptionColumn.Width = 92;
             // 
             // richTextBox1
             // 
@@ -166,7 +178,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(967, 583);
+            ClientSize = new Size(1442, 583);
             Controls.Add(buttonReset);
             Controls.Add(button1);
             Controls.Add(richTextBox1);
@@ -182,14 +194,15 @@
         #endregion
         private BindingSource starBindingSource;
         private DataGridView dataGridView1;
+        private RichTextBox richTextBox1;
+        private Button button1;
+        private Button buttonReset;
         private DataGridViewTextBoxColumn ColumnName;
         private DataGridViewTextBoxColumn ApparentMagnitudeColumn;
         private DataGridViewTextBoxColumn DistanceLightYearsColumn;
         private DataGridViewTextBoxColumn RightAscensionColumn;
         private DataGridViewTextBoxColumn DeclinationColumn;
+        private DataGridViewTextBoxColumn ConstellationColumn;
         private DataGridViewTextBoxColumn DescriptionColumn;
-        private RichTextBox richTextBox1;
-        private Button button1;
-        private Button buttonReset;
     }
 }

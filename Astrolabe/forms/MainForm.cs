@@ -1,4 +1,5 @@
 using Astrolabe.models;
+using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Text.Json;
 using System.Windows.Forms;
@@ -17,6 +18,7 @@ namespace Astrolabe
             astronomy = new Astronomy();
             this.FormClosing += MainForm_FormClosing;
             this.AcceptButton = ApplyAdvancedFilterButton;
+            this.DoubleBuffered = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,7 +40,7 @@ namespace Astrolabe
 
         private void updateSearch()
         {
-            string search_target = textBox10.Text;
+            string search_target = "";//textBox10.Text;
             List<Star> result = Filters.FindAllByName(search_target, astronomy.stars);
             starBindingSource1.DataSource = result;
             if (FileOpened)
@@ -52,16 +54,6 @@ namespace Astrolabe
                 label4.Visible = true;
             }
 
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            updateSearch();
-        }
-
-        private void textBox10_TextChanged_1(object sender, EventArgs e)
-        {
-            updateSearch();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -113,7 +105,6 @@ namespace Astrolabe
             form.ShowDialog();
             if (form.isDataChanged)
             {
-                MessageBox.Show("awda");
                 if (!FileOpened)
                 {
                     FileOpened = true;
@@ -123,15 +114,6 @@ namespace Astrolabe
 
             }
             astronomy = form.astronomy;
-        }
-        public List<Star> GetVisibleStars(List<Star> allStars, double observerLatitude)
-        {
-            return allStars
-                .Where(star =>
-                    star.Declination >= (observerLatitude - 90) &&
-                    star.Declination <= (observerLatitude + 90) &&
-                    (star.ApparentMagnitude <= 6.5))
-                .ToList();
         }
 
         //private void button1_Click_1(object sender, EventArgs e)
@@ -193,7 +175,7 @@ namespace Astrolabe
 
                 if (result == DialogResult.Yes)
                 {
-                    saveAsToolStripMenuItem_Click(null, null);
+                    saveAsToolStripMenuItem_Click(sender, e);
                 }
                 else if (result == DialogResult.Cancel)
                 {
@@ -207,14 +189,34 @@ namespace Astrolabe
             string search_target = richTextBox1.Text ?? string.Empty;
             List<Star> firstFiltration = Filters.ApplyAdvancedFilter(search_target, astronomy);
 
-            double lat = double.Parse(textBoxLatitude.Text.Replace(".", ","));
-            double lon = double.Parse(textBoxLongitude.Text.Replace(".", ","));
-            DateTime time = DateTime.Parse(dateTimePicker1.Text);
-            List<Star> secondFiltration = Filters.FindVisibleStars(firstFiltration, lat, lon, time);
+            double lat = 0, lon = 0;
+            bool coordsParsed = false;
 
-            starBindingSource1.DataSource = null;
-            starBindingSource1.DataSource = secondFiltration;
+            if (!string.IsNullOrWhiteSpace(textBoxLatitude.Text))
+            {
+                string[] parts = textBoxLatitude.Text.Split(',');
+                if (parts.Length == 2 &&
+                    double.TryParse(parts[0].Trim().Replace(".", ","), out lat) &&
+                    double.TryParse(parts[1].Trim().Replace(".", ","), out lon))
+                {
+                    coordsParsed = true;
+                }
+            }
+
+            if (coordsParsed)
+            {
+                DateTime time = dateTimePicker1.Value;
+                List<Star> secondFiltration = Filters.FindVisibleStars(firstFiltration, lat, lon, time);
+                starBindingSource1.DataSource = null;
+                starBindingSource1.DataSource = secondFiltration;
+            }
+            else
+            {
+                starBindingSource1.DataSource = null;
+                starBindingSource1.DataSource = firstFiltration;
+            }
         }
+
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -233,7 +235,8 @@ namespace Astrolabe
                     "distance:", "dist:",
                     "name:",
                     "magnitude:", "mag:",
-                    "constellation:", "cons:"
+                    "constellation:", "cons:",
+                    "isvisible:", "visible:"
                 };
 
             foreach (string keyword in keywords)
@@ -256,6 +259,119 @@ namespace Astrolabe
         {
             richTextBox1.Text = string.Empty;
             updateSearch();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<Star> list = (starBindingSource1.DataSource as List<Star>);
+
+            List<Star> sorted = list.OrderByDescending(x => x.ApparentMagnitude).Reverse().ToList();
+
+            starBindingSource1.DataSource = null;
+            starBindingSource1.DataSource = sorted;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            List<Star> list = (starBindingSource1.DataSource as List<Star>);
+
+            List<Star> sorted = list.OrderByDescending(x => x.Name).Reverse().ToList();
+
+            starBindingSource1.DataSource = null;
+            starBindingSource1.DataSource = sorted;
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            List<Star> list = (starBindingSource1.DataSource as List<Star>);
+
+            List<Star> sorted = list.OrderByDescending(x => x.Constellation).Reverse().ToList();
+
+            starBindingSource1.DataSource = null;
+            starBindingSource1.DataSource = sorted;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            List<Star> list = (starBindingSource1.DataSource as List<Star>);
+
+            List<Star> sorted = list.OrderByDescending(x => x.DistanceLightYears).Reverse().ToList();
+
+            starBindingSource1.DataSource = null;
+            starBindingSource1.DataSource = sorted;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            double lat = 0, lon = 0;
+            bool coordsParsed = false;
+
+            if (!string.IsNullOrWhiteSpace(textBox1.Text))
+            {
+                string[] parts = textBox1.Text.Split(',');
+                if (parts.Length == 2 &&
+                    double.TryParse(parts[0].Trim().Replace(".", ","), out lat) &&
+                    double.TryParse(parts[1].Trim().Replace(".", ","), out lon))
+                {
+                    coordsParsed = true;
+                }
+            }
+
+            if (!coordsParsed)
+            {
+                MessageBox.Show("¬вед≥ть координати у формат≥: широта, довгота");
+                return;
+            }
+
+            DateTime time = dateTimePicker2.Value;
+            List<string> visibleConstellations = new List<string>();
+
+            foreach (var constellation in astronomy.constellations)
+            {
+                var starsInConstellation = astronomy.stars
+                    .Where(s => s.Constellation == constellation)
+                    .ToList();
+
+                if (starsInConstellation.Count == 0)
+                    continue;
+
+                var visibleStars = Filters.FindVisibleStars(starsInConstellation, lat, lon, time);
+
+                // якщо вс≥ з≥рки видим≥ Ч додаЇмо суз≥рТ€
+                if (visibleStars.Count == starsInConstellation.Count)
+                {
+                    visibleConstellations.Add(constellation);
+                }
+            }
+
+            if (visibleConstellations.Count == 0)
+            {
+                MessageBox.Show("∆одне суз≥рТ€ повн≥стю не видно з обраноњ точки.");
+            }
+
+            starBindingSource2.DataSource = null;
+            starBindingSource2.DataSource = visibleConstellations;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            starBindingSource2.DataSource = null;
+            starBindingSource2.DataSource = astronomy.constellations;
+        }
+
+        private void tabPage4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabMain_Click(object sender, EventArgs e)
+        {
+            this.AcceptButton = ApplyAdvancedFilterButton;
+        }
+
+        private void tabSearchByStar_Click(object sender, EventArgs e)
+        {
+            this.AcceptButton = button6;
         }
     }
 }

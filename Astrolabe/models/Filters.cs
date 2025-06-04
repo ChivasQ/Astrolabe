@@ -72,6 +72,17 @@ namespace Astrolabe.models
                         result = result.Where(s => !string.IsNullOrEmpty(s.Constellation) &&
                                                    s.Constellation.Equals(value, StringComparison.OrdinalIgnoreCase)).ToList();
                         break;
+
+                    case "visible":
+                    case "isvisible":
+                        if (bool.TryParse(value, out bool visible))
+                        {
+                            if(visible)
+                                result = result.Where(s => s.ApparentMagnitude <= 6.5).ToList();
+                            else
+                                result = result.Where(s => s.ApparentMagnitude > 6.5).ToList();
+                        }
+                        break;
                 }
             }
 
@@ -84,7 +95,7 @@ namespace Astrolabe.models
                 remaining = remaining.Remove(range.Start, range.End - range.Start);
             }
 
-            var extraWords = remaining.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            var extraWords = remaining.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
             foreach (string word in extraWords)
             {
@@ -115,15 +126,9 @@ namespace Astrolabe.models
 
         public static List<Star> FindVisibleStars(List<Star> stars, double lat, double lon, DateTime time)
         {
-            List<Star> result = new List<Star>();
-            foreach (Star star in stars)
-            {
-                if (StarVisibility.IsStarVisible(star.RightAscension, star.Declination, lat, lon, time))
-                {
-                    result.Add(star);
-                }
-            }
-            return result;
+            return stars
+                .Where(star => StarVisibility.IsStarVisible(star.RightAscension, star.Declination, lat, lon, time))
+                .ToList();
         }
     }
 }
