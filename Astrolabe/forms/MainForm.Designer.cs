@@ -90,6 +90,7 @@ namespace Astrolabe
             editToolStripMenuItem = new ToolStripMenuItem();
             EditBaseToolStripMenuItem = new ToolStripMenuItem();
             toolTip1 = new ToolTip(components);
+            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).BeginInit();
             tabControl1.SuspendLayout();
             tabMain.SuspendLayout();
@@ -416,6 +417,7 @@ namespace Astrolabe
             // 
             // splitContainer2.Panel2
             // 
+            splitContainer2.Panel2.Controls.Add(label6);
             splitContainer2.Panel2.Controls.Add(button7);
             splitContainer2.Panel2.Controls.Add(button6);
             splitContainer2.Panel2.Controls.Add(groupBox7);
@@ -634,6 +636,15 @@ namespace Astrolabe
             EditBaseToolStripMenuItem.Text = "Редагувати базу";
             EditBaseToolStripMenuItem.Click += EditBaseToolStripMenuItem_Click;
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(64, 360);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 15);
+            label6.TabIndex = 19;
+            label6.Text = "label6";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -663,6 +674,7 @@ namespace Astrolabe
             tabSearchByStar.ResumeLayout(false);
             splitContainer2.Panel1.ResumeLayout(false);
             splitContainer2.Panel2.ResumeLayout(false);
+            splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
@@ -757,5 +769,6 @@ namespace Astrolabe
         private GroupBox groupBox7;
         private Button button6;
         private Button button7;
+        private Label label6;
     }
 }

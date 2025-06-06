@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Drawing.Drawing2D;
 using System.Text.Json;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Astrolabe
 {
@@ -11,6 +12,7 @@ namespace Astrolabe
         Astronomy astronomy;
         bool FileOpened = false;
         private bool isModified = false;
+        Settings settings = Settings.Load();
 
         public MainForm()
         {
@@ -23,26 +25,38 @@ namespace Astrolabe
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //astronomy.Fill(100);
             dataGridView1.Visible = false;
             label4.Visible = true;
+
+
+            if (!string.IsNullOrWhiteSpace(settings.LastOpenedFile) && File.Exists(settings.LastOpenedFile))
+            {
+                try
+                {
+                    string json = File.ReadAllText(settings.LastOpenedFile);
+                    astronomy.constellations = JsonSerializer.Deserialize<List<Constellation>>(json);
+
+                    FileOpened = true;
+                    isModified = false;
+
+                    astronomy.InitConstellations();
+
+                    updateSearch();
+                    this.Text = "Астролябія - " + settings.GetLastOpenedFileName();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Не вдалося відкрити останній файл:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
-
-        //private void textBox10_TextChanged(object sender, EventArgs e)
-        //{
-        //    updateSearch();
-        //}
-
-        //private void button1_Click(object sender, EventArgs e)
-        //{
-        //    updateSearch();
-        //}
 
         private void updateSearch()
         {
-            string search_target = "";//textBox10.Text;
-            List<Star> result = Filters.FindAllByName(search_target, astronomy.stars);
-            starBindingSource1.DataSource = result;
+            starBindingSource1.DataSource = null;
+            starBindingSource1.DataSource = astronomy.stars;
+            starBindingSource2.DataSource = null;
+            starBindingSource2.DataSource = astronomy.constellations;
             if (FileOpened)
             {
                 dataGridView1.Visible = true;
@@ -56,13 +70,6 @@ namespace Astrolabe
 
         }
 
-        private void button9_Click(object sender, EventArgs e)
-        {
-            var form = new forms.DataEditorForm(astronomy);
-            form.ShowDialog();
-
-        }
-
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -70,12 +77,18 @@ namespace Astrolabe
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string json = File.ReadAllText(openFileDialog.FileName);
-                astronomy.stars = JsonSerializer.Deserialize<List<Star>>(json);
+                var loaded = JsonSerializer.Deserialize<List<Constellation>>(json);
+
+                astronomy.constellations = loaded ?? new List<Constellation>();
+                astronomy.InitConstellations();
                 FileOpened = true;
                 isModified = false;
                 updateSearch();
-                astronomy.InitConstellations();
-                starBindingSource2.DataSource = astronomy.constellations;
+
+
+                settings.LastOpenedFile = openFileDialog.FileName;
+                settings.Save();
+                this.Text = "Астролябія - " + settings.GetLastOpenedFileName();
             }
         }
 
@@ -87,15 +100,20 @@ namespace Astrolabe
 
             var options = new JsonSerializerOptions
             {
-                WriteIndented = true
+                WriteIndented = true,
             };
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                string json = JsonSerializer.Serialize(astronomy.stars, options);
+                string json = JsonSerializer.Serialize(astronomy.constellations, options);
                 File.WriteAllText(saveFileDialog.FileName, json);
-                MessageBox.Show("saved");
+
+                MessageBox.Show("Збережено успішно.");
                 isModified = false;
+
+                settings.LastOpenedFile = saveFileDialog.FileName;
+                settings.Save();
+                this.Text = "Астролябія - " + settings.GetLastOpenedFileName();
             }
         }
 
@@ -103,49 +121,50 @@ namespace Astrolabe
         {
             var form = new forms.DataEditorForm(astronomy);
             form.ShowDialog();
+
             if (form.isDataChanged)
             {
+                astronomy.stars = form.EditedStars;
+
+                RebuildConstellationsFromStars(astronomy);
+                astronomy.InitConstellations();
+
                 if (!FileOpened)
                 {
                     FileOpened = true;
                 }
                 isModified = true;
-                updateSearch();
-
             }
-            astronomy = form.astronomy;
+
+            updateSearch();
         }
 
-        //private void button1_Click_1(object sender, EventArgs e)
-        //{
-        //    if (!FileOpened)
-        //    {
-        //        MessageBox.Show("Спочатку відкрий або створи базу зірок.");
-        //        return;
-        //    }
+        private void RebuildConstellationsFromStars(Astronomy astro)
+        {
+            var groupedStars = astro.stars.GroupBy(s => s.Constellation ?? string.Empty);
 
-        //    if (!double.TryParse(textBoxLatitude.Text, out double latitude) || latitude < -90 || latitude > 90)
-        //    {
-        //        MessageBox.Show("Введіть коректну широту (-90 до 90).");
-        //        return;
-        //    }
+            var newConstellations = new List<Constellation>();
 
-        //    var visibleStars = GetVisibleStars(astronomy.stars, latitude);
+            foreach (var group in groupedStars)
+            {
+                string name = string.IsNullOrWhiteSpace(group.Key) ? null : group.Key;
+                var stars = group.ToList();
 
-        //    if (visibleStars.Count == 0)
-        //    {
-        //        MessageBox.Show("Жодної видимої зірки не знайдено для заданих параметрів.");
-        //    }
+                var existingDescription = astro.constellations
+                    .FirstOrDefault(c => c.Name == name)?.Description;
 
-        //    starBindingSource1.DataSource = visibleStars;
-        //    dataGridView1.Visible = true;
-        //    label4.Visible = false;
-        //}
+                newConstellations.Add(new Constellation
+                {
+                    Name = name,
+                    Description = existingDescription ?? (name == null ? "stars with no constellation" : null),
+                    Stars = stars
+                });
+            }
 
-        //private void button10_Click(object sender, EventArgs e)
-        //{
-        //    starBindingSource1.DataSource = astronomy.stars;
-        //}
+            astro.constellations = newConstellations
+                .OrderBy(c => c.Name == null ? "" : c.Name)
+                .ToList();
+        }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -158,9 +177,14 @@ namespace Astrolabe
                 ?.Where(s => s.Constellation == selectedConstellation)
                 ?.ToList();
 
-            // На випадок, якщо starsInConstellation також null:
+            var constellation = astronomy.constellations
+                .FirstOrDefault(c => c.Name == selectedConstellation);
+
+            label6.Text = constellation.Description ?? "h";
+
             starBindingSource.DataSource = starsInConstellation ?? new List<Star>();
         }
+
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -216,7 +240,6 @@ namespace Astrolabe
                 starBindingSource1.DataSource = firstFiltration;
             }
         }
-
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -324,15 +347,13 @@ namespace Astrolabe
             }
 
             DateTime time = dateTimePicker2.Value;
-            List<string> visibleConstellations = new List<string>();
+            List<Constellation> visibleConstellations = new();
 
             foreach (var constellation in astronomy.constellations)
             {
-                var starsInConstellation = astronomy.stars
-                    .Where(s => s.Constellation == constellation)
-                    .ToList();
+                var starsInConstellation = constellation.Stars;
 
-                if (starsInConstellation.Count == 0)
+                if (starsInConstellation == null || starsInConstellation.Count == 0)
                     continue;
 
                 var visibleStars = Filters.FindVisibleStars(starsInConstellation, lat, lon, time);
@@ -357,11 +378,6 @@ namespace Astrolabe
         {
             starBindingSource2.DataSource = null;
             starBindingSource2.DataSource = astronomy.constellations;
-        }
-
-        private void tabPage4_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void tabMain_Click(object sender, EventArgs e)
