@@ -11,7 +11,7 @@ namespace Astrolabe.models
         public string Name { get; set; }
         public string Constellation { get; set; }
         public double ApparentMagnitude { get; set; } // видима зоряна величина
-        public double DistanceLightYears { get; set; }
+        public double Distance { get; set; }
         public double RightAscension { get; set; } // RA, год
         public double Declination { get; set; }    // Dec, градус
         public string Description { get; set; }

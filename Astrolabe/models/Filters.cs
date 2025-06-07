@@ -36,11 +36,11 @@ namespace Astrolabe.models
                         {
                             result = op switch
                             {
-                                ">" => result.Where(s => s.DistanceLightYears > dist).ToList(),
-                                "<" => result.Where(s => s.DistanceLightYears < dist).ToList(),
-                                ">=" => result.Where(s => s.DistanceLightYears >= dist).ToList(),
-                                "<=" => result.Where(s => s.DistanceLightYears <= dist).ToList(),
-                                "=" or "" => result.Where(s => s.DistanceLightYears == dist).ToList(),
+                                ">" => result.Where(s => s.Distance > dist).ToList(),
+                                "<" => result.Where(s => s.Distance < dist).ToList(),
+                                ">=" => result.Where(s => s.Distance >= dist).ToList(),
+                                "<=" => result.Where(s => s.Distance <= dist).ToList(),
+                                "=" or "" => result.Where(s => s.Distance == dist).ToList(),
                                 _ => result
                             };
                         }

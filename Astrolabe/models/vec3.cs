@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Astrolabe.models
 {
-    public class vec3d
+    public struct vec3d
     {
         public double x, y, z;
 

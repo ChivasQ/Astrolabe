@@ -47,7 +47,7 @@ namespace Astrolabe.models
             return dot > 0; // якщо більше нуля - зірка над горизонтом
         }
 
-        public static double GetLocalSiderealTime(DateTime utc, double longitude) // описаний у книзі Жана Мея "Astronomical Algorithms"
+        public static double GetLocalSiderealTime(DateTime utc, double longitude) // описаний у книзі Жана Мея "Astronomical Algorithms" повертає місцевий зоряний час у градусах
         {
             double jd = GetJulianDate(utc);
             double d = jd - 2451545.0;

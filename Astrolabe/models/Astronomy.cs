@@ -2,48 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.Design.AxImporter;
 
 namespace Astrolabe.models
 {
     public class Astronomy
     {
         public List<Star> stars = new List<Star>();
-        public List<Constellation> constellations = new List<Constellation>();
+        public List<string> constellations = new List<string>();
 
         public void InitConstellations()
         {
-            stars = constellations
-                .Where(c => c.Stars != null)
-                .SelectMany(c => c.Stars)
-                .ToList();
-
-            foreach (var constellation in constellations)
-            {
-                if (constellation.Stars != null)
-                {
-                    foreach (var star in constellation.Stars)
-                    {
-                        star.Constellation = constellation.Name;
-                    }
-                }
-            }
-
-            var groupedStars = stars.GroupBy(s => s.Constellation).ToList();
-            constellations.Clear();
-
-            foreach (var group in groupedStars)
-            {
-                constellations.Add(new Constellation
-                {
-                    Name = group.Key,
-                    Description = group.Key == null ? "stars with no constellation" : null,
-                    Stars = group.ToList()
-                });
-            }
-
-            constellations = constellations
-                .OrderBy(c => c.Name == null ? "" : c.Name)
+            this.constellations = stars
+                .Select(s => s.Constellation)
+                .Distinct()
+                .OrderBy(s => s)
                 .ToList();
         }
 
@@ -51,5 +27,30 @@ namespace Astrolabe.models
         {
             stars = Tests.createStars(len);
         }
+
+        public void Serialize(string path)
+        {
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+            };
+
+            string json = JsonSerializer.Serialize(this.stars, options);
+            File.WriteAllText(path, json);
+        }
+
+        public void Deserialize(string path)
+        {
+            try
+            {
+                string json = File.ReadAllText(path);
+                this.stars = JsonSerializer.Deserialize<List<Star>>(json);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Помилка при завантажені файлу:\n" + e.Message);
+            }
+        }
+
     }
 }

@@ -49,6 +49,11 @@ namespace Astrolabe
             ConstellationColumn = new DataGridViewTextBoxColumn();
             DescriptionColumn = new DataGridViewTextBoxColumn();
             groupBox3 = new GroupBox();
+            buttonEdit = new Button();
+            groupBox8 = new GroupBox();
+            comboBox1 = new ComboBox();
+            starBindingSource2 = new BindingSource(components);
+            checkBox1 = new CheckBox();
             groupBox5 = new GroupBox();
             label1 = new Label();
             textBoxLatitude = new TextBox();
@@ -73,11 +78,11 @@ namespace Astrolabe
             dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             starBindingSource = new BindingSource(components);
+            label6 = new Label();
             button7 = new Button();
             button6 = new Button();
             groupBox7 = new GroupBox();
             listBox1 = new ListBox();
-            starBindingSource2 = new BindingSource(components);
             groupBox6 = new GroupBox();
             label2 = new Label();
             textBox1 = new TextBox();
@@ -90,7 +95,6 @@ namespace Astrolabe
             editToolStripMenuItem = new ToolStripMenuItem();
             EditBaseToolStripMenuItem = new ToolStripMenuItem();
             toolTip1 = new ToolTip(components);
-            label6 = new Label();
             ((System.ComponentModel.ISupportInitialize)starBindingSource1).BeginInit();
             tabControl1.SuspendLayout();
             tabMain.SuspendLayout();
@@ -101,6 +105,8 @@ namespace Astrolabe
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox3.SuspendLayout();
+            groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)starBindingSource2).BeginInit();
             groupBox5.SuspendLayout();
             groupBox4.SuspendLayout();
             tabSearchByStar.SuspendLayout();
@@ -112,7 +118,6 @@ namespace Astrolabe
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).BeginInit();
             groupBox7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)starBindingSource2).BeginInit();
             groupBox6.SuspendLayout();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -217,7 +222,7 @@ namespace Astrolabe
             // 
             // DistanceLightYearsColumn
             // 
-            DistanceLightYearsColumn.DataPropertyName = "DistanceLightYears";
+            DistanceLightYearsColumn.DataPropertyName = "Distance";
             DistanceLightYearsColumn.HeaderText = "DistanceLightYears";
             DistanceLightYearsColumn.Name = "DistanceLightYearsColumn";
             DistanceLightYearsColumn.Width = 131;
@@ -252,6 +257,8 @@ namespace Astrolabe
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(buttonEdit);
+            groupBox3.Controls.Add(groupBox8);
             groupBox3.Controls.Add(groupBox5);
             groupBox3.Controls.Add(groupBox4);
             groupBox3.Controls.Add(richTextBox1);
@@ -263,6 +270,50 @@ namespace Astrolabe
             groupBox3.TabIndex = 4;
             groupBox3.TabStop = false;
             groupBox3.Text = "Фільтри";
+            // 
+            // buttonEdit
+            // 
+            buttonEdit.Location = new Point(12, 440);
+            buttonEdit.Name = "buttonEdit";
+            buttonEdit.Size = new Size(111, 29);
+            buttonEdit.TabIndex = 17;
+            buttonEdit.Text = "Редагувати рядок";
+            buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
+            // 
+            // groupBox8
+            // 
+            groupBox8.Controls.Add(comboBox1);
+            groupBox8.Controls.Add(checkBox1);
+            groupBox8.Location = new Point(198, 231);
+            groupBox8.Name = "groupBox8";
+            groupBox8.Size = new Size(182, 56);
+            groupBox8.TabIndex = 17;
+            groupBox8.TabStop = false;
+            groupBox8.Text = "Вибір сузір'я";
+            // 
+            // comboBox1
+            // 
+            comboBox1.DataSource = starBindingSource2;
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(6, 22);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(131, 23);
+            comboBox1.TabIndex = 15;
+            // 
+            // starBindingSource2
+            // 
+            starBindingSource2.DataSource = typeof(Astrolabe.models.Star);
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(151, 26);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(15, 14);
+            checkBox1.TabIndex = 16;
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // groupBox5
             // 
@@ -498,6 +549,15 @@ namespace Astrolabe
             // 
             starBindingSource.DataSource = typeof(Astrolabe.models.Star);
             // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(64, 360);
+            label6.Name = "label6";
+            label6.Size = new Size(38, 15);
+            label6.TabIndex = 19;
+            label6.Text = "label6";
+            // 
             // button7
             // 
             button7.Location = new Point(337, 428);
@@ -539,10 +599,6 @@ namespace Astrolabe
             listBox1.Size = new Size(375, 169);
             listBox1.TabIndex = 0;
             listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
-            // 
-            // starBindingSource2
-            // 
-            starBindingSource2.DataSource = typeof(Astrolabe.models.Star);
             // 
             // groupBox6
             // 
@@ -636,15 +692,6 @@ namespace Astrolabe
             EditBaseToolStripMenuItem.Text = "Редагувати базу";
             EditBaseToolStripMenuItem.Click += EditBaseToolStripMenuItem_Click;
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(64, 360);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 19;
-            label6.Text = "label6";
-            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -668,6 +715,9 @@ namespace Astrolabe
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox3.ResumeLayout(false);
+            groupBox8.ResumeLayout(false);
+            groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)starBindingSource2).EndInit();
             groupBox5.ResumeLayout(false);
             groupBox5.PerformLayout();
             groupBox4.ResumeLayout(false);
@@ -681,7 +731,6 @@ namespace Astrolabe
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).EndInit();
             groupBox7.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)starBindingSource2).EndInit();
             groupBox6.ResumeLayout(false);
             groupBox6.PerformLayout();
             menuStrip1.ResumeLayout(false);
@@ -754,13 +803,6 @@ namespace Astrolabe
         private Button button2;
         private Button button5;
         private Button button3;
-        private DataGridViewTextBoxColumn ColumnName;
-        private DataGridViewTextBoxColumn ApparentMagnitudeColumn;
-        private DataGridViewTextBoxColumn DistanceLightYearsColumn;
-        private DataGridViewTextBoxColumn RightAscensionColumn;
-        private DataGridViewTextBoxColumn DeclinationColumn;
-        private DataGridViewTextBoxColumn ConstellationColumn;
-        private DataGridViewTextBoxColumn DescriptionColumn;
         private GroupBox groupBox6;
         private Label label2;
         private TextBox textBox1;
@@ -770,5 +812,16 @@ namespace Astrolabe
         private Button button6;
         private Button button7;
         private Label label6;
+        private DataGridViewTextBoxColumn ColumnName;
+        private DataGridViewTextBoxColumn ApparentMagnitudeColumn;
+        private DataGridViewTextBoxColumn DistanceLightYearsColumn;
+        private DataGridViewTextBoxColumn RightAscensionColumn;
+        private DataGridViewTextBoxColumn DeclinationColumn;
+        private DataGridViewTextBoxColumn ConstellationColumn;
+        private DataGridViewTextBoxColumn DescriptionColumn;
+        private ComboBox comboBox1;
+        private GroupBox groupBox8;
+        private CheckBox checkBox1;
+        private Button buttonEdit;
     }
 }
