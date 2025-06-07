@@ -192,6 +192,8 @@ namespace Astrolabe
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
             dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -203,6 +205,7 @@ namespace Astrolabe
             dataGridView1.DataSource = starBindingSource1;
             dataGridView1.Location = new Point(6, 18);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
             dataGridView1.Size = new Size(1037, 455);
             dataGridView1.TabIndex = 2;
@@ -214,6 +217,7 @@ namespace Astrolabe
             ColumnName.DefaultCellStyle = dataGridViewCellStyle2;
             ColumnName.HeaderText = "Name";
             ColumnName.Name = "ColumnName";
+            ColumnName.ReadOnly = true;
             ColumnName.Width = 64;
             // 
             // ApparentMagnitudeColumn
@@ -221,6 +225,7 @@ namespace Astrolabe
             ApparentMagnitudeColumn.DataPropertyName = "ApparentMagnitude";
             ApparentMagnitudeColumn.HeaderText = "ApparentMagnitude";
             ApparentMagnitudeColumn.Name = "ApparentMagnitudeColumn";
+            ApparentMagnitudeColumn.ReadOnly = true;
             ApparentMagnitudeColumn.Width = 139;
             // 
             // DistanceLightYearsColumn
@@ -228,6 +233,7 @@ namespace Astrolabe
             DistanceLightYearsColumn.DataPropertyName = "Distance";
             DistanceLightYearsColumn.HeaderText = "DistanceLightYears";
             DistanceLightYearsColumn.Name = "DistanceLightYearsColumn";
+            DistanceLightYearsColumn.ReadOnly = true;
             DistanceLightYearsColumn.Width = 131;
             // 
             // RightAscensionColumn
@@ -235,6 +241,7 @@ namespace Astrolabe
             RightAscensionColumn.DataPropertyName = "RightAscension";
             RightAscensionColumn.HeaderText = "RightAscension";
             RightAscensionColumn.Name = "RightAscensionColumn";
+            RightAscensionColumn.ReadOnly = true;
             RightAscensionColumn.Width = 114;
             // 
             // DeclinationColumn
@@ -242,6 +249,7 @@ namespace Astrolabe
             DeclinationColumn.DataPropertyName = "Declination";
             DeclinationColumn.HeaderText = "Declination";
             DeclinationColumn.Name = "DeclinationColumn";
+            DeclinationColumn.ReadOnly = true;
             DeclinationColumn.Width = 92;
             // 
             // ConstellationColumn
@@ -249,6 +257,7 @@ namespace Astrolabe
             ConstellationColumn.DataPropertyName = "Constellation";
             ConstellationColumn.HeaderText = "Constellation";
             ConstellationColumn.Name = "ConstellationColumn";
+            ConstellationColumn.ReadOnly = true;
             ConstellationColumn.Width = 102;
             // 
             // DescriptionColumn
@@ -256,6 +265,7 @@ namespace Astrolabe
             DescriptionColumn.DataPropertyName = "Description";
             DescriptionColumn.HeaderText = "Description";
             DescriptionColumn.Name = "DescriptionColumn";
+            DescriptionColumn.ReadOnly = true;
             DescriptionColumn.Width = 92;
             // 
             // groupBox3
@@ -524,6 +534,8 @@ namespace Astrolabe
             // 
             // dataGridView2
             // 
+            dataGridView2.AllowUserToAddRows = false;
+            dataGridView2.AllowUserToDeleteRows = false;
             dataGridViewCellStyle3.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
             dataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             dataGridView2.AutoGenerateColumns = false;
@@ -531,8 +543,9 @@ namespace Astrolabe
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView2.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
             dataGridView2.DataSource = starBindingSource;
-            dataGridView2.Location = new Point(8, 22);
+            dataGridView2.Location = new Point(8, 20);
             dataGridView2.Name = "dataGridView2";
+            dataGridView2.ReadOnly = true;
             dataGridView2.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridView2.Size = new Size(1046, 466);
             dataGridView2.TabIndex = 3;
@@ -544,6 +557,7 @@ namespace Astrolabe
             dataGridViewTextBoxColumn1.DefaultCellStyle = dataGridViewCellStyle4;
             dataGridViewTextBoxColumn1.HeaderText = "Name";
             dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            dataGridViewTextBoxColumn1.ReadOnly = true;
             dataGridViewTextBoxColumn1.Width = 150;
             // 
             // dataGridViewTextBoxColumn2
@@ -551,6 +565,7 @@ namespace Astrolabe
             dataGridViewTextBoxColumn2.DataPropertyName = "ApparentMagnitude";
             dataGridViewTextBoxColumn2.HeaderText = "ApparentMagnitude";
             dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            dataGridViewTextBoxColumn2.ReadOnly = true;
             dataGridViewTextBoxColumn2.Width = 200;
             // 
             // dataGridViewTextBoxColumn3
@@ -558,6 +573,7 @@ namespace Astrolabe
             dataGridViewTextBoxColumn3.DataPropertyName = "Distance";
             dataGridViewTextBoxColumn3.HeaderText = "DistanceLightYears";
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            dataGridViewTextBoxColumn3.ReadOnly = true;
             dataGridViewTextBoxColumn3.Width = 200;
             // 
             // dataGridViewTextBoxColumn4
@@ -565,18 +581,21 @@ namespace Astrolabe
             dataGridViewTextBoxColumn4.DataPropertyName = "RightAscension";
             dataGridViewTextBoxColumn4.HeaderText = "RightAscension";
             dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn5
             // 
             dataGridViewTextBoxColumn5.DataPropertyName = "Declination";
             dataGridViewTextBoxColumn5.HeaderText = "Declination";
             dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            dataGridViewTextBoxColumn5.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn6
             // 
             dataGridViewTextBoxColumn6.DataPropertyName = "Description";
             dataGridViewTextBoxColumn6.HeaderText = "Description";
             dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            dataGridViewTextBoxColumn6.ReadOnly = true;
             dataGridViewTextBoxColumn6.Width = 150;
             // 
             // starBindingSource
@@ -686,35 +705,35 @@ namespace Astrolabe
             // 
             fIleToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, saveAsToolStripMenuItem });
             fIleToolStripMenuItem.Name = "fIleToolStripMenuItem";
-            fIleToolStripMenuItem.Size = new Size(37, 20);
-            fIleToolStripMenuItem.Text = "FIle";
+            fIleToolStripMenuItem.Size = new Size(48, 20);
+            fIleToolStripMenuItem.Text = "Файл";
             // 
             // openToolStripMenuItem
             // 
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(121, 22);
-            openToolStripMenuItem.Text = "Open...";
+            openToolStripMenuItem.Size = new Size(163, 22);
+            openToolStripMenuItem.Text = "Відкрити файл...";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
             // saveAsToolStripMenuItem
             // 
             saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            saveAsToolStripMenuItem.Size = new Size(121, 22);
-            saveAsToolStripMenuItem.Text = "Save as...";
+            saveAsToolStripMenuItem.Size = new Size(163, 22);
+            saveAsToolStripMenuItem.Text = "Зберегти як...";
             saveAsToolStripMenuItem.Click += saveAsToolStripMenuItem_Click;
             // 
             // editToolStripMenuItem
             // 
             editToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { EditBaseToolStripMenuItem });
             editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(39, 20);
-            editToolStripMenuItem.Text = "Edit";
+            editToolStripMenuItem.Size = new Size(79, 20);
+            editToolStripMenuItem.Text = "Редагувати";
             // 
             // EditBaseToolStripMenuItem
             // 
             EditBaseToolStripMenuItem.Name = "EditBaseToolStripMenuItem";
-            EditBaseToolStripMenuItem.Size = new Size(161, 22);
-            EditBaseToolStripMenuItem.Text = "Редагувати базу";
+            EditBaseToolStripMenuItem.Size = new Size(170, 22);
+            EditBaseToolStripMenuItem.Text = "Редагувати базу...";
             EditBaseToolStripMenuItem.Click += EditBaseToolStripMenuItem_Click;
             // 
             // MainForm
