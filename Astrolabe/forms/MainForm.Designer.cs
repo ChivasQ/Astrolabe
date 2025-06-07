@@ -49,7 +49,10 @@ namespace Astrolabe
             ConstellationColumn = new DataGridViewTextBoxColumn();
             DescriptionColumn = new DataGridViewTextBoxColumn();
             groupBox3 = new GroupBox();
+            groupBox9 = new GroupBox();
+            buttonDelete = new Button();
             buttonEdit = new Button();
+            buttonAdd = new Button();
             groupBox8 = new GroupBox();
             comboBox1 = new ComboBox();
             starBindingSource2 = new BindingSource(components);
@@ -78,7 +81,6 @@ namespace Astrolabe
             dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
             starBindingSource = new BindingSource(components);
-            label6 = new Label();
             button7 = new Button();
             button6 = new Button();
             groupBox7 = new GroupBox();
@@ -105,6 +107,7 @@ namespace Astrolabe
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             groupBox3.SuspendLayout();
+            groupBox9.SuspendLayout();
             groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)starBindingSource2).BeginInit();
             groupBox5.SuspendLayout();
@@ -257,7 +260,7 @@ namespace Astrolabe
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(buttonEdit);
+            groupBox3.Controls.Add(groupBox9);
             groupBox3.Controls.Add(groupBox8);
             groupBox3.Controls.Add(groupBox5);
             groupBox3.Controls.Add(groupBox4);
@@ -271,9 +274,31 @@ namespace Astrolabe
             groupBox3.TabStop = false;
             groupBox3.Text = "Фільтри";
             // 
+            // groupBox9
+            // 
+            groupBox9.Controls.Add(buttonDelete);
+            groupBox9.Controls.Add(buttonEdit);
+            groupBox9.Controls.Add(buttonAdd);
+            groupBox9.Location = new Point(6, 344);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Size = new Size(141, 129);
+            groupBox9.TabIndex = 20;
+            groupBox9.TabStop = false;
+            groupBox9.Text = "Швидке редагування";
+            // 
+            // buttonDelete
+            // 
+            buttonDelete.Location = new Point(6, 22);
+            buttonDelete.Name = "buttonDelete";
+            buttonDelete.Size = new Size(111, 29);
+            buttonDelete.TabIndex = 19;
+            buttonDelete.Text = "Видалити зірку";
+            buttonDelete.UseVisualStyleBackColor = true;
+            buttonDelete.Click += buttonDelete_Click;
+            // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(12, 440);
+            buttonEdit.Location = new Point(6, 92);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(111, 29);
             buttonEdit.TabIndex = 17;
@@ -281,11 +306,21 @@ namespace Astrolabe
             buttonEdit.UseVisualStyleBackColor = true;
             buttonEdit.Click += buttonEdit_Click;
             // 
+            // buttonAdd
+            // 
+            buttonAdd.Location = new Point(6, 57);
+            buttonAdd.Name = "buttonAdd";
+            buttonAdd.Size = new Size(111, 29);
+            buttonAdd.TabIndex = 18;
+            buttonAdd.Text = "Додати зірку";
+            buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += buttonAdd_Click;
+            // 
             // groupBox8
             // 
             groupBox8.Controls.Add(comboBox1);
             groupBox8.Controls.Add(checkBox1);
-            groupBox8.Location = new Point(198, 231);
+            groupBox8.Location = new Point(198, 218);
             groupBox8.Name = "groupBox8";
             groupBox8.Size = new Size(182, 56);
             groupBox8.TabIndex = 17;
@@ -321,7 +356,7 @@ namespace Astrolabe
             groupBox5.Controls.Add(textBoxLatitude);
             groupBox5.Controls.Add(dateTimePicker1);
             groupBox5.Controls.Add(label5);
-            groupBox5.Location = new Point(198, 133);
+            groupBox5.Location = new Point(198, 120);
             groupBox5.Name = "groupBox5";
             groupBox5.Size = new Size(182, 95);
             groupBox5.TabIndex = 14;
@@ -369,7 +404,7 @@ namespace Astrolabe
             groupBox4.Controls.Add(button3);
             groupBox4.Controls.Add(button2);
             groupBox4.Controls.Add(button1);
-            groupBox4.Location = new Point(6, 133);
+            groupBox4.Location = new Point(6, 120);
             groupBox4.Name = "groupBox4";
             groupBox4.Size = new Size(176, 167);
             groupBox4.TabIndex = 13;
@@ -468,7 +503,6 @@ namespace Astrolabe
             // 
             // splitContainer2.Panel2
             // 
-            splitContainer2.Panel2.Controls.Add(label6);
             splitContainer2.Panel2.Controls.Add(button7);
             splitContainer2.Panel2.Controls.Add(button6);
             splitContainer2.Panel2.Controls.Add(groupBox7);
@@ -521,7 +555,7 @@ namespace Astrolabe
             // 
             // dataGridViewTextBoxColumn3
             // 
-            dataGridViewTextBoxColumn3.DataPropertyName = "DistanceLightYears";
+            dataGridViewTextBoxColumn3.DataPropertyName = "Distance";
             dataGridViewTextBoxColumn3.HeaderText = "DistanceLightYears";
             dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
             dataGridViewTextBoxColumn3.Width = 200;
@@ -548,15 +582,6 @@ namespace Astrolabe
             // starBindingSource
             // 
             starBindingSource.DataSource = typeof(Astrolabe.models.Star);
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(64, 360);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 19;
-            label6.Text = "label6";
             // 
             // button7
             // 
@@ -715,6 +740,7 @@ namespace Astrolabe
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             groupBox3.ResumeLayout(false);
+            groupBox9.ResumeLayout(false);
             groupBox8.ResumeLayout(false);
             groupBox8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)starBindingSource2).EndInit();
@@ -724,7 +750,6 @@ namespace Astrolabe
             tabSearchByStar.ResumeLayout(false);
             splitContainer2.Panel1.ResumeLayout(false);
             splitContainer2.Panel2.ResumeLayout(false);
-            splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).EndInit();
             splitContainer2.ResumeLayout(false);
             groupBox2.ResumeLayout(false);
@@ -781,12 +806,6 @@ namespace Astrolabe
         private BindingSource starBindingSource;
         private BindingSource starBindingSource2;
         private DataGridView dataGridView2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private RichTextBox richTextBox1;
         private Button button4;
         private SplitContainer splitContainer1;
@@ -811,7 +830,6 @@ namespace Astrolabe
         private GroupBox groupBox7;
         private Button button6;
         private Button button7;
-        private Label label6;
         private DataGridViewTextBoxColumn ColumnName;
         private DataGridViewTextBoxColumn ApparentMagnitudeColumn;
         private DataGridViewTextBoxColumn DistanceLightYearsColumn;
@@ -823,5 +841,14 @@ namespace Astrolabe
         private GroupBox groupBox8;
         private CheckBox checkBox1;
         private Button buttonEdit;
+        private Button buttonAdd;
+        private GroupBox groupBox9;
+        private Button buttonDelete;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
     }
 }

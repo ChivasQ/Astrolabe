@@ -203,6 +203,12 @@ namespace Astrolabe
             }
             else
             {
+                if (!string.IsNullOrWhiteSpace(textBoxLatitude.Text))
+                    MessageBox.Show("Введіть координати у форматі: широта, довгота\nАбо зайдіть на Google maps та скопіюйте координати та вставте рядок у поле",
+                        "Фільтр координат буде проігноровано",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+
                 if (checkBox1.Checked)
                 {
                     firstFiltration = firstFiltration.Where(s => comboBox1.Text == s.Constellation).ToList();
@@ -314,7 +320,10 @@ namespace Astrolabe
 
             if (!coordsParsed)
             {
-                MessageBox.Show("Введіть координати у форматі: широта, довгота");
+                MessageBox.Show("Введіть координати у форматі: широта, довгота\nАбо зайдіть на Google maps та скопіюйте координати та вставте рядок у поле",
+                        "Некоректно заповнене поле",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
                 return;
             }
 
@@ -323,14 +332,14 @@ namespace Astrolabe
 
             foreach (var constellation in astronomy.constellations)
             {
-                var starsInConstellation = astronomy.stars
+                List<Star> starsInConstellation = astronomy.stars
                     .Where(s => s.Constellation == constellation)
                     .ToList();
 
                 if (starsInConstellation.Count == 0)
                     continue;
 
-                var visibleStars = Filters.FindVisibleStars(starsInConstellation, lat, lon, time);
+                List<Star> visibleStars = Filters.FindVisibleStars(starsInConstellation, lat, lon, time);
 
                 // Якщо всі зірки видимі — додаємо сузір’я
                 if (visibleStars.Count == starsInConstellation.Count)
@@ -374,7 +383,7 @@ namespace Astrolabe
         {
             if (dataGridView1.CurrentRow?.DataBoundItem is Star selectedStar)
             {
-                EditStarForm editForm = new EditStarForm(selectedStar, astronomy);
+                EditStarForm editForm = new EditStarForm(astronomy, selectedStar);
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
                     dataGridView1.Refresh();
@@ -384,6 +393,41 @@ namespace Astrolabe
             else
             {
                 MessageBox.Show("Будь ласка, виберіть зірку для редагування.");
+            }
+        }
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.CurrentRow?.DataBoundItem is Star selectedStar)
+            {
+                DialogResult result = MessageBox.Show(
+                                            $"Ви бажаєте видалити зірку {selectedStar.Name}?",
+                                            "Видалити зірку?",
+                                            MessageBoxButtons.YesNoCancel,
+                                            MessageBoxIcon.Warning
+                                            );
+
+                if (result == DialogResult.Yes)
+                {
+                    astronomy.stars.Remove(selectedStar);
+                    updateSearch();
+                    dataGridView1.Refresh();
+                    isModified = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Будь ласка, виберіть зірку для видалення.");
+            }
+        }
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            EditStarForm form = new EditStarForm(astronomy, null);
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Star newStar = form.NewStar;
+                astronomy.stars.Add(newStar);
+                updateSearch();
+                isModified = true;
             }
         }
     }

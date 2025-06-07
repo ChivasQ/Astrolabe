@@ -18,6 +18,9 @@ namespace Astrolabe.forms
             this.dataGridView1.UserDeletingRow += dataGridView1_UserDeletingRow;
             this.dataGridView1.DataError += dataGridView1_DataError;
             this.dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
+            this.dataGridView1.CellValidating += dataGridView1_CellValidating;
+
+
 
             this.AcceptButton = button1;
         }
@@ -51,7 +54,8 @@ namespace Astrolabe.forms
                     "distance:", "dist:",
                     "name:",
                     "magnitude:", "mag:",
-                    "constellation:", "cons:"
+                    "constellation:", "cons:",
+                    "isvisible:", "visible:"
                 };
 
             foreach (string keyword in keywords)
@@ -77,12 +81,29 @@ namespace Astrolabe.forms
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            MessageBox.Show("Помилка при редагуванні данних: " + e.Exception.Message);
+            //MessageBox.Show("Помилка при редагуванні данних: " + e.Exception.Message);
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             isDataChanged = true;
+        }
+
+        private void dataGridView1_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
+        {
+            string headerText = dataGridView1.Columns[e.ColumnIndex].HeaderText;
+
+            if (headerText == "DistanceLightYears" || 
+                headerText == "ApparentMagnitude" || 
+                headerText == "RightAscension" ||
+                headerText == "Declination") // або інші числові поля
+            {
+                if (!double.TryParse(e.FormattedValue.ToString(), out _)) // чи можна розпарсити значення double
+                {
+                    MessageBox.Show("Введіть коректне число у поле \"" + headerText + "\".");
+                    e.Cancel = true;
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

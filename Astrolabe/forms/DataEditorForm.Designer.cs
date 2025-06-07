@@ -36,9 +36,6 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             starBindingSource = new BindingSource(components);
             dataGridView1 = new DataGridView();
-            richTextBox1 = new RichTextBox();
-            button1 = new Button();
-            buttonReset = new Button();
             ColumnName = new DataGridViewTextBoxColumn();
             ApparentMagnitudeColumn = new DataGridViewTextBoxColumn();
             DistanceLightYearsColumn = new DataGridViewTextBoxColumn();
@@ -46,6 +43,9 @@
             DeclinationColumn = new DataGridViewTextBoxColumn();
             ConstellationColumn = new DataGridViewTextBoxColumn();
             DescriptionColumn = new DataGridViewTextBoxColumn();
+            richTextBox1 = new RichTextBox();
+            button1 = new Button();
+            buttonReset = new Button();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -93,35 +93,6 @@
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             dataGridView1.Size = new Size(1418, 498);
             dataGridView1.TabIndex = 3;
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(12, 516);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(372, 55);
-            richTextBox1.TabIndex = 4;
-            richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(390, 516);
-            button1.Name = "button1";
-            button1.Size = new Size(87, 34);
-            button1.TabIndex = 5;
-            button1.Text = "Apply";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // buttonReset
-            // 
-            buttonReset.Location = new Point(483, 537);
-            buttonReset.Name = "buttonReset";
-            buttonReset.Size = new Size(51, 34);
-            buttonReset.TabIndex = 6;
-            buttonReset.Text = "Reset";
-            buttonReset.UseVisualStyleBackColor = true;
-            buttonReset.Click += buttonReset_Click;
             // 
             // ColumnName
             // 
@@ -174,6 +145,35 @@
             DescriptionColumn.Name = "DescriptionColumn";
             DescriptionColumn.Width = 92;
             // 
+            // richTextBox1
+            // 
+            richTextBox1.Location = new Point(12, 516);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(372, 55);
+            richTextBox1.TabIndex = 4;
+            richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(390, 516);
+            button1.Name = "button1";
+            button1.Size = new Size(87, 34);
+            button1.TabIndex = 5;
+            button1.Text = "Apply";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // buttonReset
+            // 
+            buttonReset.Location = new Point(483, 537);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new Size(51, 34);
+            buttonReset.TabIndex = 6;
+            buttonReset.Text = "Reset";
+            buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += buttonReset_Click;
+            // 
             // DataEditorForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -184,7 +184,7 @@
             Controls.Add(richTextBox1);
             Controls.Add(dataGridView1);
             Name = "DataEditorForm";
-            Text = "A";
+            Text = "Редактор бази";
             Load += DataEditorForm_Load;
             ((System.ComponentModel.ISupportInitialize)starBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
