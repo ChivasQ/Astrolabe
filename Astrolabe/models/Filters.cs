@@ -106,24 +106,6 @@ namespace Astrolabe.models
             return result;
         }
 
-        public static List<Star> FindAllByName(String name, List<Star> stars)
-        {
-            List<Star> result = new List<Star>();
-            for (int i = 0; i < stars.Count; i++)
-            {
-                Star st = stars[i];
-                if (st.Name == null)
-                {
-                    continue;
-                }
-                if (Regex.IsMatch(st.Name, name))
-                {
-                    result.Add(st);
-                }
-            }
-            return result;
-        }
-
         public static List<Star> FindVisibleStars(List<Star> stars, double lat, double lon, DateTime time)
         {
             return stars

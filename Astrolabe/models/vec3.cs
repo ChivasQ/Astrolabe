@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Astrolabe.models
 {
-    public struct vec3d
+    public struct Vec3d
     {
         public double x, y, z;
 
-        public vec3d(double x, double y, double z)
+        public Vec3d(double x, double y, double z)
         {
             this.x = x; 
             this.y = y; 
             this.z = z;
         }
 
-        public static double dot(vec3d a, vec3d b)
+        public static double dot(Vec3d a, Vec3d b)
         {
             return a.x * b.x + a.y * b.y + a.z * b.z;
         }

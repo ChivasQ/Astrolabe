@@ -58,8 +58,9 @@ namespace Astrolabe
             starBindingSource2 = new BindingSource(components);
             checkBox1 = new CheckBox();
             groupBox5 = new GroupBox();
+            label6 = new Label();
+            button8 = new Button();
             label1 = new Label();
-            textBoxLatitude = new TextBox();
             dateTimePicker1 = new DateTimePicker();
             label5 = new Label();
             groupBox4 = new GroupBox();
@@ -291,7 +292,7 @@ namespace Astrolabe
             groupBox9.Controls.Add(buttonAdd);
             groupBox9.Location = new Point(6, 344);
             groupBox9.Name = "groupBox9";
-            groupBox9.Size = new Size(141, 129);
+            groupBox9.Size = new Size(144, 129);
             groupBox9.TabIndex = 20;
             groupBox9.TabStop = false;
             groupBox9.Text = "Швидке редагування";
@@ -300,7 +301,7 @@ namespace Astrolabe
             // 
             buttonDelete.Location = new Point(6, 22);
             buttonDelete.Name = "buttonDelete";
-            buttonDelete.Size = new Size(111, 29);
+            buttonDelete.Size = new Size(132, 29);
             buttonDelete.TabIndex = 19;
             buttonDelete.Text = "Видалити зірку";
             buttonDelete.UseVisualStyleBackColor = true;
@@ -310,7 +311,7 @@ namespace Astrolabe
             // 
             buttonEdit.Location = new Point(6, 92);
             buttonEdit.Name = "buttonEdit";
-            buttonEdit.Size = new Size(111, 29);
+            buttonEdit.Size = new Size(132, 29);
             buttonEdit.TabIndex = 17;
             buttonEdit.Text = "Редагувати рядок";
             buttonEdit.UseVisualStyleBackColor = true;
@@ -320,7 +321,7 @@ namespace Astrolabe
             // 
             buttonAdd.Location = new Point(6, 57);
             buttonAdd.Name = "buttonAdd";
-            buttonAdd.Size = new Size(111, 29);
+            buttonAdd.Size = new Size(132, 29);
             buttonAdd.TabIndex = 18;
             buttonAdd.Text = "Додати зірку";
             buttonAdd.UseVisualStyleBackColor = true;
@@ -330,7 +331,7 @@ namespace Astrolabe
             // 
             groupBox8.Controls.Add(comboBox1);
             groupBox8.Controls.Add(checkBox1);
-            groupBox8.Location = new Point(198, 218);
+            groupBox8.Location = new Point(198, 245);
             groupBox8.Name = "groupBox8";
             groupBox8.Size = new Size(182, 56);
             groupBox8.TabIndex = 17;
@@ -362,16 +363,36 @@ namespace Astrolabe
             // 
             // groupBox5
             // 
+            groupBox5.Controls.Add(label6);
+            groupBox5.Controls.Add(button8);
             groupBox5.Controls.Add(label1);
-            groupBox5.Controls.Add(textBoxLatitude);
             groupBox5.Controls.Add(dateTimePicker1);
             groupBox5.Controls.Add(label5);
             groupBox5.Location = new Point(198, 120);
             groupBox5.Name = "groupBox5";
-            groupBox5.Size = new Size(182, 95);
+            groupBox5.Size = new Size(182, 119);
             groupBox5.TabIndex = 14;
             groupBox5.TabStop = false;
             groupBox5.Text = "Видимість зірок";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(6, 56);
+            label6.Name = "label6";
+            label6.Size = new Size(53, 15);
+            label6.TabIndex = 21;
+            label6.Text = "location:";
+            // 
+            // button8
+            // 
+            button8.Location = new Point(65, 49);
+            button8.Name = "button8";
+            button8.Size = new Size(110, 29);
+            button8.TabIndex = 21;
+            button8.Text = "Вибрати на карті";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
             // 
             // label1
             // 
@@ -383,17 +404,9 @@ namespace Astrolabe
             label1.Text = "Координати на небосхилі";
             toolTip1.SetToolTip(label1, "AOPJWDOAPDM");
             // 
-            // textBoxLatitude
-            // 
-            textBoxLatitude.Location = new Point(6, 37);
-            textBoxLatitude.Name = "textBoxLatitude";
-            textBoxLatitude.Size = new Size(169, 23);
-            textBoxLatitude.TabIndex = 6;
-            toolTip1.SetToolTip(textBoxLatitude, "POKMPOS");
-            // 
             // dateTimePicker1
             // 
-            dateTimePicker1.Location = new Point(39, 63);
+            dateTimePicker1.Location = new Point(39, 84);
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(136, 23);
             dateTimePicker1.TabIndex = 11;
@@ -402,7 +415,7 @@ namespace Astrolabe
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(6, 69);
+            label5.Location = new Point(6, 90);
             label5.Name = "label5";
             label5.Size = new Size(33, 15);
             label5.TabIndex = 12;
@@ -830,7 +843,6 @@ namespace Astrolabe
         private SplitContainer splitContainer1;
         private GroupBox groupBox3;
         private Button button1;
-        private TextBox textBoxLatitude;
         private Label label1;
         private Label label5;
         private DateTimePicker dateTimePicker1;
@@ -869,5 +881,7 @@ namespace Astrolabe
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private Button button8;
+        private Label label6;
     }
 }

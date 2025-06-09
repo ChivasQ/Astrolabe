@@ -23,11 +23,6 @@ namespace Astrolabe.models
                 .ToList();
         }
 
-        public void Fill(int len)
-        {
-            stars = Tests.createStars(len);
-        }
-
         public void Serialize(string path)
         {
             var options = new JsonSerializerOptions

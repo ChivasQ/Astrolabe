@@ -10,6 +10,7 @@ namespace Astrolabe.models
     public class Settings
     {
         public string LastOpenedFile { get; set; }
+        //public string LastPickedLocation{ get; set; } 
 
         private static string AppDir => AppDomain.CurrentDomain.BaseDirectory;
         private static string SaveFolder => Path.Combine(AppDir, "AstrolabeSavedData");

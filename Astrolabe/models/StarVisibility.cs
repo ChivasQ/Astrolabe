@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Astrolabe.models
+﻿namespace Astrolabe.models
 {
     public static class StarVisibility
     {
@@ -35,14 +28,14 @@ namespace Astrolabe.models
             double z = Math.Sin(dec);
 
             // Вектор напрямку на зірку
-            vec3d starVector = new vec3d(x, y, z);
+            Vec3d starVector = new Vec3d(x, y, z);
 
             // Вектор зеніту (тобто напрямок прямо вгору) для спостерігача
             double lat = latitudeDeg * DEG_TO_RAD;
-            vec3d zenithVector = new vec3d(Math.Cos(lat), 0, Math.Sin(lat));
+            Vec3d zenithVector = new Vec3d(Math.Cos(lat), 0, Math.Sin(lat));
 
             // Скалярний добуток
-            double dot = vec3d.dot(starVector, zenithVector);
+            double dot = Vec3d.dot(starVector, zenithVector);
 
             return dot > 0; // якщо більше нуля - зірка над горизонтом
         }

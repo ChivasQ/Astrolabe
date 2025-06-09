@@ -1,4 +1,5 @@
 using Astrolabe.forms;
+using Astrolabe.Forms;
 using Astrolabe.models;
 using System.ComponentModel;
 using System.Drawing.Drawing2D;
@@ -15,6 +16,9 @@ namespace Astrolabe
         bool FileOpened = false;
         private bool isModified = false;
         Settings settings = Settings.Load();
+        private double? selectedLatitude = null;
+        private double? selectedLongitude = null;
+
 
         public MainForm()
         {
@@ -177,16 +181,13 @@ namespace Astrolabe
             double lat = 0, lon = 0;
             bool coordsParsed = false;
 
-            if (!string.IsNullOrWhiteSpace(textBoxLatitude.Text))
+            if (selectedLatitude.HasValue && selectedLongitude.HasValue)
             {
-                string[] parts = textBoxLatitude.Text.Split(',');
-                if (parts.Length == 2 &&
-                    double.TryParse(parts[0].Trim().Replace(".", ","), out lat) &&
-                    double.TryParse(parts[1].Trim().Replace(".", ","), out lon))
-                {
-                    coordsParsed = true;
-                }
+                lat = selectedLatitude.Value;
+                lon = selectedLongitude.Value;
+                coordsParsed = true;
             }
+
 
             if (coordsParsed)
             {
@@ -203,11 +204,11 @@ namespace Astrolabe
             }
             else
             {
-                if (!string.IsNullOrWhiteSpace(textBoxLatitude.Text))
-                    MessageBox.Show("Введіть координати у форматі: широта, довгота\nАбо зайдіть на Google maps та скопіюйте координати та вставте рядок у поле",
-                        "Фільтр координат буде проігноровано",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                //if (!string.IsNullOrWhiteSpace(textBoxLatitude.Text))
+                //    MessageBox.Show("Введіть координати у форматі: широта, довгота\nАбо зайдіть на Google maps та скопіюйте координати та вставте рядок у поле",
+                //        "Фільтр координат буде проігноровано",
+                //        MessageBoxButtons.OK,
+                //        MessageBoxIcon.Warning);
 
                 if (checkBox1.Checked)
                 {
@@ -259,7 +260,18 @@ namespace Astrolabe
 
         private void button4_Click(object sender, EventArgs e)
         {
+            var result = MessageBox.Show(
+                "Ви дійсно бажаєте зкинути всі фільтри?",
+                "зкинути фільтри?",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Warning
+            );
+            if (result != DialogResult.Yes)
+                return;
+            button8.Text = "Вибрати на карті";
             richTextBox1.Text = string.Empty;
+            selectedLatitude = null;
+            selectedLongitude = null;
             updateSearch();
         }
 
@@ -430,5 +442,19 @@ namespace Astrolabe
                 isModified = true;
             }
         }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            LocationPickerForm form = new LocationPickerForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                selectedLatitude = form.latitude;
+                selectedLongitude = form.longitude;
+
+                MessageBox.Show($"Ви вибрали: {form.latitude}, {form.longitude}");
+                button8.Text = $"{form.latitude:F2}, {form.longitude:F2}";
+            }
+        }
+
     }
 }
