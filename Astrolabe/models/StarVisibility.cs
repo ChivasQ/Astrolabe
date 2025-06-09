@@ -1,5 +1,9 @@
-﻿namespace Astrolabe.models
+﻿namespace Astrolabe.Models
 {
+    /// <summary>
+    /// Статичний клас утиліта для визначення видимості зірок з урахуванням
+    /// географічних координат спостерігача, часу спостереження та кута видимості.
+    /// </summary>
     public static class StarVisibility
     {
         const double DEG_TO_RAD = Math.PI / 180;
@@ -8,7 +12,8 @@
         public static bool IsStarVisible(
             double raDeg, double decDeg,
             double latitudeDeg, double longitudeDeg,
-            DateTime utc
+            DateTime utc,
+            double angle = 90.0 // кут видимості, за замовчуванням 90 градусів (все над горизонтом)
         )
         {
             // Місцевий сидеричний час
@@ -37,7 +42,11 @@
             // Скалярний добуток
             double dot = Vec3d.dot(starVector, zenithVector);
 
-            return dot > 0; // якщо більше нуля - зірка над горизонтом
+            // Перевірка видимості у межах кута:
+            // dot = cos(θ), треба dot >= cos(angle)
+            double angleRad = angle * DEG_TO_RAD;
+
+            return dot >= Math.Cos(angleRad);
         }
 
         public static double GetLocalSiderealTime(DateTime utc, double longitude) // описаний у книзі Жана Мея "Astronomical Algorithms" повертає місцевий зоряний час у градусах

@@ -1,4 +1,4 @@
-﻿namespace Astrolabe.forms
+﻿namespace Astrolabe.Forms
 {
     partial class DataEditorForm
     {
@@ -52,7 +52,7 @@
             // 
             // starBindingSource
             // 
-            starBindingSource.DataSource = typeof(Astrolabe.models.Star);
+            starBindingSource.DataSource = typeof(Astrolabe.Models.Star);
             // 
             // dataGridView1
             // 
@@ -149,7 +149,7 @@
             // 
             richTextBox1.Location = new Point(12, 516);
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(372, 55);
+            richTextBox1.Size = new Size(372, 34);
             richTextBox1.TabIndex = 4;
             richTextBox1.Text = "";
             richTextBox1.TextChanged += richTextBox1_TextChanged;
@@ -166,7 +166,7 @@
             // 
             // buttonReset
             // 
-            buttonReset.Location = new Point(483, 537);
+            buttonReset.Location = new Point(483, 516);
             buttonReset.Name = "buttonReset";
             buttonReset.Size = new Size(51, 34);
             buttonReset.TabIndex = 6;
@@ -178,7 +178,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1442, 583);
+            ClientSize = new Size(1442, 561);
             Controls.Add(buttonReset);
             Controls.Add(button1);
             Controls.Add(richTextBox1);

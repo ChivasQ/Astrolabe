@@ -1,26 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.Design.AxImporter;
+﻿using System.Text.Json;
 
-namespace Astrolabe.models
+namespace Astrolabe.Models
 {
+    /// <summary>
+    /// Представляє астрономічну модель, що містить колекції зірок та сузір'їв.
+    /// Забезпечує функціонал для отримання зірок певного сузір'я,
+    /// а також серіалізації та десеріалізації даних у JSON форматі.
+    /// </summary>
     public class Astronomy
     {
-        public List<Star> stars = new List<Star>();
-        public List<string> constellations = new List<string>();
+        public List<Star> Stars { get; set; } = new List<Star>();
+        public List<Constellation> Constellations { get; set; } = new List<Constellation>();
 
-        public void InitConstellations()
+        public Astronomy()
         {
-            this.constellations = stars
-                .Select(s => s.Constellation)
-                .Distinct()
-                .OrderBy(s => s)
-                .ToList();
+        }
+
+        public List<Star> GetStarsInConstellation(int constellationId)
+        {
+            return Stars.Where(s => s.ConstellationId == constellationId).ToList();
         }
 
         public void Serialize(string path)
@@ -29,8 +27,7 @@ namespace Astrolabe.models
             {
                 WriteIndented = true,
             };
-
-            string json = JsonSerializer.Serialize(this.stars, options);
+            var json = JsonSerializer.Serialize(this, options);
             File.WriteAllText(path, json);
         }
 
@@ -39,13 +36,35 @@ namespace Astrolabe.models
             try
             {
                 string json = File.ReadAllText(path);
-                this.stars = JsonSerializer.Deserialize<List<Star>>(json);
+                Astronomy deserializedAstronomy = JsonSerializer.Deserialize<Astronomy>(json);
+
+                if (deserializedAstronomy != null)
+                {
+                    Stars = deserializedAstronomy.Stars ?? new List<Star>();
+                    Constellations = deserializedAstronomy.Constellations ?? new List<Constellation>();
+
+                    foreach (var star in Stars)
+                    {
+                        var constellation = Constellations.FirstOrDefault(c => c.Id == star.ConstellationId);
+                        if (constellation != null)
+                        {
+                            star.Constellation = constellation.Name;
+                        }
+                        else
+                        {
+                            star.Constellation = "Невідоме сузір'я";
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Не вдалося завантажити дані з файлу. Десеріалізований об'єкт Astronomy є null.", "Помилка завантаження", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             catch (Exception e)
             {
-                MessageBox.Show("Помилка при завантажені файлу:\n" + e.Message);
+                MessageBox.Show("Помилка при завантаженні файлу:\n" + e.Message, "Загальна помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
     }
 }

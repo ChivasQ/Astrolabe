@@ -1,4 +1,4 @@
-﻿namespace Astrolabe.forms
+﻿namespace Astrolabe.Forms
 {
     partial class EditStarForm
     {

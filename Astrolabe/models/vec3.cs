@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Astrolabe.models
+namespace Astrolabe.Models
 {
+    /// <summary>
+    /// Структура тривимірного вектору double.
+    /// Використовується для простих векторних операцій у 3D-просторі.
+    /// </summary>
     public struct Vec3d
     {
         public double x, y, z;

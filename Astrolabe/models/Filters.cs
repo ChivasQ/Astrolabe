@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+﻿using System.Text.RegularExpressions;
 
-namespace Astrolabe.models
+namespace Astrolabe.Models
 {
-    public class Filters
+    /// <summary>
+    /// Статичний клас, який реалізує фільтри для списку зірок.
+    /// Забезпечує складний пошук зірок за текстовим запитом з підтримкою різних полів та операцій порівняння,
+    /// а також фільтрацію зірок за видимістю з урахуванням координат спостерігача та часу.
+    /// </summary>
+    public static class Filters
     {
         public static List<Star> ApplyAdvancedFilter(string input, Astronomy astronomy)
         {
             if (string.IsNullOrWhiteSpace(input))
-                return astronomy.stars;
+                return astronomy.Stars;
 
-            var result = new List<Star>(astronomy.stars);
+            var result = new List<Star>(astronomy.Stars);
 
             var regex = new Regex(@"(?<field>\w+):(?<op>>=|<=|>|<|=)?(?<value>""[^""]+""|\S+)", RegexOptions.IgnoreCase);
             var matchedSpans = new List<(int Start, int Length)>();

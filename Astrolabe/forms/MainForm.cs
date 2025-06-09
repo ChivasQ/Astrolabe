@@ -1,12 +1,6 @@
-using Astrolabe.forms;
 using Astrolabe.Forms;
 using Astrolabe.models;
-using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.IO;
-using System.Text.Json;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Astrolabe.Models;
 
 namespace Astrolabe
 {
@@ -39,13 +33,10 @@ namespace Astrolabe
             {
                 try
                 {
-                    string json = File.ReadAllText(settings.LastOpenedFile);
-                    astronomy.stars = JsonSerializer.Deserialize<List<Star>>(json);
+                    astronomy.Deserialize(settings.LastOpenedFile);
 
                     FileOpened = true;
                     isModified = false;
-
-                    astronomy.InitConstellations();
 
                     updateSearch();
                     this.Text = "Астролябія - " + settings.GetLastOpenedFileName();
@@ -60,9 +51,14 @@ namespace Astrolabe
         private void updateSearch()
         {
             starBindingSource1.DataSource = null;
-            starBindingSource1.DataSource = astronomy.stars;
+            starBindingSource1.DataSource = astronomy.Stars;
+
             starBindingSource2.DataSource = null;
-            starBindingSource2.DataSource = astronomy.constellations;
+            starBindingSource2.DataSource = astronomy.Constellations;
+
+            comboBox1.DataSource = null;
+            comboBox1.DataSource = astronomy.Constellations;
+
             if (FileOpened)
             {
                 dataGridView1.Visible = true;
@@ -73,7 +69,6 @@ namespace Astrolabe
                 dataGridView1.Visible = false;
                 label4.Visible = true;
             }
-
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,8 +81,6 @@ namespace Astrolabe
                 FileOpened = true;
                 isModified = false;
                 updateSearch();
-                astronomy.InitConstellations();
-                starBindingSource2.DataSource = astronomy.constellations;
                 settings.LastOpenedFile = openFileDialog.FileName;
                 settings.Save();
                 this.Text = "Астролябія - " + settings.GetLastOpenedFileName();
@@ -115,7 +108,7 @@ namespace Astrolabe
 
         private void EditBaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new forms.DataEditorForm(astronomy);
+            var form = new DataEditorForm(astronomy);
             form.ShowDialog();
             if (form.isDataChanged)
             {
@@ -126,28 +119,34 @@ namespace Astrolabe
                 isModified = true;
 
             }
-            astronomy = form.astronomy;
             RemoveNullNames();
             updateSearch();
         }
 
         public void RemoveNullNames()
         {
-            astronomy.stars.RemoveAll(s => string.IsNullOrWhiteSpace(s.Name));
+            astronomy.Stars.RemoveAll(s => string.IsNullOrWhiteSpace(s.Name));
         }
+
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!FileOpened || listBox1.SelectedItem == null)
                 return;
 
-            string selectedConstellation = listBox1.SelectedItem.ToString();
+            Constellation selectedConstellation = listBox1.SelectedItem as Constellation;
 
-            var starsInConstellation = astronomy?.stars
-                ?.Where(s => s.Constellation == selectedConstellation)
-                ?.ToList();
+            if (selectedConstellation != null)
+            {
+                var starsInConstellation = astronomy?.Stars
+                    ?.Where(s => s.ConstellationId == selectedConstellation.Id)
+                    ?.ToList();
 
-            // На випадок, якщо starsInConstellation також null:
-            starBindingSource.DataSource = starsInConstellation ?? new List<Star>();
+                starBindingSource.DataSource = starsInConstellation ?? new List<Star>();
+            }
+            else
+            {
+                starBindingSource.DataSource = new List<Star>();
+            }
         }
 
 
@@ -177,7 +176,6 @@ namespace Astrolabe
         {
             string search_target = richTextBox1.Text ?? string.Empty;
             List<Star> firstFiltration = Filters.ApplyAdvancedFilter(search_target, astronomy);
-
             double lat = 0, lon = 0;
             bool coordsParsed = false;
 
@@ -195,7 +193,15 @@ namespace Astrolabe
                 List<Star> secondFiltration = Filters.FindVisibleStars(firstFiltration, lat, lon, time);
                 if (checkBox1.Checked)
                 {
-                    secondFiltration = secondFiltration.Where(s => comboBox1.Text == s.Constellation).ToList();
+                    if (comboBox1.SelectedItem is Constellation selectedFilterConstellation)
+                    {
+                        secondFiltration = secondFiltration.Where(s => s.ConstellationId == selectedFilterConstellation.Id).ToList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Будь ласка, виберіть сузір’я для фільтрації.", "Помилка фільтрації", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                 }
                 starBindingSource1.DataSource = null;
                 starBindingSource1.DataSource = secondFiltration;
@@ -204,15 +210,17 @@ namespace Astrolabe
             }
             else
             {
-                //if (!string.IsNullOrWhiteSpace(textBoxLatitude.Text))
-                //    MessageBox.Show("Введіть координати у форматі: широта, довгота\nАбо зайдіть на Google maps та скопіюйте координати та вставте рядок у поле",
-                //        "Фільтр координат буде проігноровано",
-                //        MessageBoxButtons.OK,
-                //        MessageBoxIcon.Warning);
-
                 if (checkBox1.Checked)
                 {
-                    firstFiltration = firstFiltration.Where(s => comboBox1.Text == s.Constellation).ToList();
+                    if (comboBox1.SelectedItem is Constellation selectedFilterConstellation)
+                    {
+                        firstFiltration = firstFiltration.Where(s => s.ConstellationId == selectedFilterConstellation.Id).ToList();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Будь ласка, виберіть сузір’я для фільтрації.", "Помилка фільтрації", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
                 }
                 starBindingSource1.DataSource = null;
                 starBindingSource1.DataSource = firstFiltration;
@@ -223,38 +231,8 @@ namespace Astrolabe
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            int selectionStart = richTextBox1.SelectionStart;
-            int selectionLength = richTextBox1.SelectionLength;
-
             richTextBox1.TextChanged -= richTextBox1_TextChanged;
-
-            string text = richTextBox1.Text;
-            richTextBox1.SelectAll();
-            richTextBox1.SelectionFont = new Font("Segoe UI", 10, FontStyle.Regular);
-            richTextBox1.SelectionColor = Color.Black;
-
-            string[] keywords =
-                {
-                    "distance:", "dist:",
-                    "name:",
-                    "magnitude:", "mag:",
-                    "constellation:", "cons:",
-                    "isvisible:", "visible:"
-                };
-
-            foreach (string keyword in keywords)
-            {
-                int index = 0;
-                while ((index = text.IndexOf(keyword, index, StringComparison.OrdinalIgnoreCase)) != -1)
-                {
-                    richTextBox1.Select(index, keyword.Length);
-                    richTextBox1.SelectionFont = new Font("Segoe UI", 10, FontStyle.Bold);
-                    richTextBox1.SelectionColor = Color.Blue;
-                    index += keyword.Length;
-                }
-            }
-
-            richTextBox1.Select(selectionStart, selectionLength);
+            FilterSyntaxHighlighter.Highlight(richTextBox1);
             richTextBox1.TextChanged += richTextBox1_TextChanged;
         }
 
@@ -278,9 +256,8 @@ namespace Astrolabe
         private void button1_Click(object sender, EventArgs e)
         {
             List<Star> list = (starBindingSource1.DataSource as List<Star>);
-
+            if (list == null) return;
             List<Star> sorted = list.OrderByDescending(x => x.ApparentMagnitude).Reverse().ToList();
-
             starBindingSource1.DataSource = null;
             starBindingSource1.DataSource = sorted;
         }
@@ -288,9 +265,8 @@ namespace Astrolabe
         private void button2_Click(object sender, EventArgs e)
         {
             List<Star> list = (starBindingSource1.DataSource as List<Star>);
-
+            if (list == null) return;
             List<Star> sorted = list.OrderByDescending(x => x.Name).Reverse().ToList();
-
             starBindingSource1.DataSource = null;
             starBindingSource1.DataSource = sorted;
         }
@@ -298,8 +274,16 @@ namespace Astrolabe
         private void button3_Click_1(object sender, EventArgs e)
         {
             List<Star> list = (starBindingSource1.DataSource as List<Star>);
-
-            List<Star> sorted = list.OrderByDescending(x => x.Constellation).Reverse().ToList();
+            if (list == null) return;
+            // Щоб сортувати за назвою сузір'я, потрібно об'єднати дані про сузір'я.
+            List<Star> sorted = list
+                                .Join(astronomy.Constellations,
+                                      star => star.ConstellationId,
+                                      constellation => constellation.Id,
+                                      (star, constellation) => new { Star = star, ConstellationName = constellation.Name })
+                                .OrderByDescending(x => x.ConstellationName)
+                                .Select(x => x.Star)
+                                .ToList();
 
             starBindingSource1.DataSource = null;
             starBindingSource1.DataSource = sorted;
@@ -308,44 +292,41 @@ namespace Astrolabe
         private void button5_Click(object sender, EventArgs e)
         {
             List<Star> list = (starBindingSource1.DataSource as List<Star>);
-
+            if (list == null) return;
             List<Star> sorted = list.OrderByDescending(x => x.Distance).Reverse().ToList();
-
             starBindingSource1.DataSource = null;
             starBindingSource1.DataSource = sorted;
         }
+
         private void button6_Click(object sender, EventArgs e)
         {
             double lat = 0, lon = 0;
             bool coordsParsed = false;
 
-            if (!string.IsNullOrWhiteSpace(textBox1.Text))
+            if (selectedLatitude.HasValue && selectedLongitude.HasValue)
             {
-                string[] parts = textBox1.Text.Split(',');
-                if (parts.Length == 2 &&
-                    double.TryParse(parts[0].Trim().Replace(".", ","), out lat) &&
-                    double.TryParse(parts[1].Trim().Replace(".", ","), out lon))
-                {
-                    coordsParsed = true;
-                }
+                lat = selectedLatitude.Value;
+                lon = selectedLongitude.Value;
+                coordsParsed = true;
             }
+
 
             if (!coordsParsed)
             {
                 MessageBox.Show("Введіть координати у форматі: широта, довгота\nАбо зайдіть на Google maps та скопіюйте координати та вставте рядок у поле",
-                        "Некоректно заповнене поле",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                                "Некоректно заповнене поле",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
             DateTime time = dateTimePicker2.Value;
-            List<string> visibleConstellations = new List<string>();
+            List<Constellation> visibleConstellations = new List<Constellation>();
 
-            foreach (var constellation in astronomy.constellations)
+            foreach (var constellation in astronomy.Constellations)
             {
-                List<Star> starsInConstellation = astronomy.stars
-                    .Where(s => s.Constellation == constellation)
+                List<Star> starsInConstellation = astronomy.Stars
+                    .Where(s => s.ConstellationId == constellation.Id)
                     .ToList();
 
                 if (starsInConstellation.Count == 0)
@@ -353,7 +334,7 @@ namespace Astrolabe
 
                 List<Star> visibleStars = Filters.FindVisibleStars(starsInConstellation, lat, lon, time);
 
-                // Якщо всі зірки видимі — додаємо сузір’я
+                // Якщо всі зірки сузір'я видимі — додаємо сузір’я до видимих
                 if (visibleStars.Count == starsInConstellation.Count)
                 {
                     visibleConstellations.Add(constellation);
@@ -373,7 +354,7 @@ namespace Astrolabe
         private void button7_Click(object sender, EventArgs e)
         {
             starBindingSource2.DataSource = null;
-            starBindingSource2.DataSource = astronomy.constellations;
+            starBindingSource2.DataSource = astronomy.Constellations;
         }
 
         private void tabMain_Click(object sender, EventArgs e)
@@ -384,11 +365,6 @@ namespace Astrolabe
         private void tabSearchByStar_Click(object sender, EventArgs e)
         {
             this.AcceptButton = button6;
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
@@ -407,20 +383,21 @@ namespace Astrolabe
                 MessageBox.Show("Будь ласка, виберіть зірку для редагування.");
             }
         }
+
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             if (dataGridView1.CurrentRow?.DataBoundItem is Star selectedStar)
             {
                 DialogResult result = MessageBox.Show(
-                                            $"Ви бажаєте видалити зірку {selectedStar.Name}?",
-                                            "Видалити зірку?",
-                                            MessageBoxButtons.YesNoCancel,
-                                            MessageBoxIcon.Warning
-                                            );
+                                                     $"Ви бажаєте видалити зірку {selectedStar.Name}?",
+                                                     "Видалити зірку?",
+                                                     MessageBoxButtons.YesNoCancel,
+                                                     MessageBoxIcon.Warning
+                                                     );
 
                 if (result == DialogResult.Yes)
                 {
-                    astronomy.stars.Remove(selectedStar);
+                    astronomy.Stars.Remove(selectedStar);
                     updateSearch();
                     dataGridView1.Refresh();
                     isModified = true;
@@ -431,19 +408,20 @@ namespace Astrolabe
                 MessageBox.Show("Будь ласка, виберіть зірку для видалення.");
             }
         }
+
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             EditStarForm form = new EditStarForm(astronomy, null);
             if (form.ShowDialog() == DialogResult.OK)
             {
                 Star newStar = form.NewStar;
-                astronomy.stars.Add(newStar);
+                astronomy.Stars.Add(newStar);
                 updateSearch();
                 isModified = true;
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void buttonPickLocation_Click(object sender, EventArgs e)
         {
             LocationPickerForm form = new LocationPickerForm();
             if (form.ShowDialog() == DialogResult.OK)
@@ -455,6 +433,5 @@ namespace Astrolabe
                 button8.Text = $"{form.latitude:F2}, {form.longitude:F2}";
             }
         }
-
     }
 }

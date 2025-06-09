@@ -1,6 +1,6 @@
-﻿using Astrolabe.models;
+﻿using Astrolabe.Models;
 
-namespace Astrolabe.forms
+namespace Astrolabe.Forms
 {
     public partial class EditStarForm : Form
     {
@@ -17,7 +17,7 @@ namespace Astrolabe.forms
             this.star = star ?? new Star();
             this.isNew = star == null;
 
-            comboBox1.DataSource = astronomy.constellations;
+            comboBox1.DataSource = astronomy.Constellations;
 
             if (!isNew)
             {
@@ -25,13 +25,23 @@ namespace Astrolabe.forms
                 textBoxDescription.Text = star.Description;
                 textBoxRA.Text = star.RightAscension.ToString();
                 textBoxDec.Text = star.Declination.ToString();
-                comboBox1.Text = star.Constellation;
+
+                var selectedConstellation = astronomy.Constellations.FirstOrDefault(c => c.Id == star.ConstellationId);
+                if (selectedConstellation != null)
+                {
+                    comboBox1.SelectedItem = selectedConstellation;
+                }
+                else
+                {
+                    comboBox1.SelectedIndex = -1;
+                }
+
                 textBoxMagnitude.Text = star.ApparentMagnitude.ToString();
                 textBoxDistance.Text = star.Distance.ToString();
             }
-            else 
+            else
             {
-                comboBox1.Text = "";
+                comboBox1.SelectedIndex = -1;
             }
         }
 
@@ -39,20 +49,37 @@ namespace Astrolabe.forms
         {
             if (string.IsNullOrWhiteSpace(textBoxName.Text))
             {
-                MessageBox.Show("Назва зірки не може бути порожньою.");
+                MessageBox.Show("Назва зірки не може бути порожньою.", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (
-                !double.TryParse(textBoxRA.Text, out double ra) ||
-                !double.TryParse(textBoxDec.Text, out double dec) ||
-                !double.TryParse(textBoxMagnitude.Text, out double mag) ||
-                !double.TryParse(textBoxDistance.Text, out double dist)
+                !double.TryParse(textBoxRA.Text.Replace('.', ','), out double ra) ||
+                !double.TryParse(textBoxDec.Text.Replace('.', ','), out double dec) ||
+                !double.TryParse(textBoxMagnitude.Text.Replace('.', ','), out double mag) ||
+                !double.TryParse(textBoxDistance.Text.Replace('.', ','), out double dist)
             )
             {
-                MessageBox.Show("Некоректні числові значення.");
+                MessageBox.Show("Некоректні числові значення. Будь ласка, перевірте введені дані.", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (ra < 0 || ra > 24)
+            {
+                MessageBox.Show("Пряме сходження (RA) повинно бути між 0 та 24 годинами.", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (dec < -90 || dec > 90)
+            {
+                MessageBox.Show("Схилення (DEC) повинно бути між -90 та 90 градусами.", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (dist <= 0)
+            {
+                MessageBox.Show("Відстань повинна бути додатним числом.", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
 
             star.Name = textBoxName.Text.Trim();
             star.Description = textBoxDescription.Text.Trim();
@@ -60,10 +87,20 @@ namespace Astrolabe.forms
             star.Declination = dec;
             star.ApparentMagnitude = mag;
             star.Distance = dist;
-            star.Constellation = comboBox1.SelectedItem?.ToString() ?? string.Empty;
+
+            if (comboBox1.SelectedItem is Constellation selectedConstellation)
+            {
+                star.ConstellationId = selectedConstellation.Id;
+                star.Constellation = selectedConstellation.Name;
+            }
+            else
+            {
+                MessageBox.Show("Будь ласка, виберіть сузір'я.", "Помилка введення", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             NewStar = star;
-            DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.OK; 
             Close();
         }
 

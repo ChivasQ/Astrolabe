@@ -48,6 +48,14 @@ namespace Astrolabe
             DeclinationColumn = new DataGridViewTextBoxColumn();
             ConstellationColumn = new DataGridViewTextBoxColumn();
             DescriptionColumn = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            constellationIdDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            apparentMagnitudeDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            distanceDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            rightAscensionDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            declinationDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            descriptionDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
+            constellationDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             groupBox3 = new GroupBox();
             groupBox9 = new GroupBox();
             buttonDelete = new Button();
@@ -81,14 +89,23 @@ namespace Astrolabe
             dataGridViewTextBoxColumn4 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn5 = new DataGridViewTextBoxColumn();
             dataGridViewTextBoxColumn6 = new DataGridViewTextBoxColumn();
+            nameDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            constellationIdDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            apparentMagnitudeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            distanceDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            rightAscensionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            declinationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            descriptionDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
+            constellationDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             starBindingSource = new BindingSource(components);
             button7 = new Button();
             button6 = new Button();
             groupBox7 = new GroupBox();
             listBox1 = new ListBox();
             groupBox6 = new GroupBox();
+            label7 = new Label();
+            button9 = new Button();
             label2 = new Label();
-            textBox1 = new TextBox();
             dateTimePicker2 = new DateTimePicker();
             label3 = new Label();
             menuStrip1 = new MenuStrip();
@@ -128,7 +145,7 @@ namespace Astrolabe
             // 
             // starBindingSource1
             // 
-            starBindingSource1.DataSource = typeof(Astrolabe.models.Star);
+            starBindingSource1.DataSource = typeof(Models.Star);
             // 
             // tabControl1
             // 
@@ -202,13 +219,13 @@ namespace Astrolabe
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             dataGridView1.BackgroundColor = SystemColors.Control;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnName, ApparentMagnitudeColumn, DistanceLightYearsColumn, RightAscensionColumn, DeclinationColumn, ConstellationColumn, DescriptionColumn });
+            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { ColumnName, ApparentMagnitudeColumn, DistanceLightYearsColumn, RightAscensionColumn, DeclinationColumn, ConstellationColumn, DescriptionColumn, nameDataGridViewTextBoxColumn1, constellationIdDataGridViewTextBoxColumn1, apparentMagnitudeDataGridViewTextBoxColumn1, distanceDataGridViewTextBoxColumn1, rightAscensionDataGridViewTextBoxColumn1, declinationDataGridViewTextBoxColumn1, descriptionDataGridViewTextBoxColumn1, constellationDataGridViewTextBoxColumn1 });
             dataGridView1.DataSource = starBindingSource1;
             dataGridView1.Location = new Point(6, 18);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            dataGridView1.Size = new Size(1037, 455);
+            dataGridView1.Size = new Size(1045, 465);
             dataGridView1.TabIndex = 2;
             // 
             // ColumnName
@@ -268,6 +285,70 @@ namespace Astrolabe
             DescriptionColumn.Name = "DescriptionColumn";
             DescriptionColumn.ReadOnly = true;
             DescriptionColumn.Width = 92;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn1.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            nameDataGridViewTextBoxColumn1.ReadOnly = true;
+            nameDataGridViewTextBoxColumn1.Width = 64;
+            // 
+            // constellationIdDataGridViewTextBoxColumn1
+            // 
+            constellationIdDataGridViewTextBoxColumn1.DataPropertyName = "ConstellationId";
+            constellationIdDataGridViewTextBoxColumn1.HeaderText = "ConstellationId";
+            constellationIdDataGridViewTextBoxColumn1.Name = "constellationIdDataGridViewTextBoxColumn1";
+            constellationIdDataGridViewTextBoxColumn1.ReadOnly = true;
+            constellationIdDataGridViewTextBoxColumn1.Width = 112;
+            // 
+            // apparentMagnitudeDataGridViewTextBoxColumn1
+            // 
+            apparentMagnitudeDataGridViewTextBoxColumn1.DataPropertyName = "ApparentMagnitude";
+            apparentMagnitudeDataGridViewTextBoxColumn1.HeaderText = "ApparentMagnitude";
+            apparentMagnitudeDataGridViewTextBoxColumn1.Name = "apparentMagnitudeDataGridViewTextBoxColumn1";
+            apparentMagnitudeDataGridViewTextBoxColumn1.ReadOnly = true;
+            apparentMagnitudeDataGridViewTextBoxColumn1.Width = 139;
+            // 
+            // distanceDataGridViewTextBoxColumn1
+            // 
+            distanceDataGridViewTextBoxColumn1.DataPropertyName = "Distance";
+            distanceDataGridViewTextBoxColumn1.HeaderText = "Distance";
+            distanceDataGridViewTextBoxColumn1.Name = "distanceDataGridViewTextBoxColumn1";
+            distanceDataGridViewTextBoxColumn1.ReadOnly = true;
+            distanceDataGridViewTextBoxColumn1.Width = 77;
+            // 
+            // rightAscensionDataGridViewTextBoxColumn1
+            // 
+            rightAscensionDataGridViewTextBoxColumn1.DataPropertyName = "RightAscension";
+            rightAscensionDataGridViewTextBoxColumn1.HeaderText = "RightAscension";
+            rightAscensionDataGridViewTextBoxColumn1.Name = "rightAscensionDataGridViewTextBoxColumn1";
+            rightAscensionDataGridViewTextBoxColumn1.ReadOnly = true;
+            rightAscensionDataGridViewTextBoxColumn1.Width = 114;
+            // 
+            // declinationDataGridViewTextBoxColumn1
+            // 
+            declinationDataGridViewTextBoxColumn1.DataPropertyName = "Declination";
+            declinationDataGridViewTextBoxColumn1.HeaderText = "Declination";
+            declinationDataGridViewTextBoxColumn1.Name = "declinationDataGridViewTextBoxColumn1";
+            declinationDataGridViewTextBoxColumn1.ReadOnly = true;
+            declinationDataGridViewTextBoxColumn1.Width = 92;
+            // 
+            // descriptionDataGridViewTextBoxColumn1
+            // 
+            descriptionDataGridViewTextBoxColumn1.DataPropertyName = "Description";
+            descriptionDataGridViewTextBoxColumn1.HeaderText = "Description";
+            descriptionDataGridViewTextBoxColumn1.Name = "descriptionDataGridViewTextBoxColumn1";
+            descriptionDataGridViewTextBoxColumn1.ReadOnly = true;
+            descriptionDataGridViewTextBoxColumn1.Width = 92;
+            // 
+            // constellationDataGridViewTextBoxColumn1
+            // 
+            constellationDataGridViewTextBoxColumn1.DataPropertyName = "Constellation";
+            constellationDataGridViewTextBoxColumn1.HeaderText = "Constellation";
+            constellationDataGridViewTextBoxColumn1.Name = "constellationDataGridViewTextBoxColumn1";
+            constellationDataGridViewTextBoxColumn1.ReadOnly = true;
+            constellationDataGridViewTextBoxColumn1.Width = 102;
             // 
             // groupBox3
             // 
@@ -349,7 +430,7 @@ namespace Astrolabe
             // 
             // starBindingSource2
             // 
-            starBindingSource2.DataSource = typeof(Astrolabe.models.Star);
+            starBindingSource2.DataSource = typeof(Models.Star);
             // 
             // checkBox1
             // 
@@ -359,7 +440,6 @@ namespace Astrolabe
             checkBox1.Size = new Size(15, 14);
             checkBox1.TabIndex = 16;
             checkBox1.UseVisualStyleBackColor = true;
-            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
             // groupBox5
             // 
@@ -392,7 +472,7 @@ namespace Astrolabe
             button8.TabIndex = 21;
             button8.Text = "Вибрати на карті";
             button8.UseVisualStyleBackColor = true;
-            button8.Click += button8_Click;
+            button8.Click += buttonPickLocation_Click;
             // 
             // label1
             // 
@@ -485,7 +565,7 @@ namespace Astrolabe
             // 
             // ApplyAdvancedFilterButton
             // 
-            ApplyAdvancedFilterButton.Location = new Point(244, 440);
+            ApplyAdvancedFilterButton.Location = new Point(244, 454);
             ApplyAdvancedFilterButton.Name = "ApplyAdvancedFilterButton";
             ApplyAdvancedFilterButton.Size = new Size(136, 29);
             ApplyAdvancedFilterButton.TabIndex = 1;
@@ -554,7 +634,7 @@ namespace Astrolabe
             dataGridView2.AutoGenerateColumns = false;
             dataGridView2.BackgroundColor = SystemColors.ButtonHighlight;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6 });
+            dataGridView2.Columns.AddRange(new DataGridViewColumn[] { dataGridViewTextBoxColumn1, dataGridViewTextBoxColumn2, dataGridViewTextBoxColumn3, dataGridViewTextBoxColumn4, dataGridViewTextBoxColumn5, dataGridViewTextBoxColumn6, nameDataGridViewTextBoxColumn, constellationIdDataGridViewTextBoxColumn, apparentMagnitudeDataGridViewTextBoxColumn, distanceDataGridViewTextBoxColumn, rightAscensionDataGridViewTextBoxColumn, declinationDataGridViewTextBoxColumn, descriptionDataGridViewTextBoxColumn, constellationDataGridViewTextBoxColumn });
             dataGridView2.DataSource = starBindingSource;
             dataGridView2.Location = new Point(8, 20);
             dataGridView2.Name = "dataGridView2";
@@ -611,9 +691,65 @@ namespace Astrolabe
             dataGridViewTextBoxColumn6.ReadOnly = true;
             dataGridViewTextBoxColumn6.Width = 150;
             // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            nameDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // constellationIdDataGridViewTextBoxColumn
+            // 
+            constellationIdDataGridViewTextBoxColumn.DataPropertyName = "ConstellationId";
+            constellationIdDataGridViewTextBoxColumn.HeaderText = "ConstellationId";
+            constellationIdDataGridViewTextBoxColumn.Name = "constellationIdDataGridViewTextBoxColumn";
+            constellationIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // apparentMagnitudeDataGridViewTextBoxColumn
+            // 
+            apparentMagnitudeDataGridViewTextBoxColumn.DataPropertyName = "ApparentMagnitude";
+            apparentMagnitudeDataGridViewTextBoxColumn.HeaderText = "ApparentMagnitude";
+            apparentMagnitudeDataGridViewTextBoxColumn.Name = "apparentMagnitudeDataGridViewTextBoxColumn";
+            apparentMagnitudeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // distanceDataGridViewTextBoxColumn
+            // 
+            distanceDataGridViewTextBoxColumn.DataPropertyName = "Distance";
+            distanceDataGridViewTextBoxColumn.HeaderText = "Distance";
+            distanceDataGridViewTextBoxColumn.Name = "distanceDataGridViewTextBoxColumn";
+            distanceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rightAscensionDataGridViewTextBoxColumn
+            // 
+            rightAscensionDataGridViewTextBoxColumn.DataPropertyName = "RightAscension";
+            rightAscensionDataGridViewTextBoxColumn.HeaderText = "RightAscension";
+            rightAscensionDataGridViewTextBoxColumn.Name = "rightAscensionDataGridViewTextBoxColumn";
+            rightAscensionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // declinationDataGridViewTextBoxColumn
+            // 
+            declinationDataGridViewTextBoxColumn.DataPropertyName = "Declination";
+            declinationDataGridViewTextBoxColumn.HeaderText = "Declination";
+            declinationDataGridViewTextBoxColumn.Name = "declinationDataGridViewTextBoxColumn";
+            declinationDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // descriptionDataGridViewTextBoxColumn
+            // 
+            descriptionDataGridViewTextBoxColumn.DataPropertyName = "Description";
+            descriptionDataGridViewTextBoxColumn.HeaderText = "Description";
+            descriptionDataGridViewTextBoxColumn.Name = "descriptionDataGridViewTextBoxColumn";
+            descriptionDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // constellationDataGridViewTextBoxColumn
+            // 
+            constellationDataGridViewTextBoxColumn.DataPropertyName = "Constellation";
+            constellationDataGridViewTextBoxColumn.HeaderText = "Constellation";
+            constellationDataGridViewTextBoxColumn.Name = "constellationDataGridViewTextBoxColumn";
+            constellationDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // starBindingSource
             // 
-            starBindingSource.DataSource = typeof(Astrolabe.models.Star);
+            starBindingSource.DataSource = typeof(Models.Star);
             // 
             // button7
             // 
@@ -627,7 +763,7 @@ namespace Astrolabe
             // 
             // button6
             // 
-            button6.Location = new Point(252, 463);
+            button6.Location = new Point(252, 462);
             button6.Name = "button6";
             button6.Size = new Size(136, 29);
             button6.TabIndex = 17;
@@ -659,16 +795,36 @@ namespace Astrolabe
             // 
             // groupBox6
             // 
+            groupBox6.Controls.Add(label7);
+            groupBox6.Controls.Add(button9);
             groupBox6.Controls.Add(label2);
-            groupBox6.Controls.Add(textBox1);
             groupBox6.Controls.Add(dateTimePicker2);
             groupBox6.Controls.Add(label3);
             groupBox6.Location = new Point(208, 205);
             groupBox6.Name = "groupBox6";
-            groupBox6.Size = new Size(182, 95);
+            groupBox6.Size = new Size(182, 104);
             groupBox6.TabIndex = 15;
             groupBox6.TabStop = false;
             groupBox6.Text = "Видимість сузір'їв";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(7, 44);
+            label7.Name = "label7";
+            label7.Size = new Size(53, 15);
+            label7.TabIndex = 22;
+            label7.Text = "location:";
+            // 
+            // button9
+            // 
+            button9.Location = new Point(66, 37);
+            button9.Name = "button9";
+            button9.Size = new Size(110, 29);
+            button9.TabIndex = 23;
+            button9.Text = "Вибрати на карті";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += buttonPickLocation_Click;
             // 
             // label2
             // 
@@ -680,17 +836,9 @@ namespace Astrolabe
             label2.Text = "Координати на небосхилі";
             toolTip1.SetToolTip(label2, "AOPJWDOAPDM");
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(6, 37);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(169, 23);
-            textBox1.TabIndex = 6;
-            toolTip1.SetToolTip(textBox1, "POKMPOS");
-            // 
             // dateTimePicker2
             // 
-            dateTimePicker2.Location = new Point(39, 63);
+            dateTimePicker2.Location = new Point(40, 72);
             dateTimePicker2.Name = "dateTimePicker2";
             dateTimePicker2.Size = new Size(136, 23);
             dateTimePicker2.TabIndex = 11;
@@ -699,7 +847,7 @@ namespace Astrolabe
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(6, 69);
+            label3.Location = new Point(7, 78);
             label3.Name = "label3";
             label3.Size = new Size(33, 15);
             label3.TabIndex = 12;
@@ -855,7 +1003,6 @@ namespace Astrolabe
         private Button button3;
         private GroupBox groupBox6;
         private Label label2;
-        private TextBox textBox1;
         private DateTimePicker dateTimePicker2;
         private Label label3;
         private GroupBox groupBox7;
@@ -883,5 +1030,17 @@ namespace Astrolabe
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
         private Button button8;
         private Label label6;
+        private Label label7;
+        private Button button9;
+        private DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn constellationIdDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn apparentMagnitudeDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn distanceDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn rightAscensionDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn declinationDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn descriptionDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn constellationDataGridViewTextBoxColumn1;
+        private DataGridViewTextBoxColumn constellationIdDataGridViewTextBoxColumn;
+        private DataGridViewTextBoxColumn distanceDataGridViewTextBoxColumn;
     }
 }

@@ -1,7 +1,6 @@
-﻿using Astrolabe.models;
-using System.Text.RegularExpressions;
+﻿using Astrolabe.Models;
 
-namespace Astrolabe.forms
+namespace Astrolabe.Forms
 {
     public partial class DataEditorForm : Form
     {
@@ -12,7 +11,7 @@ namespace Astrolabe.forms
         {
             InitializeComponent();
             this.astronomy = astronomy;
-            starBindingSource.DataSource = astronomy.stars;
+            starBindingSource.DataSource = astronomy.Stars;
             isDataChanged = false;
 
             this.dataGridView1.UserDeletingRow += dataGridView1_UserDeletingRow;
@@ -34,43 +33,13 @@ namespace Astrolabe.forms
 
         private void DataEditorForm_Load(object sender, EventArgs e)
         {
-            starBindingSource.DataSource = astronomy.stars;
+            starBindingSource.DataSource = astronomy.Stars;
         }
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            int selectionStart = richTextBox1.SelectionStart;
-            int selectionLength = richTextBox1.SelectionLength;
-
             richTextBox1.TextChanged -= richTextBox1_TextChanged;
-
-            string text = richTextBox1.Text;
-            richTextBox1.SelectAll();
-            richTextBox1.SelectionFont = new Font("Segoe UI", 10, FontStyle.Regular);
-            richTextBox1.SelectionColor = Color.Black;
-
-            string[] keywords =
-                {
-                    "distance:", "dist:",
-                    "name:",
-                    "magnitude:", "mag:",
-                    "constellation:", "cons:",
-                    "isvisible:", "visible:"
-                };
-
-            foreach (string keyword in keywords)
-            {
-                int index = 0;
-                while ((index = text.IndexOf(keyword, index, StringComparison.OrdinalIgnoreCase)) != -1)
-                {
-                    richTextBox1.Select(index, keyword.Length);
-                    richTextBox1.SelectionFont = new Font("Segoe UI", 10, FontStyle.Bold);
-                    richTextBox1.SelectionColor = Color.Blue;
-                    index += keyword.Length;
-                }
-            }
-
-            richTextBox1.Select(selectionStart, selectionLength);
+            FilterSyntaxHighlighter.Highlight(richTextBox1);
             richTextBox1.TextChanged += richTextBox1_TextChanged;
         }
 
