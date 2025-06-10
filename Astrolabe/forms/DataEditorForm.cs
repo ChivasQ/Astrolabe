@@ -1,4 +1,4 @@
-﻿using Astrolabe.Models;
+using Astrolabe.Models;
 
 namespace Astrolabe.Forms
 {

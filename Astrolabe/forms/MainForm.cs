@@ -39,15 +39,13 @@ namespace Astrolabe
                     isModified = false;
 
                     updateSearch();
-                    this.Text = "Астролябія - " + settings.GetLastOpenedFileName();
+                    this.Text = "РђСЃС‚СЂРѕР»СЏР±С–СЏ - " + settings.GetLastOpenedFileName();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Не вдалося відкрити останній файл:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"РќРµ РІРґР°Р»РѕСЃСЏ РІС–РґРєСЂРёС‚Рё РѕСЃС‚Р°РЅРЅС–Р№ С„Р°Р№Р»:\n{ex.Message}", "РџРѕРјРёР»РєР°", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView2.AutoGenerateColumns = false;
         }
 
         private void updateSearch()
@@ -87,7 +85,7 @@ namespace Astrolabe
                 updateSearch();
                 settings.LastOpenedFile = openFileDialog.FileName;
                 settings.Save();
-                this.Text = "Астролябія - " + settings.GetLastOpenedFileName();
+                this.Text = "РђСЃС‚СЂРѕР»СЏР±С–СЏ - " + settings.GetLastOpenedFileName();
             }
         }
 
@@ -95,18 +93,18 @@ namespace Astrolabe
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
-            saveFileDialog.Title = "Зберегти базу зірок";
+            saveFileDialog.Title = "Р—Р±РµСЂРµРіС‚Рё Р±Р°Р·Сѓ Р·С–СЂРѕРє";
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 astronomy.Serialize(saveFileDialog.FileName);
 
-                MessageBox.Show("Збережено успішно.");
+                MessageBox.Show("Р—Р±РµСЂРµР¶РµРЅРѕ СѓСЃРїС–С€РЅРѕ.");
                 isModified = false;
 
                 settings.LastOpenedFile = saveFileDialog.FileName;
                 settings.Save();
-                this.Text = "Астролябія - " + settings.GetLastOpenedFileName();
+                this.Text = "РђСЃС‚СЂРѕР»СЏР±С–СЏ - " + settings.GetLastOpenedFileName();
             }
         }
 
@@ -159,8 +157,8 @@ namespace Astrolabe
             if (isModified)
             {
                 var result = MessageBox.Show(
-                    "Ви маєте незбережені зміни. Бажаєте зберегти їх перед закриттям?",
-                    "Зберегти зміни?",
+                    "Р’Рё РјР°С”С‚Рµ РЅРµР·Р±РµСЂРµР¶РµРЅС– Р·РјС–РЅРё. Р‘Р°Р¶Р°С”С‚Рµ Р·Р±РµСЂРµРіС‚Рё С—С… РїРµСЂРµРґ Р·Р°РєСЂРёС‚С‚СЏРј?",
+                    "Р—Р±РµСЂРµРіС‚Рё Р·РјС–РЅРё?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Warning
                 );
@@ -203,14 +201,14 @@ namespace Astrolabe
                     }
                     else
                     {
-                        MessageBox.Show("Будь ласка, виберіть сузір’я для фільтрації.", "Помилка фільтрації", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРёР±РµСЂС–С‚СЊ СЃСѓР·С–СЂвЂ™СЏ РґР»СЏ С„С–Р»СЊС‚СЂР°С†С–С—.", "РџРѕРјРёР»РєР° С„С–Р»СЊС‚СЂР°С†С–С—", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                 }
                 starBindingSource1.DataSource = null;
                 starBindingSource1.DataSource = secondFiltration;
                 if (secondFiltration.Count == 0)
-                    MessageBox.Show("По вашому запиту нічого не знайдено");
+                    MessageBox.Show("РџРѕ РІР°С€РѕРјСѓ Р·Р°РїРёС‚Сѓ РЅС–С‡РѕРіРѕ РЅРµ Р·РЅР°Р№РґРµРЅРѕ");
             }
             else
             {
@@ -223,14 +221,14 @@ namespace Astrolabe
                     }
                     else
                     {
-                        MessageBox.Show("Будь ласка, виберіть сузір’я для фільтрації.", "Помилка фільтрації", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРёР±РµСЂС–С‚СЊ СЃСѓР·С–СЂвЂ™СЏ РґР»СЏ С„С–Р»СЊС‚СЂР°С†С–С—.", "РџРѕРјРёР»РєР° С„С–Р»СЊС‚СЂР°С†С–С—", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         return;
                     }
                 }
                 starBindingSource1.DataSource = null;
                 starBindingSource1.DataSource = firstFiltration;
                 if (firstFiltration.Count == 0)
-                    MessageBox.Show("По вашому запиту нічого не знайдено");
+                    MessageBox.Show("РџРѕ РІР°С€РѕРјСѓ Р·Р°РїРёС‚Сѓ РЅС–С‡РѕРіРѕ РЅРµ Р·РЅР°Р№РґРµРЅРѕ");
             }
         }
 
@@ -244,14 +242,14 @@ namespace Astrolabe
         private void button4_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(
-                "Ви дійсно бажаєте зкинути всі фільтри?",
-                "зкинути фільтри?",
+                "Р’Рё РґС–Р№СЃРЅРѕ Р±Р°Р¶Р°С”С‚Рµ Р·РєРёРЅСѓС‚Рё РІСЃС– С„С–Р»СЊС‚СЂРё?",
+                "Р·РєРёРЅСѓС‚Рё С„С–Р»СЊС‚СЂРё?",
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Warning
             );
             if (result != DialogResult.Yes)
                 return;
-            button8.Text = "Вибрати на карті";
+            button8.Text = "Р’РёР±СЂР°С‚Рё РЅР° РєР°СЂС‚С–";
             richTextBox1.Text = string.Empty;
             selectedLatitude = null;
             selectedLongitude = null;
@@ -280,7 +278,7 @@ namespace Astrolabe
         {
             List<Star> list = (starBindingSource1.DataSource as List<Star>);
             if (list == null) return;
-            // Щоб сортувати за назвою сузір'я, потрібно об'єднати дані про сузір'я.
+            // Р©РѕР± СЃРѕСЂС‚СѓРІР°С‚Рё Р·Р° РЅР°Р·РІРѕСЋ СЃСѓР·С–СЂ'СЏ, РїРѕС‚СЂС–Р±РЅРѕ РѕР±'С”РґРЅР°С‚Рё РґР°РЅС– РїСЂРѕ СЃСѓР·С–СЂ'СЏ.
             List<Star> sorted = list
                                 .Join(astronomy.Constellations,
                                       star => star.ConstellationId,
@@ -321,8 +319,8 @@ namespace Astrolabe
 
             if (!coordsParsed)
             {
-                MessageBox.Show("Введіть координати у форматі: широта, довгота\nАбо зайдіть на Google maps та скопіюйте координати та вставте рядок у поле",
-                                "Некоректно заповнене поле",
+                MessageBox.Show("Р’РІРµРґС–С‚СЊ РєРѕРѕСЂРґРёРЅР°С‚Рё Сѓ С„РѕСЂРјР°С‚С–: С€РёСЂРѕС‚Р°, РґРѕРІРіРѕС‚Р°\nРђР±Рѕ Р·Р°Р№РґС–С‚СЊ РЅР° Google maps С‚Р° СЃРєРѕРїС–СЋР№С‚Рµ РєРѕРѕСЂРґРёРЅР°С‚Рё С‚Р° РІСЃС‚Р°РІС‚Рµ СЂСЏРґРѕРє Сѓ РїРѕР»Рµ",
+                                "РќРµРєРѕСЂРµРєС‚РЅРѕ Р·Р°РїРѕРІРЅРµРЅРµ РїРѕР»Рµ",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
                 return;
@@ -342,7 +340,7 @@ namespace Astrolabe
 
                 List<Star> visibleStars = Filters.FindVisibleStars(starsInConstellation, lat, lon, time);
 
-                // Якщо всі зірки сузір'я видимі — додаємо сузір’я до видимих
+                // РЇРєС‰Рѕ РІСЃС– Р·С–СЂРєРё СЃСѓР·С–СЂ'СЏ РІРёРґРёРјС– вЂ” РґРѕРґР°С”РјРѕ СЃСѓР·С–СЂвЂ™СЏ РґРѕ РІРёРґРёРјРёС…
                 if (visibleStars.Count == starsInConstellation.Count)
                 {
                     visibleConstellations.Add(constellation);
@@ -351,7 +349,7 @@ namespace Astrolabe
 
             if (visibleConstellations.Count == 0)
             {
-                MessageBox.Show("Жодне сузір’я повністю не видно з обраної точки.");
+                MessageBox.Show("Р–РѕРґРЅРµ СЃСѓР·С–СЂвЂ™СЏ РїРѕРІРЅС–СЃС‚СЋ РЅРµ РІРёРґРЅРѕ Р· РѕР±СЂР°РЅРѕС— С‚РѕС‡РєРё.");
             }
 
             starBindingSource2.DataSource = null;
@@ -388,7 +386,7 @@ namespace Astrolabe
             }
             else
             {
-                MessageBox.Show("Будь ласка, виберіть зірку для редагування.");
+                MessageBox.Show("Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРёР±РµСЂС–С‚СЊ Р·С–СЂРєСѓ РґР»СЏ СЂРµРґР°РіСѓРІР°РЅРЅСЏ.");
             }
         }
 
@@ -398,8 +396,8 @@ namespace Astrolabe
             {
                 DialogResult result = MessageBox.Show
                 (
-                    $"Ви бажаєте видалити зірку {selectedStar.Name}?",
-                    "Видалити зірку?",
+                    $"Р’Рё Р±Р°Р¶Р°С”С‚Рµ РІРёРґР°Р»РёС‚Рё Р·С–СЂРєСѓ {selectedStar.Name}?",
+                    "Р’РёРґР°Р»РёС‚Рё Р·С–СЂРєСѓ?",
                     MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Warning
                 );
@@ -414,7 +412,7 @@ namespace Astrolabe
             }
             else
             {
-                MessageBox.Show("Будь ласка, виберіть зірку для видалення.");
+                MessageBox.Show("Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРёР±РµСЂС–С‚СЊ Р·С–СЂРєСѓ РґР»СЏ РІРёРґР°Р»РµРЅРЅСЏ.");
             }
         }
 
@@ -438,7 +436,7 @@ namespace Astrolabe
                 selectedLatitude = form.latitude;
                 selectedLongitude = form.longitude;
 
-                MessageBox.Show($"Ви вибрали: {form.latitude}, {form.longitude}");
+                MessageBox.Show($"Р’Рё РІРёР±СЂР°Р»Рё: {form.latitude}, {form.longitude}");
                 button8.Text = $"{form.latitude:F2}, {form.longitude:F2}";
             }
         }
@@ -447,7 +445,7 @@ namespace Astrolabe
         {
             if (listBox1.SelectedItem is Constellation selectedConstellation)
             {
-                //MessageBox.Show(selectedConstellation.Name, "Опис сузір'я", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show(selectedConstellation.Name, "РћРїРёСЃ СЃСѓР·С–СЂ'СЏ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 EditConstellationForm editForm = new EditConstellationForm(astronomy, selectedConstellation);
                 if (editForm.ShowDialog() == DialogResult.OK)
                 {
@@ -457,7 +455,7 @@ namespace Astrolabe
             }
             else
             {
-                MessageBox.Show("Будь ласка, виберіть сузір'я для редагування.");
+                MessageBox.Show("Р‘СѓРґСЊ Р»Р°СЃРєР°, РІРёР±РµСЂС–С‚СЊ СЃСѓР·С–СЂ'СЏ РґР»СЏ СЂРµРґР°РіСѓРІР°РЅРЅСЏ.");
             }
         }
 
