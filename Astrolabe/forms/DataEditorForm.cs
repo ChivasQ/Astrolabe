@@ -19,7 +19,7 @@ namespace Astrolabe.Forms
             this.dataGridView1.CellValueChanged += dataGridView1_CellValueChanged;
             this.dataGridView1.CellValidating += dataGridView1_CellValidating;
 
-
+            constellationBindingSource.DataSource = astronomy.Constellations;
 
             this.AcceptButton = button1;
         }
@@ -62,8 +62,8 @@ namespace Astrolabe.Forms
         {
             string headerText = dataGridView1.Columns[e.ColumnIndex].HeaderText;
 
-            if (headerText == "DistanceLightYears" || 
-                headerText == "ApparentMagnitude" || 
+            if (headerText == "DistanceLightYears" ||
+                headerText == "ApparentMagnitude" ||
                 headerText == "RightAscension" ||
                 headerText == "Declination") // або інші числові поля
             {

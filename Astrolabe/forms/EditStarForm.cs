@@ -33,7 +33,7 @@ namespace Astrolabe.Forms
                 }
                 else
                 {
-                    comboBox1.SelectedIndex = -1;
+                    //comboBox1.SelectedIndex = -1;
                 }
 
                 textBoxMagnitude.Text = star.ApparentMagnitude.ToString();
@@ -100,7 +100,7 @@ namespace Astrolabe.Forms
             }
 
             NewStar = star;
-            DialogResult = DialogResult.OK; 
+            DialogResult = DialogResult.OK;
             Close();
         }
 
@@ -108,6 +108,11 @@ namespace Astrolabe.Forms
         {
             DialogResult = DialogResult.Cancel;
             Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

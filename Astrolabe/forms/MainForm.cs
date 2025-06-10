@@ -56,6 +56,8 @@ namespace Astrolabe
             starBindingSource2.DataSource = null;
             starBindingSource2.DataSource = astronomy.Constellations;
 
+            //starBindingSource.DataSource = null;
+
             comboBox1.DataSource = null;
             comboBox1.DataSource = astronomy.Constellations;
 
@@ -214,7 +216,8 @@ namespace Astrolabe
                 {
                     if (comboBox1.SelectedItem is Constellation selectedFilterConstellation)
                     {
-                        firstFiltration = firstFiltration.Where(s => s.ConstellationId == selectedFilterConstellation.Id).ToList();
+                        firstFiltration = firstFiltration.Where(s => s.ConstellationId == selectedFilterConstellation.Id)
+                            .ToList();
                     }
                     else
                     {
@@ -280,7 +283,10 @@ namespace Astrolabe
                                 .Join(astronomy.Constellations,
                                       star => star.ConstellationId,
                                       constellation => constellation.Id,
-                                      (star, constellation) => new { Star = star, ConstellationName = constellation.Name })
+                                      (star, constellation) => new { 
+                                          Star = star, 
+                                          ConstellationName = constellation.Name 
+                                      })
                                 .OrderByDescending(x => x.ConstellationName)
                                 .Select(x => x.Star)
                                 .ToList();
@@ -388,12 +394,13 @@ namespace Astrolabe
         {
             if (dataGridView1.CurrentRow?.DataBoundItem is Star selectedStar)
             {
-                DialogResult result = MessageBox.Show(
-                                                     $"Ви бажаєте видалити зірку {selectedStar.Name}?",
-                                                     "Видалити зірку?",
-                                                     MessageBoxButtons.YesNoCancel,
-                                                     MessageBoxIcon.Warning
-                                                     );
+                DialogResult result = MessageBox.Show
+                (
+                    $"Ви бажаєте видалити зірку {selectedStar.Name}?",
+                    "Видалити зірку?",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Warning
+                );
 
                 if (result == DialogResult.Yes)
                 {
@@ -431,6 +438,58 @@ namespace Astrolabe
 
                 MessageBox.Show($"Ви вибрали: {form.latitude}, {form.longitude}");
                 button8.Text = $"{form.latitude:F2}, {form.longitude:F2}";
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem is Constellation selectedConstellation)
+            {
+                //MessageBox.Show(selectedConstellation.Name, "Опис сузір'я", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                EditConstellationForm editForm = new EditConstellationForm(astronomy, selectedConstellation);
+                if (editForm.ShowDialog() == DialogResult.OK)
+                {
+                    updateSearch();
+                    isModified = true;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Будь ласка, виберіть сузір'я для редагування.");
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            EditConstellationForm editForm = new EditConstellationForm(astronomy, null);
+            if (editForm.ShowDialog() == DialogResult.OK)
+            {
+                Constellation newConstellation = editForm.NewConstellation;
+                astronomy.Constellations.Add(newConstellation);
+                updateSearch();
+                isModified = true;
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem is Constellation selectedConstellation)
+            {
+                DeleteConstellationForm deleteForm = new DeleteConstellationForm(selectedConstellation, astronomy);
+                if (deleteForm.ShowDialog() == DialogResult.OK)
+                {
+                    //astronomy = deleteForm.astronomy;
+                    updateSearch();
+                    listBox1.SelectedIndex = 0;
+                    if (listBox1.Items.Count > 0)
+                    {
+                        listBox1.SelectedIndex = 0;
+                    }
+                    listBox1_SelectedIndexChanged(listBox1, EventArgs.Empty);
+                    //dataGridView1.Refresh();
+                    //dataGridView2.Refresh();
+                    isModified = true;
+                }
             }
         }
     }

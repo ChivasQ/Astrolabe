@@ -1,155 +1,209 @@
-[
 {
-"Name": "Polaris",
-"Constellation": "Ursa Minor",
-"ApparentMagnitude": 1.98,
-"Distance": 431,
-"RightAscension": 2.31,
-"Declination": 89.26,
-"Description": "Найяскравіша зірка в Ursa Minor, відома як Північна зірка. Вона знаходиться дуже близько до північного небесного полюса, що робить її незамінним орієнтиром для навігації. Є змінною зіркою."
-},
-{
-"Name": "Kochab",
-"Constellation": "Ursa Minor",
-"ApparentMagnitude": 2.08,
-"Distance": 130,
-"RightAscension": 14.84,
-"Declination": 74.15,
-"Description": "Друга за яскравістю зірка в Ursa Minor. Це помаранчевий гігант, який разом з Pherkad є одним із 'Вартових Полюса'."
-},
-{
-"Name": "Pherkad",
-"Constellation": "Ursa Minor",
-"ApparentMagnitude": 3.05,
-"Distance": 487,
-"RightAscension": 15.34,
-"Declination": 71.83,
-"Description": "Третя за яскравістю зірка в Ursa Minor, біло-жовтий гігант. Також є 'Вартовим Полюса' разом з Kochab."
-},
-{
-"Name": "Yildun",
-"Constellation": "Ursa Minor",
-"ApparentMagnitude": 4.36,
-"Distance": 172,
-"RightAscension": 17.53,
-"Declination": 86.58,
-"Description": "Біла зірка головної послідовності, розташована в ручці Малого Ковша."
-},
-{
-"Name": "Epsilon Ursae Minoris",
-"Constellation": "Ursa Minor",
-"ApparentMagnitude": 4.23,
-"Distance": 304,
-"RightAscension": 16.76,
-"Declination": 82.04,
-"Description": "Помаранчева зірка-гігант, яка є змінною зіркою. Входить до 'ручки' Малого Ковша."
-},
-{
-"Name": "Zeta Ursae Minoris",
-"Constellation": "Ursa Minor",
-"ApparentMagnitude": 4.29,
-"Distance": 369,
-"RightAscension": 15.73,
-"Declination": 77.79,
-"Description": "Біло-блакитна зірка головної послідовності. Частина 'ковша' Малої Ведмедиці."
-},
-{
-"Name": "Eta Ursae Minoris",
-"Constellation": "Ursa Minor",
-"ApparentMagnitude": 4.95,
-"Distance": 97,
-"RightAscension": 16.29,
-"Declination": 75.75,
-"Description": "Жовто-біла зірка головної послідовності, найближча до Землі з яскравих зірок Малого Ковша."
-},
-{
-"Name": "Betelgeuse",
-"Constellation": "Orion",
-"ApparentMagnitude": 0.42,
-"Distance": 643,
-"RightAscension": 5.92,
-"Declination": 7.41,
-"Description": "Червоний надгігант, одна з найяскравіших і найбільших зірок, що видно неозброєним оком. Відома своєю змінною яскравістю і потенціалом до вибуху наднової."
-},
-{
-"Name": "Rigel",
-"Constellation": "Orion",
-"ApparentMagnitude": 0.13,
-"Distance": 863,
-"RightAscension": 5.14,
-"Declination": -8.20,
-"Description": "Блакитний надгігант, найяскравіша зірка в сузір'ї Оріона. Дуже гаряча та світна зірка."
-},
-{
-"Name": "Arcturus",
-"Constellation": "Boötes",
-"ApparentMagnitude": -0.05,
-"Distance": 36.7,
-"RightAscension": 14.15,
-"Declination": 19.18,
-"Description": "Яскравий помаранчевий гігант, четверта за яскравістю зірка на нічному небі. Легко знайти за ручкою Великого Ковша."
-},
-{
-"Name": "Capella",
-"Constellation": "Auriga",
-"ApparentMagnitude": 0.08,
-"Distance": 42.9,
-"RightAscension": 5.25,
-"Declination": 46.01,
-"Description": "Множинна зоряна система, що складається з двох пар жовтих гігантів. Одна з найяскравіших зірок північного неба."
-},
-{
-"Name": "Aldebaran",
-"Constellation": "Taurus",
-"ApparentMagnitude": 0.87,
-"Distance": 65.2,
-"RightAscension": 4.59,
-"Declination": 16.51,
-"Description": "Помаранчевий гігант, найяскравіша зірка в сузір'ї Тельця і частина зоряного скупчення Гіади. Вважається 'Оком Тельця'."
-},
-{
-"Name": "Spica",
-"Constellation": "Virgo",
-"ApparentMagnitude": 0.97,
-"Distance": 250,
-"RightAscension": 13.42,
-"Declination": -11.16,
-"Description": "Одна з найяскравіших зірок на нічному небі, подвійна система з двох близько розташованих блакитних зірок. Єдина яскрава зірка в сузір'ї Діви."
-},
-{
-"Name": "Antares",
-"Constellation": "Scorpius",
-"ApparentMagnitude": 1.06,
-"Distance": 550,
-"RightAscension": 16.50,
-"Declination": -26.43,
-"Description": "Величезний червоний надгігант, одна з найбільших відомих зірок. Його назва означає 'суперник Марса' через його червонуватий відтінок."
-},
-{
-"Name": "Procyon",
-"Constellation": "Canis Minor",
-"ApparentMagnitude": 0.34,
-"Distance": 11.4,
-"RightAscension": 7.39,
-"Declination": 5.22,
-"Description": "Яскрава зірка, біло-жовта зірка головної послідовності. Частина 'Малого Пса' і одна з найближчих зірок до Сонця."
-},
-{
-"Name": "Achernar",
-"Constellation": "Eridanus",
-"ApparentMagnitude": 0.46,
-"Distance": 139,
-"RightAscension": 1.63,
-"Declination": -57.34,
-"Description": "Блакитно-біла зірка, одна з найбільш сплюснутих відомих зірок через швидке обертання. Розташована на південному небі."
-},
-{
-"Name": "Fomalhaut",
-"Constellation": "Piscis Austrinus",
-"ApparentMagnitude": 1.16,
-"Distance": 25,
-"RightAscension": 22.96,
-"Declination": -29.62,
-"Description": "Яскрава біла зірка, оточена пиловим диском. Одна з найближчих до Землі яскравих зірок і єдина зірка першої величини в сузір'ї Південної Риби."
+  "Stars": [
+    {
+      "Name": "Полярна зірка",
+      "ConstellationId": 1,
+      "ApparentMagnitude": 1.98,
+      "Distance": 431,
+      "RightAscension": 2.31,
+      "Declination": 89.26,
+      "Description": "Найяскравіша зірка в Ursa Minor, відома як Північна зірка. Вона знаходиться дуже близько до північного небесного полюса, що робить її незамінним орієнтиром для навігації. Є змінною зіркою."
+    },
+    {
+      "Name": "Кохаб",
+      "ConstellationId": 1,
+      "ApparentMagnitude": 2.08,
+      "Distance": 130,
+      "RightAscension": 14.84,
+      "Declination": 74.15,
+      "Description": "Друга за яскравістю зірка в Ursa Minor. Це помаранчевий гігант, який разом з Pherkad є одним із 'Вартових Полюса'."
+    },
+    {
+      "Name": "Феркад",
+      "ConstellationId": 1,
+      "ApparentMagnitude": 3.05,
+      "Distance": 487,
+      "RightAscension": 15.34,
+      "Declination": 71.83,
+      "Description": "Третя за яскравістю зірка в Ursa Minor, біло-жовтий гігант. Також є 'Вартовим Полюса' разом з Kochab."
+    },
+    {
+      "Name": "Йілдун",
+      "ConstellationId": 1,
+      "ApparentMagnitude": 4.36,
+      "Distance": 172,
+      "RightAscension": 17.53,
+      "Declination": 86.58,
+      "Description": "Біла зірка головної послідовності, розташована в ручці Малого Ковша."
+    },
+    {
+      "Name": "Epsilon Ursae Minoris",
+      "ConstellationId": 1,
+      "ApparentMagnitude": 4.23,
+      "Distance": 304,
+      "RightAscension": 16.76,
+      "Declination": 82.04,
+      "Description": "Помаранчева зірка-гігант, яка є змінною зіркою. Входить до 'ручки' Малого Ковша."
+    },
+    {
+      "Name": "Zeta Ursae Minoris",
+      "ConstellationId": 1,
+      "ApparentMagnitude": 4.29,
+      "Distance": 369,
+      "RightAscension": 15.73,
+      "Declination": 77.79,
+      "Description": "Біло-блакитна зірка головної послідовності. Частина 'ковша' Малої Ведмедиці."
+    },
+    {
+      "Name": "Eta Ursae Minoris",
+      "ConstellationId": 1,
+      "ApparentMagnitude": 4.95,
+      "Distance": 97,
+      "RightAscension": 16.29,
+      "Declination": 75.75,
+      "Description": "Жовто-біла зірка головної послідовності, найближча до Землі з яскравих зірок Малого Ковша."
+    },
+    {
+      "Name": "Бетельгейзе",
+      "ConstellationId": 2,
+      "ApparentMagnitude": 0.42,
+      "Distance": 643,
+      "RightAscension": 5.92,
+      "Declination": 7.41,
+      "Description": "Червоний надгігант, одна з найяскравіших і найбільших зірок, що видно неозброєним оком. Відома своєю змінною яскравістю і потенціалом до вибуху наднової."
+    },
+    {
+      "Name": "Рігель",
+      "ConstellationId": 2,
+      "ApparentMagnitude": 0.13,
+      "Distance": 863,
+      "RightAscension": 5.14,
+      "Declination": -8.2,
+      "Description": "Блакитний надгігант, найяскравіша зірка в сузір'ї Оріона. Дуже гаряча та світна зірка."
+    },
+    {
+      "Name": "Арктур",
+      "ConstellationId": 3,
+      "ApparentMagnitude": -0.05,
+      "Distance": 36.7,
+      "RightAscension": 14.15,
+      "Declination": 19.18,
+      "Description": "Яскравий помаранчевий гігант, четверта за яскравістю зірка на нічному небі. Легко знайти за ручкою Великого Ковша."
+    },
+    {
+      "Name": "Капелла",
+      "ConstellationId": 4,
+      "ApparentMagnitude": 0.08,
+      "Distance": 42.9,
+      "RightAscension": 5.25,
+      "Declination": 46.01,
+      "Description": "Множинна зоряна система, що складається з двох пар жовтих гігантів. Одна з найяскравіших зірок північного неба."
+    },
+    {
+      "Name": "Альдебаран",
+      "ConstellationId": 5,
+      "ApparentMagnitude": 0.87,
+      "Distance": 65.2,
+      "RightAscension": 4.59,
+      "Declination": 16.51,
+      "Description": "Помаранчевий гігант, найяскравіша зірка в сузір'ї Тельця і частина зоряного скупчення Гіади. Вважається 'Оком Тельця'."
+    },
+    {
+      "Name": "Спіка",
+      "ConstellationId": 6,
+      "ApparentMagnitude": 0.97,
+      "Distance": 250,
+      "RightAscension": 13.42,
+      "Declination": -11.16,
+      "Description": "Одна з найяскравіших зірок на нічному небі, подвійна система з двох близько розташованих блакитних зірок. Єдина яскрава зірка в сузір'ї Діви."
+    },
+    {
+      "Name": "Антарес",
+      "ConstellationId": 7,
+      "ApparentMagnitude": 1.06,
+      "Distance": 550,
+      "RightAscension": 16.5,
+      "Declination": -26.43,
+      "Description": "Величезний червоний надгігант, одна з найбільших відомих зірок. Його назва означає 'суперник Марса' через його червонуватий відтінок."
+    },
+    {
+      "Name": "Проціон",
+      "ConstellationId": 8,
+      "ApparentMagnitude": 0.34,
+      "Distance": 11.4,
+      "RightAscension": 7.39,
+      "Declination": 5.22,
+      "Description": "Яскрава зірка, біло-жовта зірка головної послідовності. Частина 'Малого Пса' і одна з найближчих зірок до Сонця."
+    },
+    {
+      "Name": "Ахернар",
+      "ConstellationId": 9,
+      "ApparentMagnitude": 0.46,
+      "Distance": 139,
+      "RightAscension": 1.63,
+      "Declination": -57.34,
+      "Description": "Блакитно-біла зірка, одна з найбільш сплюснутих відомих зірок через швидке обертання. Розташована на південному небі."
+    },
+    {
+      "Name": "Фомальгаут",
+      "ConstellationId": 10,
+      "ApparentMagnitude": 1.16,
+      "Distance": 25,
+      "RightAscension": 22.96,
+      "Declination": -29.62,
+      "Description": "Яскрава біла зірка, оточена пиловим диском. Одна з найближчих до Землі яскравих зірок і єдина зірка першої величини в сузір'ї Південної Риби."
+    }
+  ],
+  "Constellations": [
+    {
+      "Id": 1,
+      "Name": "Мала Ведмедиця",
+      "Description": "Сузір'я північної небесної півкулі, відоме тим, що в ньому знаходиться Полярна зірка."
+    },
+    {
+      "Id": 2,
+      "Name": "Оріон",
+      "Description": "Одне з найвідоміших і найвпізнаваніших сузір'їв на нічному небі."
+    },
+    {
+      "Id": 3,
+      "Name": "Волопас",
+      "Description": "Велике сузір'я північної півкулі, що містить яскраву зірку Арктур."
+    },
+    {
+      "Id": 4,
+      "Name": "Візничий",
+      "Description": "Сузір'я північної півкулі з яскравою зіркою Капелла."
+    },
+    {
+      "Id": 5,
+      "Name": "Телець",
+      "Description": "Зодіакальне сузір'я, відоме зоряними скупченнями Гіади та Плеяди."
+    },
+    {
+      "Id": 6,
+      "Name": "Діва",
+      "Description": "Найбільше зодіакальне сузір'я з яскравою зіркою Спіка."
+    },
+    {
+      "Id": 7,
+      "Name": "Скорпіон",
+      "Description": "Яскраве зодіакальне сузір'я, що нагадує скорпіона, з червоним надгігантом Антарес."
+    },
+    {
+      "Id": 8,
+      "Name": "Малий Пес",
+      "Description": "Невелике сузір'я з однією з найяскравіших зірок нічного неба — Проціоном."
+    },
+    {
+      "Id": 9,
+      "Name": "Ерідан",
+      "Description": "Довге, звивисте сузір'я, що простягається від небесного екватора далеко на південь."
+    },
+    {
+      "Id": 10,
+      "Name": "Південна Риба",
+      "Description": "Сузір'я південної півкулі з яскравою зіркою Фомальгаут."
+    }
+  ]
 }
-]

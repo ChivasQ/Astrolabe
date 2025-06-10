@@ -76,7 +76,7 @@
             buttonSave.TabIndex = 3;
             buttonSave.Text = "Зберегти";
             buttonSave.UseVisualStyleBackColor = true;
-            buttonSave.Click += this.buttonSave_Click;
+            buttonSave.Click += buttonSave_Click;
             // 
             // label2
             // 
@@ -164,11 +164,17 @@
             // 
             // comboBox1
             // 
+            comboBox1.BackColor = SystemColors.Window;
+            comboBox1.DisplayMember = "Name";
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.ForeColor = SystemColors.WindowText;
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(131, 183);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(180, 23);
             comboBox1.TabIndex = 16;
+            comboBox1.ValueMember = "Name";
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // EditStarForm
             // 
