@@ -36,17 +36,17 @@
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             starBindingSource = new BindingSource(components);
             dataGridView1 = new DataGridView();
-            constellationBindingSource = new BindingSource(components);
-            richTextBox1 = new RichTextBox();
-            button1 = new Button();
-            buttonReset = new Button();
             ColumnName = new DataGridViewTextBoxColumn();
             ApparentMagnitudeColumn = new DataGridViewTextBoxColumn();
             DistanceLightYearsColumn = new DataGridViewTextBoxColumn();
             RightAscensionColumn = new DataGridViewTextBoxColumn();
             DeclinationColumn = new DataGridViewTextBoxColumn();
             ConstellationColumn = new DataGridViewComboBoxColumn();
+            constellationBindingSource = new BindingSource(components);
             DescriptionColumn = new DataGridViewTextBoxColumn();
+            richTextBox1 = new RichTextBox();
+            button1 = new Button();
+            buttonReset = new Button();
             ((System.ComponentModel.ISupportInitialize)starBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)constellationBindingSource).BeginInit();
@@ -82,7 +82,9 @@
             dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
-            dataGridView1.Location = new Point(12, 12);
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(0, 0);
+            dataGridView1.Margin = new Padding(100);
             dataGridView1.Name = "dataGridView1";
             dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = SystemColors.Control;
@@ -93,41 +95,8 @@
             dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
             dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dataGridView1.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            dataGridView1.Size = new Size(1418, 498);
+            dataGridView1.Size = new Size(1442, 561);
             dataGridView1.TabIndex = 3;
-            // 
-            // constellationBindingSource
-            // 
-            constellationBindingSource.DataSource = typeof(Models.Constellation);
-            // 
-            // richTextBox1
-            // 
-            richTextBox1.Location = new Point(12, 516);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(372, 34);
-            richTextBox1.TabIndex = 4;
-            richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(390, 516);
-            button1.Name = "button1";
-            button1.Size = new Size(87, 34);
-            button1.TabIndex = 5;
-            button1.Text = "Apply";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
-            // buttonReset
-            // 
-            buttonReset.Location = new Point(483, 516);
-            buttonReset.Name = "buttonReset";
-            buttonReset.Size = new Size(51, 34);
-            buttonReset.TabIndex = 6;
-            buttonReset.Text = "Reset";
-            buttonReset.UseVisualStyleBackColor = true;
-            buttonReset.Click += buttonReset_Click;
             // 
             // ColumnName
             // 
@@ -174,11 +143,47 @@
             ConstellationColumn.ValueMember = "Name";
             ConstellationColumn.Width = 102;
             // 
+            // constellationBindingSource
+            // 
+            constellationBindingSource.DataSource = typeof(Models.Constellation);
+            // 
             // DescriptionColumn
             // 
             DescriptionColumn.DataPropertyName = "Description";
             DescriptionColumn.HeaderText = "Description";
             DescriptionColumn.Name = "DescriptionColumn";
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            richTextBox1.Location = new Point(12, 516);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Size = new Size(372, 34);
+            richTextBox1.TabIndex = 4;
+            richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            // 
+            // button1
+            // 
+            button1.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            button1.Location = new Point(390, 516);
+            button1.Name = "button1";
+            button1.Size = new Size(87, 34);
+            button1.TabIndex = 5;
+            button1.Text = "Apply";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // buttonReset
+            // 
+            buttonReset.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            buttonReset.Location = new Point(483, 516);
+            buttonReset.Name = "buttonReset";
+            buttonReset.Size = new Size(51, 34);
+            buttonReset.TabIndex = 6;
+            buttonReset.Text = "Reset";
+            buttonReset.UseVisualStyleBackColor = true;
+            buttonReset.Click += buttonReset_Click;
             // 
             // DataEditorForm
             // 

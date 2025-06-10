@@ -46,6 +46,8 @@ namespace Astrolabe
                     MessageBox.Show($"Не вдалося відкрити останній файл:\n{ex.Message}", "Помилка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView2.AutoGenerateColumns = false;
         }
 
         private void updateSearch()
