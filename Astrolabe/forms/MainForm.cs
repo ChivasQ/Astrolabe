@@ -249,7 +249,7 @@ namespace Astrolabe
             );
             if (result != DialogResult.Yes)
                 return;
-            button8.Text = "Вибрати на карті";
+            button8.Text = "Вибрати на мапі";
             richTextBox1.Text = string.Empty;
             selectedLatitude = null;
             selectedLongitude = null;
@@ -359,6 +359,8 @@ namespace Astrolabe
 
         private void button7_Click(object sender, EventArgs e)
         {
+            button9.Text = "Вибрати на мапі";
+            button8.Text = "Вибрати на мапі";
             starBindingSource2.DataSource = null;
             starBindingSource2.DataSource = astronomy.Constellations;
         }
@@ -436,8 +438,9 @@ namespace Astrolabe
                 selectedLatitude = form.latitude;
                 selectedLongitude = form.longitude;
 
-                MessageBox.Show($"Ви вибрали: {form.latitude}, {form.longitude}");
+                //MessageBox.Show($"Ви вибрали: {form.latitude}, {form.longitude}");
                 button8.Text = $"{form.latitude:F2}, {form.longitude:F2}";
+                button9.Text = $"{form.latitude:F2}, {form.longitude:F2}";
             }
         }
 
