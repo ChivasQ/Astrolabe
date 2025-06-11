@@ -40,7 +40,7 @@
             Vec3d zenithVector = new Vec3d(Math.Cos(lat), 0, Math.Sin(lat));
 
             // Скалярний добуток
-            double dot = Vec3d.dot(starVector, zenithVector);
+            double dot = Vec3d.Dot(starVector, zenithVector);
 
             // Перевірка видимості у межах кута:
             // dot = cos(θ), треба dot >= cos(angle)
@@ -49,7 +49,7 @@
             return dot >= Math.Cos(angleRad);
         }
 
-        public static double GetLocalSiderealTime(DateTime utc, double longitude) // описаний у книзі Жана Мея "Astronomical Algorithms" повертає місцевий зоряний час у градусах
+        private static double GetLocalSiderealTime(DateTime utc, double longitude) // описаний у книзі Жана Мея "Astronomical Algorithms" повертає місцевий зоряний час у градусах
         {
             double jd = GetJulianDate(utc);
             double d = jd - 2451545.0;
@@ -58,7 +58,7 @@
             if (lst < 0) lst += 360;
             return lst;
         }
-        public static double GetJulianDate(DateTime utc) // Алгоритм Жана Мея
+        private static double GetJulianDate(DateTime utc) // Алгоритм Жана Мея
         {
             int Y = utc.Year;
             int M = utc.Month;

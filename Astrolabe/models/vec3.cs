@@ -12,18 +12,18 @@ namespace Astrolabe.Models
     /// </summary>
     public struct Vec3d
     {
-        public double x, y, z;
+        public double X, Y, Z;
 
         public Vec3d(double x, double y, double z)
         {
-            this.x = x; 
-            this.y = y; 
-            this.z = z;
+            this.X = x; 
+            this.Y = y; 
+            this.Z = z;
         }
 
-        public static double dot(Vec3d a, Vec3d b)
+        public static double Dot(Vec3d a, Vec3d b)
         {
-            return a.x * b.x + a.y * b.y + a.z * b.z;
+            return a.X * b.X + a.Y * b.Y + a.Z * b.Z;
         }
     }
 }
